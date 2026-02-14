@@ -753,8 +753,8 @@
             "bgZoomTo": 1.05,
             "bgZoomDur": 1.8,
             "bgZoomDelay": 0.2,
-            "arcSweepDur": 1.8,
-            "arcSweepDelay": 0.4,
+            "arcSweepDur": 1.0,
+            "arcSweepDelay": 0.3,
             "arcSweepEase": "power3.out",
             "contentStartDelay": 1.2,
             "contentStagger": 0.15,
@@ -956,14 +956,23 @@
             });
             scrollTL.to(badge, { opacity: 0, scale: 0.7, duration: 0.06, ease: "power2.in" }, 0);
 
-            // ── B: Arc flows back — smooth single motion, curves flatten AS it slides off ──
-            // Single smooth animation: morph to flat AND slide off simultaneously
+            // ── B: Arc flows back — flattens at left edge, then slides off ──
+            // Step 1: Arc moves to left edge and flattens completely while still visible
+            const flattenAtEdge = computeFlat(50);
             scrollTL.to(pts, {
-                ...gone,
-                duration: K.arcExitDur,
+                ...flattenAtEdge,
+                duration: K.arcExitDur * 0.65,
                 ease: "power2.inOut",
                 onUpdate: applyPath
             }, K.arcExitDelay);
+
+            // Step 2: Flat edge slides off screen (overlaps slightly for smooth flow)
+            scrollTL.to(pts, {
+                ...gone,
+                duration: K.arcExitDur * 0.4,
+                ease: "power1.in",
+                onUpdate: applyPath
+            }, K.arcExitDelay + K.arcExitDur * 0.55);
 
             // ── C: Vignette ──
             scrollTL.to(vignette, {
