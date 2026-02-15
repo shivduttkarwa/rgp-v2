@@ -122,7 +122,7 @@ export default function HeroSection() {
       opacity: 1,
     });
     gsap.set(desc, { opacity: 0 });
-    gsap.set(actions, { scale: 0, opacity: 0 });
+    gsap.set(actions, { opacity: 0 });
     gsap.set(bg, { opacity: 0 });
 
     gsap.set(badge, { opacity: 0 });
@@ -190,11 +190,10 @@ export default function HeroSection() {
         0.03,
       );
 
-      // Actions/CTA: zoom out (reverse)
+      // Actions/CTA: fade out (reverse)
       scrollTL.to(
         actions,
         {
-          scale: 0,
           opacity: 0,
           duration: 0.08,
           ease: "power2.in",
@@ -402,14 +401,13 @@ export default function HeroSection() {
       1.5,
     );
 
-    // Actions/CTA: zoom in
+    // Actions/CTA: fade in
     entryTL.to(
       actions,
       {
-        scale: 1,
         opacity: 1,
         duration: 0.56,
-        ease: "back.out(1.5)",
+        ease: "power2.out",
       },
       1.575,
     );
