@@ -221,13 +221,13 @@ export default function HeroSection() {
 
       /* A — content reverse animations */
 
-      // Logo: shrink to 25% and move to top-left corner
+      // Logo: shrink to 75% and move to top-left corner
       scrollTL.to(
         logo,
         {
           scale: 0.75,
-          x: 20,
-          y: 30,
+          x: -120,
+          y: -110,
           duration: 0.4,
           ease: "power2.inOut",
         },
