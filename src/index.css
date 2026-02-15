@@ -1,0 +1,32 @@
+/* ════════════════════════════════════════════════════════
+   GLOBAL STYLES
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  --rg-navy: #102e50;
+  --rg-gold: #f5c45e;
+  --rg-amber: #e78b48;
+  --rg-crimson: #be3d2a;
+  --rg-dark: #0a1a2e;
+  --rg-darker: #071425;
+  --rg-ink: #f0ead6;
+  --rg-ink-2: rgba(240, 234, 214, 0.72);
+  --rg-max: 90rem;
+  --rg-pad: clamp(1.5rem, 4vw, 3rem);
+  --rg-radius: 1.125rem;
+  --font-title: "Bona Nova SC", serif;
+  --font-body: "Bricolage Grotesque", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--rg-darker);
+  color: var(--rg-ink);
+  min-height: 100vh;
+}
