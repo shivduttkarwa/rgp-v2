@@ -108,11 +108,11 @@ export default function HeroSection() {
     };
 
     /* ── initial states ── */
-    gsap.set([revealL1, revealL2], { yPercent: 130, opacity: 0 });
-    gsap.set(revealL1, { x: -100 });
-    gsap.set(revealL2, { x: 100 });
-    gsap.set(revealSub, { y: 50, opacity: 0 });
-    gsap.set(revealCta, { y: 50, opacity: 0, scale: 0.85 });
+    gsap.set([revealL1, revealL2, revealSub, revealCta], {
+      x: -300,
+      opacity: 0,
+    });
+    gsap.set(revealCta, { scale: 0.85 });
 
     // Custom logo section states
     gsap.set(logo, { opacity: 0, x: -60 });
@@ -280,13 +280,12 @@ export default function HeroSection() {
         0.42,
       );
 
-      /* F — reveal */
+      /* F — reveal (all slide from left to right, staggered) */
       scrollTL.to(
         revealL1,
         {
-          yPercent: 0,
-          opacity: 1,
           x: 0,
+          opacity: 1,
           duration: 0.18,
           ease: "power4.out",
         },
@@ -296,9 +295,8 @@ export default function HeroSection() {
       scrollTL.to(
         revealL2,
         {
-          yPercent: 0,
-          opacity: 1,
           x: 0,
+          opacity: 1,
           duration: 0.18,
           ease: "power4.out",
         },
@@ -308,10 +306,10 @@ export default function HeroSection() {
       scrollTL.to(
         revealSub,
         {
-          y: 0,
+          x: 0,
           opacity: 1,
-          duration: 0.144,
-          ease: "power3.out",
+          duration: 0.18,
+          ease: "power4.out",
         },
         0.3,
       );
@@ -319,13 +317,13 @@ export default function HeroSection() {
       scrollTL.to(
         revealCta,
         {
-          y: 0,
+          x: 0,
           opacity: 1,
           scale: 1,
-          duration: 0.14,
-          ease: "back.out(1.4)",
+          duration: 0.18,
+          ease: "power4.out",
         },
-        0.3,
+        0.36,
       );
 
       /* G — hold */

@@ -275,7 +275,7 @@ a {
 }
 
 .rg-reveal__line {
-  overflow: hidden;
+  /* overflow: hidden; - removed to show full slide animation */
 }
 
 .rg-reveal__text {
