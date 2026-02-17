@@ -270,7 +270,6 @@ export default function WhyUs() {
 
       <div className="whyus__wrap">
         <div className="whyus__label" aria-hidden="false" data-gsap="fade-up">
-          <span className="whyus__labelBar" aria-hidden="true" />
           <span className="whyus__labelText">Why Us</span>
         </div>
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -31,6 +32,7 @@ type Category = "for-sale" | "sold" | "for-rent";
 const propertiesData = [
   {
     id: 1,
+    slug: "modern-luxury-villa",
     category: "for-sale" as Category,
     title: "Modern Luxury Villa",
     location: "Brisbane, QLD",
@@ -48,6 +50,7 @@ const propertiesData = [
   },
   {
     id: 2,
+    slug: "contemporary-penthouse",
     category: "for-sale" as Category,
     title: "Contemporary Penthouse",
     location: "Gold Coast, QLD",
@@ -64,6 +67,7 @@ const propertiesData = [
   },
   {
     id: 3,
+    slug: "oceanfront-estate",
     category: "for-sale" as Category,
     title: "Oceanfront Estate",
     location: "Sunshine Coast, QLD",
@@ -81,6 +85,7 @@ const propertiesData = [
   },
   {
     id: 7,
+    slug: "riverside-mansion",
     category: "sold" as Category,
     title: "Riverside Mansion",
     location: "Hamilton, QLD",
@@ -98,6 +103,7 @@ const propertiesData = [
   },
   {
     id: 8,
+    slug: "downtown-condo",
     category: "sold" as Category,
     title: "Downtown Condo",
     location: "South Brisbane, QLD",
@@ -115,6 +121,7 @@ const propertiesData = [
   },
   {
     id: 9,
+    slug: "golf-course-villa",
     category: "sold" as Category,
     title: "Golf Course Villa",
     location: "Hope Island, QLD",
@@ -132,6 +139,7 @@ const propertiesData = [
   },
   {
     id: 13,
+    slug: "luxury-high-rise-apt",
     category: "for-rent" as Category,
     title: "Luxury High-Rise Apt",
     location: "Surfers Paradise, QLD",
@@ -149,6 +157,7 @@ const propertiesData = [
   },
   {
     id: 14,
+    slug: "furnished-studio-loft",
     category: "for-rent" as Category,
     title: "Furnished Studio Loft",
     location: "Fortitude Valley, QLD",
@@ -166,6 +175,7 @@ const propertiesData = [
   },
   {
     id: 15,
+    slug: "family-townhouse",
     category: "for-rent" as Category,
     title: "Family Townhouse",
     location: "Springfield, QLD",
@@ -364,7 +374,10 @@ const PropertyCard = ({
           </div>
         )}
 
-        <button className="card-btn btn-primary">
+        <Link
+          to={`/properties/${property.slug}`}
+          className="card-btn btn-primary"
+        >
           <span>
             {isSold
               ? "View Details"
@@ -373,7 +386,7 @@ const PropertyCard = ({
                 : "View Property"}
           </span>
           <ArrowRight size={16} />
-        </button>
+        </Link>
       </div>
     </div>
   );
