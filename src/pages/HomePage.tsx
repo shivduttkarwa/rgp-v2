@@ -20,6 +20,7 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
       "clipRevealLeftInit",
       "clipRevealRightInit",
       "wordRevealInit",
+      "wordWriteInit",
     ];
     guards.forEach((key) => {
       pageRef.current

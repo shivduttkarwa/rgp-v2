@@ -197,6 +197,9 @@ class GSAPAnimations {
           case 'parallax-bg':
             this.parallaxBg(el, config);
             break;
+          case 'word-write':
+            this.wordWrite(el, config);
+            break;
           default:
             console.warn(`Unknown animation type: ${animationType}`);
         }
@@ -3806,6 +3809,41 @@ class GSAPAnimations {
       autoAlpha: 1,
       duration,
       ease,
+      delay,
+      stagger,
+      scrollTrigger: {
+        trigger: el,
+        start,
+        toggleActions: 'play none none none',
+        once: true,
+      },
+    });
+  }
+
+  // ── Word Write: words appear one-by-one as if being written ──
+  wordWrite(el, config) {
+    if (!el) return;
+    if (el.dataset.wordWriteInit === 'true') return;
+    el.dataset.wordWriteInit = 'true';
+
+    const text = el.textContent || '';
+    if (!text.trim()) return;
+
+    const words = text.trim().split(/\s+/);
+    el.innerHTML = words
+      .map(w => `<span class="gsap-ww" style="display:inline-block;opacity:0;filter:blur(6px);white-space:nowrap">${w}</span>`)
+      .join('\u00A0');
+
+    const spans = Array.from(el.querySelectorAll('.gsap-ww'));
+    const start = el.hasAttribute('data-gsap-start') ? config.start : 'top 82%';
+    const delay = el.hasAttribute('data-gsap-delay') && Number.isFinite(config.delay) ? config.delay : 0;
+    const stagger = config.stagger !== null ? config.stagger : 0.08;
+
+    gsap.to(spans, {
+      opacity: 1,
+      filter: 'blur(0px)',
+      duration: 0.45,
+      ease: 'power2.out',
       delay,
       stagger,
       scrollTrigger: {

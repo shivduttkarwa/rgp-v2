@@ -45,7 +45,7 @@ const About: React.FC<AboutProps> = ({
       {/* 1) Big centered intro statement */}
       <div className="rg-about__intro">
         <div className="rg-about__kicker" data-gsap="fade-up">{introKicker}</div>
-        <h2 className="rg-about__headline" data-gsap="fade-up" data-gsap-delay="0.1">{introHeadline}</h2>
+        <h2 className="rg-about__headline" data-gsap="word-write" data-gsap-delay="0.1">{introHeadline}</h2>
       </div>
 
       {/* 2) Two-column: bigger text left, taller image right */}
