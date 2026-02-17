@@ -4,6 +4,7 @@ import About from "../sections/About";
 import PortfolioShowcase from "../extra/Home/PortfolioShowcase";
 import PropertyListingSection from "@/sections/PropertyListingSection";
 import ServiceSelection from "@/sections/ServiceSelection";
+import PhilosophyPillars from "@/sections/Philosophy";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <About />
       <PropertyListingSection />
       <ServiceSelection />
+      <PhilosophyPillars />
       <PortfolioShowcase />
     </>
   );
