@@ -11,6 +11,7 @@ interface FooterProps {
 }
 
 const Footer = ({ ready = false }: FooterProps) => {
+  const footerRef = useRef<HTMLElement>(null);
   const watermarkRef = useRef<HTMLDivElement>(null);
 
   // Hide letters before first paint — no flicker
@@ -42,9 +43,9 @@ const Footer = ({ ready = false }: FooterProps) => {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: watermark,
-          start: "top 100%",
-          end: "+=320",
+          trigger: footerRef.current,
+          start: "top 60%",
+          end: "bottom bottom",
           scrub: 1,
           onEnter: () => watermark.classList.add("is-visible"),
           onLeaveBack: () => watermark.classList.remove("is-visible"),
@@ -69,7 +70,7 @@ const Footer = ({ ready = false }: FooterProps) => {
   const watermarkLetters = ["R", "E", "A", "L", " ", "G", "O", "L", "D"];
 
   return (
-    <footer className="rg-footer">
+    <footer className="rg-footer" ref={footerRef}>
       <div className="rg-footer__border" />
 
       {/* Main Footer Grid */}
