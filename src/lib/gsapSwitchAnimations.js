@@ -200,6 +200,12 @@ class GSAPAnimations {
           case 'word-write':
             this.wordWrite(el, config);
             break;
+          case 'clip-smooth':
+            this.clipSmooth(el, config);
+            break;
+          case 'clip-smooth-down':
+            this.clipSmoothDown(el, config);
+            break;
           default:
             console.warn(`Unknown animation type: ${animationType}`);
         }
@@ -3818,6 +3824,75 @@ class GSAPAnimations {
         once: true,
       },
     });
+  }
+
+  // ── Clip Smooth: clips the container itself + scales inner img for GPU-composited butter reveal ──
+  clipSmooth(el, config) {
+    if (!el) return;
+    if (el.dataset.clipSmoothInit === 'true') return;
+    el.dataset.clipSmoothInit = 'true';
+
+    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+    const start = el.hasAttribute('data-gsap-start') ? config.start : 'top 85%';
+    const duration = el.hasAttribute('data-gsap-duration') && Number.isFinite(config.duration) ? config.duration : 1.8;
+    const delay = el.hasAttribute('data-gsap-delay') && Number.isFinite(config.delay) ? config.delay : 0;
+
+    // Clip the container (or img if standalone) — compositor-friendly
+    gsap.set(el, { clipPath: 'inset(100% 0 0 0)', willChange: 'clip-path' });
+    if (img && img !== el) gsap.set(img, { scale: 1.1, willChange: 'transform' });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start,
+        toggleActions: 'play none none none',
+        once: true,
+      },
+      delay,
+      onComplete: () => {
+        gsap.set(el, { clearProps: 'will-change,clip-path' });
+        if (img && img !== el) gsap.set(img, { clearProps: 'will-change' });
+      },
+    });
+
+    tl.to(el, { clipPath: 'inset(0% 0 0 0)', duration, ease: 'power3.inOut' }, 0);
+    if (img && img !== el) {
+      tl.to(img, { scale: 1, duration: duration * 1.1, ease: 'power3.inOut' }, 0);
+    }
+  }
+
+  // ── Clip Smooth Down: reveals top-to-bottom, GPU-composited ──
+  clipSmoothDown(el, config) {
+    if (!el) return;
+    if (el.dataset.clipSmoothDownInit === 'true') return;
+    el.dataset.clipSmoothDownInit = 'true';
+
+    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+    const start = el.hasAttribute('data-gsap-start') ? config.start : 'top 85%';
+    const duration = el.hasAttribute('data-gsap-duration') && Number.isFinite(config.duration) ? config.duration : 1.8;
+    const delay = el.hasAttribute('data-gsap-delay') && Number.isFinite(config.delay) ? config.delay : 0;
+
+    gsap.set(el, { clipPath: 'inset(0 0 100% 0)', willChange: 'clip-path' });
+    if (img && img !== el) gsap.set(img, { scale: 1.1, willChange: 'transform' });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start,
+        toggleActions: 'play none none none',
+        once: true,
+      },
+      delay,
+      onComplete: () => {
+        gsap.set(el, { clearProps: 'will-change,clip-path' });
+        if (img && img !== el) gsap.set(img, { clearProps: 'will-change' });
+      },
+    });
+
+    tl.to(el, { clipPath: 'inset(0 0 0% 0)', duration, ease: 'power3.inOut' }, 0);
+    if (img && img !== el) {
+      tl.to(img, { scale: 1, duration: duration * 1.1, ease: 'power3.inOut' }, 0);
+    }
   }
 
   // ── Word Write: words appear one-by-one as if being written ──

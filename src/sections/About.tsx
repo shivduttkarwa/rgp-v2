@@ -44,17 +44,31 @@ const About: React.FC<AboutProps> = ({
     <section className="rg-about" aria-label="About Real Gold Properties">
       {/* 1) Big centered intro statement */}
       <div className="rg-about__intro">
-        <div className="rg-about__kicker" data-gsap="fade-up">{introKicker}</div>
-        <h2 className="rg-about__headline" data-gsap="word-write" data-gsap-delay="0.1">{introHeadline}</h2>
+        <div className="rg-about__kicker" data-gsap="fade-up">
+          {introKicker}
+        </div>
+        <h2
+          className="rg-about__headline"
+          data-gsap="word-write"
+          data-gsap-delay="0.1"
+        >
+          {introHeadline}
+        </h2>
       </div>
 
       {/* 2) Two-column: bigger text left, taller image right */}
       <div className="rg-about__feature rg-about__watermark">
         <div className="rg-about__featureInner">
           <div className="rg-about__copy">
-            <div className="rg-about__eyebrow" data-gsap="fade-up">{sectionKicker}</div>
+            <div className="rg-about__eyebrow" data-gsap="fade-up">
+              {sectionKicker}
+            </div>
 
-            <h3 className="rg-about__capsTitle rg-about__capsTitle--big" data-gsap="fade-up" data-gsap-delay="0.1">
+            <h3
+              className="rg-about__capsTitle rg-about__capsTitle--big"
+              data-gsap="fade-up"
+              data-gsap-delay="0.1"
+            >
               {sectionTitle.split("\n").map((line, idx) => (
                 <span key={idx} className="rg-about__capsLine">
                   {line}
@@ -62,15 +76,24 @@ const About: React.FC<AboutProps> = ({
               ))}
             </h3>
 
-            <p className="rg-about__body rg-about__body--big" data-gsap="fade-up" data-gsap-delay="0.2">{sectionBody}</p>
+            <p
+              className="rg-about__body rg-about__body--big"
+              data-gsap="fade-up"
+              data-gsap-delay="0.2"
+            >
+              {sectionBody}
+            </p>
           </div>
 
-          <figure className="rg-about__wideFigure rg-about__wideFigure--tall">
+          <figure
+            className="rg-about__wideFigure rg-about__wideFigure--tall"
+            data-gsap="clip-smooth-down"
+            data-gsap-start="top 65%"
+          >
             <img
               className="rg-about__wideImg rg-about__wideImg--tall"
               src={imageWide}
               alt="Real Gold Properties lifestyle"
-              data-gsap="clip-reveal-top"
             />
           </figure>
         </div>
@@ -79,19 +102,28 @@ const About: React.FC<AboutProps> = ({
       {/* 3) Single split: left image, right content */}
       <div className="rg-about__split rg-about__watermark--arch">
         <div className="rg-about__splitInner">
-          <figure className="rg-about__splitFigure">
+          <figure
+            className="rg-about__splitFigure"
+            data-gsap="clip-smooth-down"
+            data-gsap-start="top 95%"
+          >
             <img
               className="rg-about__splitImg"
               src={splitImage}
               alt="Neighbourhood lifestyle"
-              data-gsap="clip-reveal-top"
             />
           </figure>
 
           <div className="rg-about__splitCopy">
-            <div className="rg-about__eyebrow" data-gsap="fade-up">{splitKicker}</div>
+            <div className="rg-about__eyebrow" data-gsap="fade-up">
+              {splitKicker}
+            </div>
 
-            <h3 className="rg-about__splitTitle" data-gsap="fade-up" data-gsap-delay="0.1">
+            <h3
+              className="rg-about__splitTitle"
+              data-gsap="fade-up"
+              data-gsap-delay="0.1"
+            >
               {splitTitle.split("\n").map((line, idx) => (
                 <span key={idx} className="rg-about__splitLine">
                   {line}
@@ -99,7 +131,13 @@ const About: React.FC<AboutProps> = ({
               ))}
             </h3>
 
-            <p className="rg-about__body" data-gsap="fade-up" data-gsap-delay="0.2">{splitBody}</p>
+            <p
+              className="rg-about__body"
+              data-gsap="fade-up"
+              data-gsap-delay="0.2"
+            >
+              {splitBody}
+            </p>
           </div>
         </div>
       </div>
@@ -115,15 +153,24 @@ const About: React.FC<AboutProps> = ({
             ))}
           </h3>
 
-          <p className="rg-about__centerBody" data-gsap="fade-up" data-gsap-delay="0.1">{centerBody}</p>
+          <p
+            className="rg-about__centerBody"
+            data-gsap="fade-up"
+            data-gsap-delay="0.1"
+          >
+            {centerBody}
+          </p>
 
-          <figure className="rg-about__bottomFigure">
+          <figure
+            className="rg-about__bottomFigure"
+            data-gsap="clip-smooth-down"
+            data-gsap-start="top 95%"
+            data-gsap-delay="0.15"
+          >
             <img
               className="rg-about__bottomImg"
               src={imageBottom}
               alt="A beautiful home exterior"
-              data-gsap="clip-reveal-top"
-              data-gsap-delay="0.15"
             />
           </figure>
         </div>
