@@ -101,6 +101,7 @@ body.menu-open {
 
 /* ========== OVERLAY MENU ========== */
 .overlay-menu {
+  --rg-gold: #9E6B1E;
   position: fixed;
   inset: 0;
   z-index: 500;
@@ -269,7 +270,7 @@ body.menu-open {
 
 .menu-number {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
   color: var(--rg-gold);
   opacity: 0.6;
   min-width: 2rem;
