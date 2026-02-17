@@ -188,11 +188,11 @@ const ServiceSelection = () => {
               <a
                 data-gsap="btn-clip-reveal"
                 data-gsap-delay="0.2"
-                href="tel:+1234567890"
+                href="tel:+61450009291"
                 className="svc-cta__btn svc-cta__btn--secondary"
               >
                 <Phone size={18} />
-                <span>+1 (234) 567-890</span>
+                <span>0450 009 291</span>
               </a>
             </div>
 

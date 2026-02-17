@@ -123,20 +123,20 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
               <div className="menu-info-block">
                 <div className="menu-info-label">Location</div>
                 <p className="menu-info-text">
-                  123 Creative Avenue
+                  PO Box 4024
                   <br />
-                  New York, NY 10001
+                  Forest Lake QLD 4078
                 </p>
               </div>
 
               <div className="menu-info-block">
                 <div className="menu-info-label">Contact</div>
                 <p className="menu-info-text">
-                  <a href="mailto:hello@realgoldproperties.com">
-                    hello@realgoldproperties.com
+                  <a href="mailto:admin@realgoldproperties.com.au">
+                    admin@realgoldproperties.com.au
                   </a>
                   <br />
-                  <a href="tel:+12345678900">+1 234 567 8900</a>
+                  <a href="tel:+61450009291">0450 009 291</a>
                 </p>
               </div>
             </div>

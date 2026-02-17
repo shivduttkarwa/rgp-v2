@@ -32,8 +32,8 @@ const SkewedSlider: React.FC<{ className?: string }> = ({ className = "" }) => {
       leftHeading: "Let's Create\nSomething Extraordinary",
       leftDesc: "Every exceptional project begins with your vision.",
       leftLink: "",
-      rightHeading: "+91 98765 43210",
-      rightDesc: "info@shambala.studio\n\nMon-Sat, 10AM-7PM IST",
+      rightHeading: "0450 009 291",
+      rightDesc: "admin@realgoldproperties.com.au\n\nMon–Sat, 9AM–6PM AEST",
     },
     {
       leftBg: elegantColors[8],
@@ -41,8 +41,8 @@ const SkewedSlider: React.FC<{ className?: string }> = ({ className = "" }) => {
       leftHeading: "Visit Our\nDesign Studio",
       leftDesc: "Experience architectural excellence in the heart of the city.",
       leftLink: "",
-      rightHeading: "Shambala Design Studio\nSector 44, Gurgaon\nHaryana, India",
-      rightDesc: "15 mins from Huda City Metro",
+      rightHeading: "Real Gold Properties\nPO Box 4024\nForest Lake QLD 4078",
+      rightDesc: "Queensland, Australia",
     },
     {
       leftBg: architecturalImages[2],
