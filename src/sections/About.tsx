@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./About.css";
 
 type AboutProps = {
@@ -40,6 +42,39 @@ const About: React.FC<AboutProps> = ({
   centerBody = "Straightforward guidance, honest pricing strategy, and clean execution. We help buyers find the right fit, sellers maximize value, and renters move in without stress — with a team that stays responsive at every step.",
   imageBottom = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=85",
 }) => {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.innerWidth <= 980) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const configs = [
+      { selector: ".rg-about__wideImg", range: 12 },
+      { selector: ".rg-about__splitImg", range: 6 },
+      { selector: ".rg-about__bottomImg", range: 12 },
+    ];
+
+    const tweens = configs.map(({ selector, range }, idx) => {
+      const dir = idx % 2 === 0 ? 1 : -1;
+      gsap.set(selector, { yPercent: -range * dir, willChange: "transform" });
+      return gsap.to(selector, {
+        yPercent: range * dir,
+        ease: "none",
+        scrollTrigger: {
+          trigger: selector,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+
+    return () => {
+      tweens.forEach((t) => t.scrollTrigger?.kill());
+      tweens.forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
     <section className="rg-about" aria-label="About Real Gold Properties">
       {/* 1) Big centered intro statement */}
