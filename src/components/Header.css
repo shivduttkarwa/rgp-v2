@@ -47,3 +47,9 @@
   height: auto;
   display: block;
 }
+
+@media (max-width: 768px) {
+  .rg-header__logo img {
+    width: 96px;
+  }
+}

@@ -82,7 +82,7 @@ export default function Header() {
     gsap.killTweensOf(logo);
     if (isOpen) {
       if (headerBgRef.current) {
-        gsap.to(headerBgRef.current, { opacity: 0, duration: 0.2, ease: "power2.in" });
+        gsap.to(headerBgRef.current, { scaleY: 0, transformOrigin: "top", duration: 0.3, ease: "power2.in" });
       }
       gsap.to(logo, {
         y: -20,
@@ -92,7 +92,7 @@ export default function Header() {
       });
     } else {
       if (headerBgRef.current && window.scrollY > 100) {
-        gsap.to(headerBgRef.current, { opacity: 1, duration: 0.3, ease: "power2.out", delay: 0.8 });
+        gsap.to(headerBgRef.current, { scaleY: 1, transformOrigin: "top", duration: 0.4, ease: "power3.out", delay: 1.3 });
       }
       gsap.set(logo, { y: -20, opacity: 0 });
       gsap.to(logo, {
