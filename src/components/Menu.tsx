@@ -150,12 +150,6 @@ export default function Menu({ isOpen, onOpenChange, showButton = true }: MenuPr
           </aside>
         </div>
 
-        {/* Decorative Element */}
-        <div className="menu-deco">
-          <span className="menu-deco-line"></span>
-          <span className="menu-deco-dot"></span>
-          <span className="menu-deco-line"></span>
-        </div>
       </nav>
     </>
   );
