@@ -1,690 +1,1210 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Gold Properties — Footer</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --rg-beige-light: #FFF8F0;
-            --rg-beige: #F5EFE6;
-            --rg-beige-dark: #E8DCC8;
-            --rg-beige-darker: #D4C4B0;
-            --rg-text-dark: #2C1810;
-            --rg-text-medium: #5C4D42;
-            --rg-text-light: #8B7968;
-            --rg-gold: #D4A056;
-            --rg-amber: #E78B48;
-            --rg-crimson: #C85A47;
-            --rg-navy: #3E2C24;
-            --rg-ink: #2C1810;
-            --rg-max: 90rem;
-            --rg-pad: clamp(1.5rem, 4vw, 3rem);
-            --rg-radius: 1.125rem;
-            --font-title: "Bona Nova SC", serif;
-            --font-body: "Bricolage Grotesque", sans-serif;
-        }
-
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background: var(--rg-beige-light);
-            color: var(--rg-text-dark);
-        }
-
-        /* Demo content to enable scrolling */
-        .demo-content {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-title);
-            font-size: 1.5rem;
-            color: var(--rg-text-light);
-        }
-
-        /* ═══════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════ */
-        .rg-footer {
-            background: var(--rg-navy);
-            color: var(--rg-beige-dark);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Top border accent */
-        .rg-footer__border {
-            height: 1px;
-            background: var(--rg-gold);
-            opacity: 0.3;
-        }
-
-        /* ─── MAIN CONTENT ─── */
-        .rg-footer__main {
-            max-width: var(--rg-max);
-            margin: 0 auto;
-            padding: 5rem var(--rg-pad) 4rem;
-            display: grid;
-            grid-template-columns: 1.5fr repeat(3, 1fr) 1.3fr;
-            gap: 3rem;
-        }
-
-        /* Brand Column */
-        .rg-footer__brand {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .rg-footer__logo {
-            display: flex;
-            align-items: center;
-            gap: 0.875rem;
-            text-decoration: none;
-        }
-
-        .rg-footer__logo-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--rg-gold);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rg-footer__logo-icon svg {
-            width: 26px;
-            height: 26px;
-            color: var(--rg-navy);
-        }
-
-        .rg-footer__logo-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.1rem;
-        }
-
-        .rg-footer__logo-name {
-            font-family: var(--font-title);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--rg-beige-light);
-            letter-spacing: 0.02em;
-            line-height: 1;
-        }
-
-        .rg-footer__logo-tagline {
-            font-size: 0.65rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-            font-weight: 500;
-        }
-
-        .rg-footer__brand-desc {
-            font-size: 0.925rem;
-            line-height: 1.75;
-            color: var(--rg-text-light);
-            max-width: 30ch;
-        }
-
-        .rg-footer__trust {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .rg-footer__trust-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--rg-beige-darker);
-        }
-
-        .rg-footer__trust-item svg {
-            width: 16px;
-            height: 16px;
-            color: var(--rg-gold);
-        }
-
-        /* Navigation Columns */
-        .rg-footer__col h4 {
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--rg-beige-light);
-            margin-bottom: 1.75rem;
-        }
-
-        .rg-footer__links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .rg-footer__links a {
-            font-size: 0.9rem;
-            color: var(--rg-text-light);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: inline-block;
-        }
-
-        .rg-footer__links a:hover {
-            color: var(--rg-gold);
-        }
-
-        /* Contact Column */
-        .rg-footer__contact {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .rg-footer__contact h4 {
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--rg-beige-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .rg-footer__contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.875rem;
-            font-size: 0.9rem;
-            color: var(--rg-text-light);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .rg-footer__contact-item:hover {
-            color: var(--rg-gold);
-        }
-
-        .rg-footer__contact-item svg {
-            width: 18px;
-            height: 18px;
-            color: var(--rg-gold);
-            flex-shrink: 0;
-        }
-
-        /* Social Links */
-        .rg-footer__socials {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 0.75rem;
-        }
-
-        .rg-footer__social {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            border: 1px solid rgba(212, 196, 176, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .rg-footer__social:hover {
-            border-color: var(--rg-gold);
-            background: var(--rg-gold);
-        }
-
-        .rg-footer__social svg {
-            width: 18px;
-            height: 18px;
-            color: var(--rg-beige-darker);
-            transition: color 0.3s ease;
-        }
-
-        .rg-footer__social:hover svg {
-            color: var(--rg-navy);
-        }
-
-        /* ─── DIVIDER ─── */
-        .rg-footer__divider {
-            max-width: var(--rg-max);
-            margin: 0 auto;
-            padding: 0 var(--rg-pad);
-        }
-
-        .rg-footer__divider-line {
-            height: 1px;
-            background: rgba(212, 196, 176, 0.1);
-        }
-
-        /* ─── BOTTOM BAR ─── */
-        .rg-footer__bottom {
-            max-width: var(--rg-max);
-            margin: 0 auto;
-            padding: 2rem var(--rg-pad);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .rg-footer__copyright {
-            font-size: 0.825rem;
-            color: var(--rg-text-light);
-        }
-
-        .rg-footer__legal {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .rg-footer__legal a {
-            font-size: 0.8rem;
-            color: var(--rg-text-light);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .rg-footer__legal a:hover {
-            color: var(--rg-gold);
-        }
-
-        /* ═══════════════════════════════════════════
-       BIG WATERMARK TEXT
-    ═══════════════════════════════════════════ */
-        .rg-footer__watermark {
-            position: relative;
-            overflow: hidden;
-            padding: 2rem 0;
-        }
-
-        .rg-footer__watermark-text {
-            font-family: var(--font-title);
-            font-size: clamp(4rem, 18vw, 16rem);
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-align: center;
-            line-height: 0.85;
-            display: flex;
-            justify-content: center;
-            gap: 0.02em;
-            transform: translateY(100%);
-            opacity: 0;
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.8s ease;
-        }
-
-        .rg-footer__watermark-text.is-visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .rg-footer__watermark-letter {
-            display: inline-block;
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(212, 196, 176, 0.12);
-            position: relative;
-            cursor: default;
-            transition: all 0.4s ease;
-        }
-
-        /* Shine effect layer */
-        .rg-footer__watermark-letter::before {
-            content: attr(data-letter);
-            position: absolute;
-            inset: 0;
-            color: var(--rg-gold);
-            -webkit-text-stroke: 0;
-            clip-path: inset(0 100% 0 0);
-            transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Initial shine animation */
-        .rg-footer__watermark-text.is-visible .rg-footer__watermark-letter::before {
-            animation: shine-reveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            animation-delay: var(--delay);
-        }
-
-        @keyframes shine-reveal {
-            0% {
-                clip-path: inset(0 100% 0 0);
-            }
-
-            50% {
-                clip-path: inset(0 0 0 0);
-            }
-
-            100% {
-                clip-path: inset(0 0 0 100%);
-            }
-        }
-
-        /* Hover shine effect */
-        .rg-footer__watermark-letter:hover::before {
-            animation: none;
-            clip-path: inset(0 0 0 0);
-        }
-
-        .rg-footer__watermark-letter:hover {
-            -webkit-text-stroke: 1px var(--rg-gold);
-        }
-
-        /* Space between words */
-        .rg-footer__watermark-space {
-            width: 0.3em;
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 1024px) {
-            .rg-footer__main {
-                grid-template-columns: 1fr 1fr 1fr;
-                gap: 2.5rem;
-            }
-
-            .rg-footer__brand {
-                grid-column: 1 / -1;
-            }
-
-            .rg-footer__contact {
-                grid-column: 1 / -1;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 2rem;
-            }
-
-            .rg-footer__contact h4 {
-                width: 100%;
-                margin-bottom: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .rg-footer__main {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-                padding: 3.5rem var(--rg-pad) 3rem;
-            }
-
-            .rg-footer__bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .rg-footer__legal {
-                gap: 1.25rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .rg-footer__trust {
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .rg-footer__main {
-                grid-template-columns: 1fr;
-            }
-
-            .rg-footer__contact {
-                flex-direction: column;
-                gap: 1.25rem;
-            }
-
-            .rg-footer__socials {
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="demo-content">
-        ↓ Scroll down to see footer
+<div class="wrapper">
+
+    <div class="content">
+        <div class="bg-shape">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405214/starwars/logo.webp" alt="">
+        </div>
+
+
+        <div class="product-img">
+
+            <div class="product-img__item" id="img1">
+                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-1.webp"
+                    alt="star wars" class="product-img__img">
+            </div>
+
+            <div class="product-img__item" id="img2">
+                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405217/starwars/item-2.webp"
+                    alt="star wars" class="product-img__img">
+            </div>
+
+            <div class="product-img__item" id="img3">
+                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405218/starwars/item-3.webp"
+                    alt="star wars" class="product-img__img">
+            </div>
+
+            <div class="product-img__item" id="img4">
+                <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-4.webp"
+                    alt="star wars" class="product-img__img">
+            </div>
+
+
+        </div>
+
+
+
+        <div class="product-slider">
+            <button class="prev disabled">
+                <span class="icon">
+                    <svg class="icon icon-arrow-right">
+                        <use xlink:href="#icon-arrow-left"></use>
+                    </svg>
+                </span>
+            </button>
+            <button class="next">
+                <span class="icon">
+                    <svg class="icon icon-arrow-right">
+                        <use xlink:href="#icon-arrow-right"></use>
+                    </svg>
+                </span>
+            </button>
+
+            <div class="product-slider__wrp swiper-wrapper">
+                <div class="product-slider__item swiper-slide" data-target="img4">
+                    <div class="product-slider__card">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405223/starwars/item-4-bg.webp"
+                            alt="star wars" class="product-slider__cover">
+                        <div class="product-slider__content">
+                            <h1 class="product-slider__title">
+                                STORMTROPER <br>
+                                HELMET
+                            </h1>
+                            <span class="product-slider__price">$1.299,<sup>99</sup></span>
+                            <div class="product-ctr">
+                                <div class="product-labels">
+                                    <div class="product-labels__title">HELMET SIZE</div>
+
+                                    <div class="product-labels__group">
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type5">
+                                            <span class="product-labels__txt">S</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type5" checked>
+                                            <span class="product-labels__txt">M</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type5">
+                                            <span class="product-labels__txt">L</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type5">
+                                            <span class="product-labels__txt">XL</span>
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="hr-vertical"></span>
+
+                                <div class="product-inf">
+                                    <div class="product-inf__percent">
+                                        <div class="product-inf__percent-circle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+                                                viewBox="0 0 100 100">
+                                                <defs>
+                                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                        <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                        <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="50" cy="50" r="47" stroke-dasharray="240, 300"
+                                                    stroke="#cb2240" stroke-width="4" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <div class="product-inf__percent-txt">
+                                            80%
+                                        </div>
+                                    </div>
+
+                                    <span class="product-inf__title">DURABILITY RATE</span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-slider__bottom">
+                                <button class="product-slider__cart">
+                                    ADD TO CART
+                                </button>
+
+                                <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO
+                                    WISHLIST</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-slider__item swiper-slide" data-target="img1">
+                    <div class="product-slider__card">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-1-bg.webp"
+                            alt="star wars" class="product-slider__cover">
+                        <div class="product-slider__content">
+                            <h1 class="product-slider__title">
+                                IMPERIAL ARMY’S <br> TIE FIGHTER
+                            </h1>
+                            <span class="product-slider__price">$9.999,<sup>99</sup></span>
+                            <div class="product-ctr">
+                                <div class="product-labels">
+                                    <div class="product-labels__title">ENGINE UNIT</div>
+
+                                    <div class="product-labels__group">
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type1" checked>
+                                            <span class="product-labels__txt">P-S4 TWIN</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type1">
+                                            <span class="product-labels__txt">P-W401</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <span class="hr-vertical"></span>
+
+                                <div class="product-inf">
+                                    <div class="product-inf__percent">
+                                        <div class="product-inf__percent-circle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+                                                viewBox="0 0 100 100">
+                                                <defs>
+                                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                        <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                        <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="50" cy="50" r="47" stroke-dasharray="225, 300"
+                                                    stroke="#cb2240" stroke-width="4" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <div class="product-inf__percent-txt">
+                                            75%
+                                        </div>
+                                    </div>
+
+                                    <span class="product-inf__title">DURABILITY</span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-slider__bottom">
+                                <button class="product-slider__cart">
+                                    ADD TO CART
+                                </button>
+
+                                <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO
+                                    WISHLIST</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-slider__item swiper-slide" data-target="img2">
+                    <div class="product-slider__card">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405222/starwars/item-2-bg.webp"
+                            alt="star wars" class="product-slider__cover">
+                        <div class="product-slider__content">
+                            <h1 class="product-slider__title">
+                                KYLO REN'S <br> LIGHTSABER
+                            </h1>
+                            <span class="product-slider__price">$1.699,<sup>99</sup></span>
+                            <div class="product-ctr">
+                                <div class="product-labels">
+                                    <div class="product-labels__title">VOLTAGE RANGE</div>
+
+                                    <div class="product-labels__group">
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type3" checked>
+                                            <span class="product-labels__txt">2000 <sup>WATT</sup></span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type3">
+                                            <span class="product-labels__txt">2800 <sup>WATT</sup></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="product-labels__title">LASER SIZE</div>
+
+                                    <div class="product-labels__group">
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type2">
+                                            <span class="product-labels__txt">S</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type2" checked>
+                                            <span class="product-labels__txt">M</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type2">
+                                            <span class="product-labels__txt">L</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type2">
+                                            <span class="product-labels__txt">XL</span>
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="hr-vertical"></span>
+
+                                <div class="product-inf">
+                                    <div class="product-inf__percent">
+                                        <div class="product-inf__percent-circle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+                                                viewBox="0 0 100 100">
+                                                <defs>
+                                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                        <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                        <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="50" cy="50" r="47" stroke-dasharray="240, 300"
+                                                    stroke="#cb2240" stroke-width="4" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <div class="product-inf__percent-txt">
+                                            80%
+                                        </div>
+                                    </div>
+
+                                    <span class="product-inf__title">DURABILITY</span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-slider__bottom">
+                                <button class="product-slider__cart">
+                                    ADD TO CART
+                                </button>
+
+                                <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO
+                                    WISHLIST</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-slider__item swiper-slide" data-target="img3">
+                    <div class="product-slider__card">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405215/starwars/item-3-bg.webp"
+                            alt="star wars" class="product-slider__cover">
+                        <div class="product-slider__content">
+                            <h1 class="product-slider__title">
+                                IMPERIAL ARMY'S <br>
+                                DEATH STAR
+                            </h1>
+                            <span class="product-slider__price">$9.999,<sup>99</sup></span>
+                            <div class="product-ctr">
+                                <div class="product-labels">
+                                    <div class="product-labels__title">HYPERDRIVE RATING</div>
+
+                                    <div class="product-labels__group">
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type6" checked>
+                                            <span class="product-labels__txt">CLASS 4</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type6">
+                                            <span class="product-labels__txt">CLASS 20</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="product-labels__title">ARMANENT</div>
+
+                                    <div class="product-labels__group">
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type7" checked>
+                                            <span class="product-labels__txt">SUPERLASER</span>
+                                        </label>
+
+                                        <label class="product-labels__item">
+                                            <input type="radio" class="product-labels__checkbox" name="type7">
+                                            <span class="product-labels__txt">TURBOLASER</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <span class="hr-vertical"></span>
+
+                                <div class="product-inf">
+                                    <div class="product-inf__percent">
+                                        <div class="product-inf__percent-circle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+                                                viewBox="0 0 100 100">
+                                                <defs>
+                                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                        <stop offset="0%" stop-color="#0c1e2c" stop-opacity="0" />
+                                                        <stop offset="100%" stop-color="#cb2240" stop-opacity="1" />
+                                                    </linearGradient>
+                                                </defs>
+                                                <circle cx="50" cy="50" r="47" stroke-dasharray="240, 300"
+                                                    stroke="#cb2240" stroke-width="4" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <div class="product-inf__percent-txt">
+                                            80%
+                                        </div>
+                                    </div>
+
+                                    <span class="product-inf__title">DURABILITY RATE</span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-slider__bottom">
+                                <button class="product-slider__cart">
+                                    ADD TO CART
+                                </button>
+
+                                <button class="product-slider__fav js-fav"><span class="heart"></span> ADD TO
+                                    WISHLIST</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
     </div>
 
-    <footer class="rg-footer">
-        <div class="rg-footer__border"></div>
+    <div class="social">
+        <a href="https://twitter.com/imuhammederdem" target="_blank" class="social__item">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405220/starwars/twitter.webp"
+                alt="muhammed erdem" class="social__img">
+            <span class="social__txt">Coded By Muhammed Erdem</span>
+        </a>
 
-        <!-- Main Footer Grid -->
-        <div class="rg-footer__main">
-            <!-- Brand -->
-            <div class="rg-footer__brand">
-                <a href="#" class="rg-footer__logo">
-                    <div class="rg-footer__logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-                        </svg>
-                    </div>
-                    <div class="rg-footer__logo-text">
-                        <span class="rg-footer__logo-name">Real Gold</span>
-                        <span class="rg-footer__logo-tagline">Properties</span>
-                    </div>
-                </a>
+        <a href="https://dribbble.com/shots/3453028-Star-Wars-TIE-Fighter-UI" target="_blank" class="social__item">
+            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1536405220/starwars/dribbble.webp"
+                alt="eray yeşilyurt" class="social__img">
+            <span class="social__txt">Designed By Eray Yeşilyurt</span>
+        </a>
 
-                <p class="rg-footer__brand-desc">
-                    Elevating real estate experiences since 2012. Connecting discerning buyers with extraordinary
-                    properties across the UAE.
-                </p>
+    </div>
 
-                <div class="rg-footer__trust">
-                    <div class="rg-footer__trust-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                        </svg>
-                        RERA Certified
-                    </div>
-                    <div class="rg-footer__trust-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                        </svg>
-                        5★ Rated
-                    </div>
-                </div>
-            </div>
+</div>
+<svg class="hidden" hidden>
+    <symbol id="icon-arrow-left" viewBox="0 0 32 32">
+        <path
+            d="M0.704 17.696l9.856 9.856c0.896 0.896 2.432 0.896 3.328 0s0.896-2.432 0-3.328l-5.792-5.856h21.568c1.312 0 2.368-1.056 2.368-2.368s-1.056-2.368-2.368-2.368h-21.568l5.824-5.824c0.896-0.896 0.896-2.432 0-3.328-0.48-0.48-1.088-0.704-1.696-0.704s-1.216 0.224-1.696 0.704l-9.824 9.824c-0.448 0.448-0.704 1.056-0.704 1.696s0.224 1.248 0.704 1.696z">
+        </path>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 32 32">
+        <path
+            d="M31.296 14.336l-9.888-9.888c-0.896-0.896-2.432-0.896-3.328 0s-0.896 2.432 0 3.328l5.824 5.856h-21.536c-1.312 0-2.368 1.056-2.368 2.368s1.056 2.368 2.368 2.368h21.568l-5.856 5.824c-0.896 0.896-0.896 2.432 0 3.328 0.48 0.48 1.088 0.704 1.696 0.704s1.216-0.224 1.696-0.704l9.824-9.824c0.448-0.448 0.704-1.056 0.704-1.696s-0.224-1.248-0.704-1.664z">
+        </path>
+    </symbol>
+</svg>
 
-            <!-- Properties -->
-            <nav class="rg-footer__col">
-                <h4>Properties</h4>
-                <ul class="rg-footer__links">
-                    <li><a href="#">Luxury Villas</a></li>
-                    <li><a href="#">Apartments</a></li>
-                    <li><a href="#">Penthouses</a></li>
-                    <li><a href="#">Commercial</a></li>
-                    <li><a href="#">Off-Plan</a></li>
-                    <li><a href="#">Townhouses</a></li>
-                </ul>
-            </nav>
 
-            <!-- Company -->
-            <nav class="rg-footer__col">
-                <h4>Company</h4>
-                <ul class="rg-footer__links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Team</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
 
-            <!-- Services -->
-            <nav class="rg-footer__col">
-                <h4>Services</h4>
-                <ul class="rg-footer__links">
-                    <li><a href="#">Buy Property</a></li>
-                    <li><a href="#">Sell Property</a></li>
-                    <li><a href="#">Property Management</a></li>
-                    <li><a href="#">Investment Advisory</a></li>
-                    <li><a href="#">Mortgage Help</a></li>
-                    <li><a href="#">Valuation</a></li>
-                </ul>
-            </nav>
+@font-face {
+font-family: 'Uni Sans';
+src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff2')
+format('woff2'),
+url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168547/unisans-font/UniSansHeavyCAPS.woff')
+format('woff'),
+url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansHeavyCAPS.ttf')
+format('truetype');
+font-weight: 900;
+font-style: normal;
+}
 
-            <!-- Contact -->
-            <div class="rg-footer__contact">
-                <h4>Get in Touch</h4>
+@font-face {
+font-family: 'Uni Sans';
+src: url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff2')
+format('woff2'),
+url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168545/unisans-font/UniSansThinCAPS.woff') format('woff'),
+url('https://res.cloudinary.com/muhammederdem/raw/upload/v1536168548/unisans-font/UniSansThinCAPS.ttf')
+format('truetype');
+font-weight: 500;
+font-style: normal;
+}
 
-                <a href="tel:+971501234567" class="rg-footer__contact-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                    </svg>
-                    +971 50 123 4567
-                </a>
+@import url('https://fonts.googleapis.com/css?family=Dosis:400,600,700,800');
 
-                <a href="mailto:info@realgold.ae" class="rg-footer__contact-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                    info@realgold.ae
-                </a>
+body {
+font-family: 'Uni Sans', sans-serif;
+font-weight: 500;
+}
 
-                <div class="rg-footer__contact-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    Business Bay, Dubai, UAE
-                </div>
+* {
+box-sizing: border-box;
+}
 
-                <div class="rg-footer__socials">
-                    <a href="#" class="rg-footer__social" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="rg-footer__social" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="rg-footer__social" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="rg-footer__social" aria-label="YouTube">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="rg-footer__social" aria-label="WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+img {
+max-width: 100%;
+}
 
-        <div class="rg-footer__divider">
-            <div class="rg-footer__divider-line"></div>
-        </div>
+a {
+text-decoration: none;
+}
 
-        <!-- Bottom Bar -->
-        <div class="rg-footer__bottom">
-            <p class="rg-footer__copyright">
-                © 2025 Real Gold Properties. All rights reserved.
-            </p>
+.icon {
+display: inline-block;
+width: 1em;
+height: 1em;
+stroke-width: 0;
+stroke: currentColor;
+fill: currentColor;
+}
 
-            <ul class="rg-footer__legal">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Cookie Preferences</a></li>
-                <li><a href="#">Sitemap</a></li>
-            </ul>
-        </div>
+.wrapper {
+width: 100%;
+height: 100vh;
+min-height: 750px;
+background: url(https://res.cloudinary.com/muhammederdem/image/upload/v1536405234/starwars/death_star.jpg) center
+no-repeat;
+background-size: cover;
+position: relative;
+overflow: hidden;
+display: flex;
 
-        <!-- Big Watermark Text -->
-        <div class="rg-footer__watermark">
-            <div class="rg-footer__watermark-text" id="watermarkText">
-                <span class="rg-footer__watermark-letter" data-letter="R" style="--delay: 0.1s">R</span>
-                <span class="rg-footer__watermark-letter" data-letter="E" style="--delay: 0.15s">E</span>
-                <span class="rg-footer__watermark-letter" data-letter="A" style="--delay: 0.2s">A</span>
-                <span class="rg-footer__watermark-letter" data-letter="L" style="--delay: 0.25s">L</span>
-                <span class="rg-footer__watermark-space"></span>
-                <span class="rg-footer__watermark-letter" data-letter="G" style="--delay: 0.35s">G</span>
-                <span class="rg-footer__watermark-letter" data-letter="O" style="--delay: 0.4s">O</span>
-                <span class="rg-footer__watermark-letter" data-letter="L" style="--delay: 0.45s">L</span>
-                <span class="rg-footer__watermark-letter" data-letter="D" style="--delay: 0.5s">D</span>
-            </div>
-        </div>
-    </footer>
+@media screen and (max-width: 992px) {
+height: auto;
+min-height: 100vh;
+}
 
-    <script>
-        // Intersection Observer for scroll-triggered animation
-        const watermarkText = document.getElementById('watermarkText');
+}
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.3
-        };
+.content {
+height: 600px;
+margin: auto;
+width: 100%;
+max-width: 1050px;
+display: flex;
+align-items: center;
+position: relative;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    watermarkText.classList.add('is-visible');
-                }
-            });
-        }, observerOptions);
 
-        observer.observe(watermarkText);
+@media screen and (max-width: 1200px){
+max-width: 920px;
+}
 
-        // Re-trigger shine on hover for the whole word
-        const letters = document.querySelectorAll('.rg-footer__watermark-letter');
+@media screen and (max-width: 992px) {
+max-width: 920px;
+margin-top: 100px;
+height: auto;
+min-height: 100vh;
+}
 
-        watermarkText.addEventListener('mouseenter', () => {
-            letters.forEach((letter, index) => {
-                letter.style.animation = 'none';
-                letter.offsetHeight; // Trigger reflow
-                letter.style.setProperty('--delay', `${index * 0.05}s`);
-                letter.querySelector
-            });
-        });
-    </script>
+@media screen and (max-width: 767px) {
+margin-top: 20px;
+}
 
-</body>
+@media screen and (max-width: 576px) {
+margin-top: 20px;
+margin-bottom: 20px;
+}
 
-</html>
+}
+
+.bg-shape {
+height: 100%;
+background-image: linear-gradient(-45deg, #cc3843 0%, #cb193f 100%);
+box-shadow: 0px 30px 139px 0px rgba(10, 22, 31, 0.26);
+border-radius: 30px;
+padding: 45px 40px;
+width: 50%;
+position: absolute;
+top: 0;
+left: 0;
+display: flex;
+align-items: center;
+
+@media screen and (max-width: 1200px) {
+width: 45%;
+}
+
+@media screen and (max-width: 992px) {
+width: 90%;
+height: 290px;
+align-items: flex-start;
+padding: 50px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+@media screen and (max-width: 767px) {
+padding: 30px;
+width: 95%;
+border-radius: 20px;
+}
+
+@media screen and (max-width: 576px) {
+height: 200px;
+
+padding: 30px;
+}
+
+
+
+img {
+object-fit: contain;
+width: 510px;
+display: block;
+object-position: left center;
+opacity: .2;
+transform: rotate(-90deg) translateY(-50%);
+max-width: inherit;
+left: 10px;
+position: absolute;
+
+
+@media screen and (max-width: 1200px) {
+width: 430px;
+left: 10px;
+}
+
+@media screen and (max-width: 992px) {
+transform: none;
+width: 100%;
+position: relative;
+left: auto;
+margin-left: auto;
+margin-right: auto;
+object-fit: contain;
+height: 100%;
+object-position: top center;
+}
+
+
+}
+
+}
+
+.next, .prev {
+z-index: 22;
+display: inline-flex;
+border: none;
+width: 61px;
+height: 61px;
+border-radius: 50%;
+justify-content: center;
+align-items: center;
+font-size: 25px;
+position: absolute;
+top: 50%;
+outline: none;
+cursor: pointer;
+
+&.disabled {
+cursor: not-allowed;
+}
+
+&:focus {
+outline: none;
+}
+
+@media screen and (max-width: 992px) {
+top: 170px;
+}
+
+}
+
+.prev {
+left: -30%;
+transform: translate(-100%, -50%);
+
+@media screen and (max-width: 1200px) {
+left: -21%;
+}
+
+@media screen and (max-width: 992px) {
+left: 0;
+transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 576px) {
+transform: translate(20%, -50%);
+}
+
+}
+
+.next {
+right: 0;
+transform: translate(50%, -50%);
+
+@media screen and (max-width: 576px) {
+transform: translate(-20%, -50%);
+}
+
+}
+
+.product {
+
+&-slider {
+width: 75%;
+height: 85%;
+border-radius: 30px;
+box-shadow: 0 28px 79px 0 rgba(10, 22, 31, 0.35);
+position: absolute;
+top: 50%;
+right: 0;
+transform: translateY(-50%);
+
+@media screen and (max-width: 1200px) {
+width: 80%;
+}
+
+@media screen and (max-width: 992px) {
+width: 80%;
+left: 50%;
+transform: translateX(-50%);
+height: auto;
+position: relative;
+top: 0;
+margin-top: 170px;
+margin-bottom: 100px;
+
+br {
+display: none;
+}
+
+}
+
+@media screen and (max-width: 767px) {
+border-radius: 20px;
+}
+
+@media screen and (max-width: 576px) {
+width: 85%;
+margin-top: 130px;
+}
+
+&__wrp {
+height: 100%;
+}
+
+&__item {
+position: relative;
+height: 100%;
+width: 100%;
+
+@media screen and (max-width: 992px) {
+height: auto;
+}
+
+&.swiper-slide-active {
+.product-slider__card {
+//opacity: 1;
+//width: 100%;
+//pointer-events: auto;
+//transition-delay: .5s;
+}
+
+.product-slider__content {
+> * {
+opacity: 1;
+transform: none;
+
+@for $i from 0 to 15 {
+&:nth-child(#{$i + 1}) {
+transition-delay: $i * 0.2s;
+}
+}
+
+}
+}
+
+circle {
+animation: progress 1s ease-out forwards;
+animation-delay: .5s;
+opacity: 0.75;
+}
+}
+
+}
+
+&__card {
+height: 100%;
+display: flex;
+align-items: center;
+width: 100%;
+transition: all .5s;
+overflow: hidden;
+position: relative;
+border-radius: 30px;
+
+@media screen and (max-width: 992px) {
+align-items: flex-start;
+}
+
+@media screen and (max-width: 767px) {
+border-radius: 20px;
+}
+}
+
+&__cover {
+border-radius: 30px;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: block;
+object-fit: cover;
+
+@media screen and (max-width: 767px) {
+border-radius: 20px;
+}
+}
+
+&__content {
+color: #fff;
+padding-top: 1px;
+position: relative;
+z-index: 2;
+width: 100%;
+padding-left: 250px;
+padding-right: 80px;
+
+@media screen and (max-width: 1200px) {
+padding-left: 220px;
+}
+
+@media screen and (max-width: 992px) {
+padding: 20px 60px 100px;
+padding-top: 280px;
+text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+padding: 20px 30px 50px;
+padding-top: 300px;
+}
+
+@media screen and (max-width: 576px) {
+padding-top: 220px;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+}
+
+&__title {
+margin: 0;
+margin-bottom: 10px;
+font-weight: 900;
+font-size: 41px;
+line-height: 1.2em;
+letter-spacing: 2px;
+opacity: 0;
+transform: translateY(55px);
+transition: all .5s;
+
+@media screen and (max-width: 1200px) {
+font-size: 34px;
+}
+
+@media screen and (max-width: 576px) {
+font-size: 24px;
+}
+
+}
+
+&__price {
+display: block;
+font-size: 42px;
+opacity: 0;
+transform: translateY(55px);
+transition: all .5s;
+
+@media screen and (max-width: 1200px) {
+font-size: 36px;
+}
+
+@media screen and (max-width: 576px) {
+font-size: 30px;
+}
+
+sup {
+top: -20px;
+font-size: 65%;
+}
+
+}
+
+&__cart {
+box-shadow: 0 7px 99px 0 rgba(204, 51, 66, 0.6);
+background-image: linear-gradient(-45deg, rgb(204, 56, 67) 0%, rgb(203, 25, 63) 100%);
+border: none;
+color: #fff;
+padding: 10px 30px;
+border-radius: 50px;
+min-height: 50px;
+font-weight: 700;
+font-size: 14px;
+letter-spacing: 2px;
+margin-right: 40px;
+cursor: pointer;
+
+@media screen and (max-width: 768px) {
+margin-right: 30px;
+}
+
+@media screen and (max-width: 576px) {
+width: 100%;
+max-width: 300px;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 50px;
+}
+}
+
+&__fav {
+color: #888e94;
+background: none;
+border: none;
+position: relative;
+padding-left: 25px;
+outline: none;
+cursor: pointer;
+
+&:focus {
+outline: none;
+}
+
+.heart {
+display: block;
+position: absolute;
+left: 0;
+transform: translate(-50%, -50%) scale(0.7);
+top: 50%;
+pointer-events: none;
+width: 100px;
+height: 100px;
+background: url("https://res.cloudinary.com/muhammederdem/image/upload/v1536405215/starwars/heart.png") no-repeat;
+background-position: 0 0;
+cursor: pointer;
+transition: background-position 1s steps(28);
+transition-duration: 0s;
+
+&.is-active {
+transition-duration: 1s;
+background-position: -2800px 0;
+}
+}
+
+
+}
+
+&__bottom {
+margin-top: 20px;
+opacity: 0;
+transform: translateY(55px);
+transition: all .5s;
+}
+
+}
+
+&-ctr {
+display: flex;
+align-items: center;
+min-height: 150px;
+margin-top: 40px;
+opacity: 0;
+transform: translateY(55px);
+transition: all .5s;
+
+@media screen and (max-width: 992px) {
+justify-content: center;
+}
+
+.hr-vertical {
+width: 1px;
+background: #9fa3a7;
+align-self: stretch;
+margin: 0 35px;
+flex-shrink: 0;
+opacity: .5;
+}
+
+@media screen and (max-width: 767px) {
+justify-content: center;
+flex-wrap: wrap;
+margin-bottom: 40px;
+
+.hr-vertical {
+width: 100%;
+margin: 35px 0;
+height: 1px;
+}
+
+}
+
+}
+
+&-labels {
+
+@media screen and (max-width: 767px) {
+width: 100%;
+}
+
+&__checkbox {
+display: none;
+
+&:checked + .product-labels__txt {
+border-color: #cc3743;
+padding: 10px 13px;
+}
+
+}
+
+&__title {
+font-family: 'Dosis', sans-serif;
+font-weight: 700;
+letter-spacing: 3px;
+font-size: 16px;
+margin-bottom: 10px;
+}
+
+&__group {
+display: flex;
+margin-bottom: 15px;
+
+@media screen and (max-width: 992px) {
+justify-content: center;
+}
+
+
+&:last-child {
+margin-bottom: 0;
+}
+
+}
+
+&__item {
+margin: 5px;
+cursor: pointer;
+
+&:first-child {
+margin-left: 0;
+}
+
+}
+
+&__txt {
+display: block;
+border: 2px solid transparent;
+font-size: 14px;
+padding: 10px 20px;
+padding-left: 0;
+border-radius: 50px;
+transition: all .3s;
+letter-spacing: 2px;
+}
+
+}
+@keyframes progress {
+0% {
+stroke-dasharray: 0 100;
+}
+}
+&-inf {
+text-align: center;
+
+@media screen and (max-width: 767px) {
+width: 100%;
+}
+
+&__percent {
+font-weight: 700;
+font-size: 22px;
+letter-spacing: 1px;
+margin-bottom: 12px;
+font-family: 'Dosis', sans-serif;
+position: relative;
+
+circle {
+transform: rotate(180deg) scaleY(-1);
+transform-origin: 50%;
+}
+
+&-txt {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+}
+
+&__title {
+font-family: 'Dosis', sans-serif;
+font-weight: 700;
+letter-spacing: 2px;
+font-size: 18px;
+}
+
+}
+
+&-img {
+position: absolute;
+z-index: 2;
+width: 500px;
+left: 25%;
+transform: translateX(-45%);
+max-height: 500px;
+height: 100%;
+pointer-events: none;
+
+@media screen and (max-width: 1200px) {
+width: 430px;
+left: 20%;
+}
+
+@media screen and (max-width: 992px) {
+width: 430px;
+left: 50%;
+transform: translateX(-50%);
+top: 0;
+height: 350px;
+}
+
+@media screen and (max-width: 767px) {
+width: 100%;
+max-width: 400px;
+top: 30px;
+height: 390px;
+}
+
+@media screen and (max-width: 576px) {
+max-width: 300px;
+height: 300px;
+}
+
+&__item {
+display: flex;
+align-items: center;
+position: absolute;
+pointer-events: none;
+user-select: none;
+top: 50%;
+right: 0;
+transform: translateY(-50%) translateX(-130px);
+opacity: 0;
+transition: all .3s;
+
+&.active {
+opacity: 1;
+transform: translateY(-50%) translateX(0);
+transition-delay: .3s;
+}
+
+img {
+object-fit: contain;
+object-position: center right;
+}
+
+}
+
+}
+
+}
+
+
+.social {
+position: absolute;
+bottom: 10px;
+right: 0;
+width: 100%;
+display: flex;
+padding: 20px 55px;
+justify-content: space-between;
+
+
+@media screen and (max-width: 576px){
+flex-direction: column;
+bottom: 0;
+}
+
+
+&__item {
+color: rgba(255, 255, 255, 0.75);
+font-family: 'Dosis', sans-serif;
+font-weight: 700;
+letter-spacing: 2px;
+line-height: 1em;
+display: flex;
+align-items: center;
+transition: all .3s;
+
+&:hover {
+color: #fff;
+}
+
+@media screen and (max-width: 576px) {
+margin-bottom: 10px;
+}
+
+}
+
+&__img {
+width: 24px;
+margin-right: 15px;
+}
+
+}
+
+
+
+var swiper = new Swiper('.product-slider', {
+spaceBetween: 30,
+effect: 'fade',
+// initialSlide: 2,
+loop: false,
+navigation: {
+nextEl: '.next',
+prevEl: '.prev'
+},
+// mousewheel: {
+// // invert: false
+// },
+on: {
+init: function(){
+var index = this.activeIndex;
+
+var target = $('.product-slider__item').eq(index).data('target');
+
+console.log(target);
+
+$('.product-img__item').removeClass('active');
+$('.product-img__item#'+ target).addClass('active');
+}
+}
+
+});
+
+swiper.on('slideChange', function () {
+var index = this.activeIndex;
+
+var target = $('.product-slider__item').eq(index).data('target');
+
+console.log(target);
+
+$('.product-img__item').removeClass('active');
+$('.product-img__item#'+ target).addClass('active');
+
+if(swiper.isEnd) {
+$('.prev').removeClass('disabled');
+$('.next').addClass('disabled');
+} else {
+$('.next').removeClass('disabled');
+}
+
+if(swiper.isBeginning) {
+$('.prev').addClass('disabled');
+} else {
+$('.prev').removeClass('disabled');
+}
+});
+
+$(".js-fav").on("click", function() {
+$(this).find('.heart').toggleClass("is-active");
+});

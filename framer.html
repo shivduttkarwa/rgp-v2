@@ -1,1302 +1,3233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxury Properties</title>
-<link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --rg-beige-light: #00032e;
-  --rg-beige: #05094a;
-  --rg-beige-dark: #0a1260;
-  --rg-beige-darker: #0f1870;
-  --rg-text-dark: #ffffff;
-  --rg-text-medium: rgba(255, 255, 255, 0.72);
-  --rg-text-light: rgba(255, 255, 255, 0.45);
-  --rg-gold: #f9c307;
-  --rg-amber: #f9c307;
-  --rg-navy: #00032e;
-  --rg-dark: #000220;
-  --rg-radius: 1.125rem;
-  --font-title: "Bona Nova SC", serif;
-  --font-body: "Bricolage Grotesque", sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--rg-beige-light);
-  font-family: var(--font-body);
-  color: var(--rg-text-dark);
-  min-height: 100vh;
-  padding: 4rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-}
-
-/* ════════════════════════════════════════════════════════════
-   CARD STYLE 1 — "The Floating Gallery"
-   ════════════════════════════════════════════════════════════ */
-
-.card-floating {
-  width: 100%;
-  max-width: 420px;
-  position: relative;
-}
-
-.card-floating .img-stack {
-  position: relative;
-  height: 320px;
-  perspective: 1000px;
-}
-
-.card-floating .img-main {
-  width: 100%;
-  height: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-  position: relative;
-  z-index: 3;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
-}
-
-.card-floating .img-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-floating:hover .img-main img {
-  transform: scale(1.05);
-}
-
-/* Floating price tag */
-.card-floating .price-float {
-  position: absolute;
-  bottom: -20px;
-  right: 24px;
-  z-index: 10;
-  background: var(--rg-gold);
-  color: var(--rg-dark);
-  padding: 14px 28px;
-  border-radius: 60px;
-  font-family: var(--font-title);
-  font-size: 1.35rem;
-  font-weight: 700;
-  box-shadow: 
-    0 10px 40px rgba(249, 195, 7, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transform: rotate(-2deg);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-floating:hover .price-float {
-  transform: rotate(0deg) scale(1.05);
-}
-
-/* Decorative floating shapes */
-.card-floating .decor {
-  position: absolute;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(249, 195, 7, 0.15), transparent);
-  backdrop-filter: blur(20px);
-  z-index: 1;
-}
-
-.card-floating .decor-1 {
-  width: 100px;
-  height: 100px;
-  top: -20px;
-  left: -30px;
-  animation: float 6s ease-in-out infinite;
-}
-
-.card-floating .decor-2 {
-  width: 60px;
-  height: 60px;
-  bottom: 40px;
-  left: -20px;
-  animation: float 8s ease-in-out infinite reverse;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(5deg); }
-}
-
-/* Content below image */
-.card-floating .content {
-  padding: 2.5rem 0.5rem 0;
-}
-
-.card-floating .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--rg-gold);
-  margin-bottom: 12px;
-}
-
-.card-floating .eyebrow::before {
-  content: '';
-  width: 20px;
-  height: 2px;
-  background: var(--rg-gold);
-}
-
-.card-floating h3 {
-  font-family: var(--font-title);
-  font-size: 1.75rem;
-  color: var(--rg-text-dark);
-  margin-bottom: 10px;
-  line-height: 1.2;
-}
-
-.card-floating .location {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--rg-text-light);
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.card-floating .location svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--rg-text-light);
-  fill: none;
-  stroke-width: 2;
-}
-
-/* Stats as minimal pills */
-.card-floating .stats {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.card-floating .stat-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 100px;
-  font-size: 0.8rem;
-  color: var(--rg-text-medium);
-  transition: all 0.3s ease;
-}
-
-.card-floating .stat-pill:hover {
-  border-color: rgba(249, 195, 7, 0.3);
-  background: rgba(249, 195, 7, 0.05);
-}
-
-.card-floating .stat-pill svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--rg-gold);
-  fill: none;
-  stroke-width: 2;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   CARD STYLE 2 — "The Split Reveal"
-   ════════════════════════════════════════════════════════════ */
-
-.card-split {
-  width: 100%;
-  max-width: 500px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  background: var(--rg-beige);
-  border-radius: 32px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.card-split::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(249, 195, 7, 0.2) 20%,
-    rgba(249, 195, 7, 0.2) 80%,
-    transparent
-  );
-  z-index: 5;
-}
-
-.card-split .visual {
-  position: relative;
-  min-height: 380px;
-}
-
-.card-split .visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-split:hover .visual img {
-  transform: scale(1.08);
-}
-
-/* Vertical text */
-.card-split .vertical-tag {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--rg-text-light);
-  z-index: 5;
-}
-
-.card-split .info {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.card-split .type-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(249, 195, 7, 0.1);
-  border: 1px solid rgba(249, 195, 7, 0.2);
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-}
-
-.card-split .type-badge svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--rg-gold);
-  fill: none;
-  stroke-width: 1.8;
-}
-
-.card-split h3 {
-  font-family: var(--font-title);
-  font-size: 1.5rem;
-  line-height: 1.25;
-  color: var(--rg-text-dark);
-  margin-bottom: 8px;
-}
-
-.card-split .address {
-  font-size: 0.82rem;
-  color: var(--rg-text-light);
-  margin-bottom: 1.5rem;
-  font-weight: 300;
-}
-
-/* Minimal stat list */
-.card-split .stat-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 2rem;
-}
-
-.card-split .stat-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-}
-
-.card-split .stat-row .label {
-  color: var(--rg-text-light);
-}
-
-.card-split .stat-row .value {
-  color: var(--rg-text-dark);
-  font-weight: 500;
-}
-
-/* Price and CTA */
-.card-split .bottom {
-  margin-top: auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.card-split .price {
-  font-family: var(--font-title);
-  font-size: 1.6rem;
-  color: var(--rg-gold);
-  margin-bottom: 1rem;
-}
-
-.card-split .price span {
-  font-size: 0.8rem;
-  color: var(--rg-text-light);
-  font-family: var(--font-body);
-  font-weight: 300;
-}
-
-.card-split .cta-arrow {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--rg-gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-split .cta-arrow svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--rg-dark);
-  fill: none;
-  stroke-width: 2.5;
-  transition: transform 0.3s ease;
-}
-
-.card-split:hover .cta-arrow {
-  transform: scale(1.1);
-  box-shadow: 0 10px 30px rgba(249, 195, 7, 0.3);
-}
-
-.card-split:hover .cta-arrow svg {
-  transform: translateX(3px);
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   CARD STYLE 3 — "The Cinematic Frame"
-   ════════════════════════════════════════════════════════════ */
-
-.card-cinematic {
-  width: 100%;
-  max-width: 600px;
-  position: relative;
-  border-radius: 40px;
-  overflow: hidden;
-  aspect-ratio: 16/10;
-  cursor: pointer;
-}
-
-.card-cinematic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.6s ease;
-  filter: brightness(0.7);
-}
-
-.card-cinematic:hover img {
-  transform: scale(1.1);
-  filter: brightness(0.5);
-}
-
-/* Golden frame border effect */
-.card-cinematic::before {
-  content: '';
-  position: absolute;
-  inset: 16px;
-  border: 1px solid rgba(249, 195, 7, 0.25);
-  border-radius: 28px;
-  z-index: 2;
-  transition: all 0.5s ease;
-}
-
-.card-cinematic:hover::before {
-  inset: 24px;
-  border-color: rgba(249, 195, 7, 0.5);
-}
-
-/* Corner accents */
-.card-cinematic .corner {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  z-index: 3;
-}
-
-.card-cinematic .corner::before,
-.card-cinematic .corner::after {
-  content: '';
-  position: absolute;
-  background: var(--rg-gold);
-}
-
-.card-cinematic .corner::before {
-  width: 100%;
-  height: 2px;
-}
-
-.card-cinematic .corner::after {
-  width: 2px;
-  height: 100%;
-}
-
-.card-cinematic .corner-tl { top: 30px; left: 30px; }
-.card-cinematic .corner-tr { top: 30px; right: 30px; transform: scaleX(-1); }
-.card-cinematic .corner-bl { bottom: 30px; left: 30px; transform: scaleY(-1); }
-.card-cinematic .corner-br { bottom: 30px; right: 30px; transform: scale(-1); }
-
-/* Content overlay */
-.card-cinematic .overlay {
-  position: absolute;
-  inset: 0;
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  z-index: 4;
-  background: linear-gradient(
-    to top,
-    rgba(0, 3, 46, 0.9) 0%,
-    transparent 60%
-  );
-}
-
-.card-cinematic .tag-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: auto;
-}
-
-.card-cinematic .tag {
-  padding: 6px 14px;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--rg-text-dark);
-}
-
-.card-cinematic .tag.gold {
-  background: var(--rg-gold);
-  color: var(--rg-dark);
-  border-color: transparent;
-}
-
-.card-cinematic h3 {
-  font-family: var(--font-title);
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  color: var(--rg-text-dark);
-  line-height: 1.15;
-  margin-bottom: 8px;
-  transform: translateY(10px);
-  opacity: 1;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-cinematic .meta {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  transform: translateY(10px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
-}
-
-.card-cinematic .meta-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  color: var(--rg-text-medium);
-}
-
-.card-cinematic .meta-item svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--rg-gold);
-  fill: none;
-  stroke-width: 2;
-}
-
-.card-cinematic .price-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-}
-
-.card-cinematic:hover .price-row {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.card-cinematic .price {
-  font-family: var(--font-title);
-  font-size: 1.8rem;
-  color: var(--rg-gold);
-}
-
-.card-cinematic .view-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--rg-text-dark);
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 10px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 100px;
-  transition: all 0.3s ease;
-}
-
-.card-cinematic .view-btn:hover {
-  background: var(--rg-text-dark);
-  color: var(--rg-dark);
-  border-color: transparent;
-}
-
-.card-cinematic .view-btn svg {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   CARD STYLE 4 — "The Minimal Stack"
-   ════════════════════════════════════════════════════════════ */
-
-.card-stack {
-  width: 100%;
-  max-width: 360px;
-  background: transparent;
-  position: relative;
-}
-
-.card-stack .img-holder {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  aspect-ratio: 4/5;
-}
-
-.card-stack .img-holder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-stack:hover .img-holder img {
-  transform: scale(1.06);
-}
-
-/* Gradient mask */
-.card-stack .img-holder::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    var(--rg-beige-light) 0%,
-    transparent 40%
-  );
-}
-
-/* Floating elements on image */
-.card-stack .status {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: rgba(0, 3, 46, 0.6);
-  backdrop-filter: blur(12px);
-  border-radius: 8px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--rg-text-dark);
-  z-index: 2;
-}
-
-.card-stack .status .dot {
-  width: 6px;
-  height: 6px;
-  background: #4ade80;
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.card-stack .actions {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 2;
-}
-
-.card-stack .action-btn {
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 3, 46, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.card-stack .action-btn svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--rg-text-medium);
-  fill: none;
-  stroke-width: 2;
-  transition: all 0.3s ease;
-}
-
-.card-stack .action-btn:hover {
-  background: rgba(249, 195, 7, 0.15);
-  border-color: rgba(249, 195, 7, 0.3);
-}
-
-.card-stack .action-btn:hover svg {
-  stroke: var(--rg-gold);
-}
-
-/* Info card that overlaps */
-.card-stack .info-card {
-  position: relative;
-  margin-top: -80px;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding: 24px;
-  background: var(--rg-beige);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  z-index: 3;
-}
-
-.card-stack .info-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 24px;
-  right: 24px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--rg-gold), transparent);
-  border-radius: 0 0 2px 2px;
-}
-
-.card-stack h3 {
-  font-family: var(--font-title);
-  font-size: 1.3rem;
-  color: var(--rg-text-dark);
-  margin-bottom: 4px;
-}
-
-.card-stack .loc {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.8rem;
-  color: var(--rg-text-light);
-  margin-bottom: 16px;
-}
-
-.card-stack .loc svg {
-  width: 12px;
-  height: 12px;
-  stroke: var(--rg-text-light);
-  fill: none;
-  stroke-width: 2;
-}
-
-.card-stack .features {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.card-stack .feat {
-  text-align: center;
-}
-
-.card-stack .feat-val {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--rg-text-dark);
-}
-
-.card-stack .feat-label {
-  font-size: 0.68rem;
-  color: var(--rg-text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.card-stack .divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  margin: 16px 0;
-}
-
-.card-stack .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-stack .price {
-  font-family: var(--font-title);
-  font-size: 1.4rem;
-  color: var(--rg-gold);
-}
-
-.card-stack .price small {
-  font-size: 0.75rem;
-  color: var(--rg-text-light);
-  font-family: var(--font-body);
-}
-
-.card-stack .book-btn {
-  padding: 10px 20px;
-  background: transparent;
-  border: 1px solid var(--rg-gold);
-  border-radius: 10px;
-  color: var(--rg-gold);
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.card-stack .book-btn:hover {
-  background: var(--rg-gold);
-  color: var(--rg-dark);
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   CARD STYLE 5 — "The Glass Morphism"
-   ════════════════════════════════════════════════════════════ */
-
-.card-glass {
-  width: 100%;
-  max-width: 400px;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 32px;
-  backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Ambient glow */
-.card-glass::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(249, 195, 7, 0.08), transparent 70%);
-  pointer-events: none;
-}
-
-.card-glass .img-wrap {
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  aspect-ratio: 5/4;
-}
-
-.card-glass .img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-glass:hover .img-wrap img {
-  transform: scale(1.05);
-}
-
-/* Image number indicator */
-.card-glass .img-counter {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  font-size: 0.75rem;
-  color: var(--rg-text-dark);
-}
-
-.card-glass .img-counter svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--rg-text-dark);
-  fill: none;
-  stroke-width: 2;
-}
-
-/* Featured badge */
-.card-glass .featured-badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 8px 14px;
-  background: var(--rg-gold);
-  color: var(--rg-dark);
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(249, 195, 7, 0.3);
-}
-
-.card-glass .body {
-  padding: 20px 8px 8px;
-}
-
-.card-glass .header-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.card-glass h3 {
-  font-family: var(--font-title);
-  font-size: 1.35rem;
-  color: var(--rg-text-dark);
-  line-height: 1.2;
-  flex: 1;
-}
-
-.card-glass .rating {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 10px;
-  background: rgba(249, 195, 7, 0.1);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--rg-gold);
-}
-
-.card-glass .rating svg {
-  width: 14px;
-  height: 14px;
-  fill: var(--rg-gold);
-  stroke: none;
-}
-
-.card-glass .location {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  color: var(--rg-text-light);
-  margin-bottom: 20px;
-}
-
-.card-glass .location svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--rg-text-light);
-  fill: none;
-  stroke-width: 2;
-}
-
-/* Amenities row */
-.card-glass .amenities {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.card-glass .amenity {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  font-size: 0.78rem;
-  color: var(--rg-text-medium);
-}
-
-.card-glass .amenity svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--rg-gold);
-  fill: none;
-  stroke-width: 2;
-}
-
-.card-glass .bottom-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.card-glass .price-block {
-  display: flex;
-  flex-direction: column;
-}
-
-.card-glass .price-label {
-  font-size: 0.7rem;
-  color: var(--rg-text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.card-glass .price-val {
-  font-family: var(--font-title);
-  font-size: 1.5rem;
-  color: var(--rg-text-dark);
-}
-
-.card-glass .price-val span {
-  font-size: 0.85rem;
-  color: var(--rg-text-light);
-  font-family: var(--font-body);
-}
-
-.card-glass .cta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: var(--rg-gold);
-  border: none;
-  border-radius: 14px;
-  color: var(--rg-dark);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.card-glass .cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(249, 195, 7, 0.3);
-}
-
-.card-glass .cta svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--rg-dark);
-  fill: none;
-  stroke-width: 2;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════════════════════════ */
-
-@media (max-width: 580px) {
-  .card-split {
-    grid-template-columns: 1fr;
-  }
-  
-  .card-split .visual {
-    min-height: 240px;
-  }
-  
-  .card-split::before {
-    display: none;
-  }
-  
-  .card-cinematic {
-    aspect-ratio: 4/5;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEHNA - Contemporary Indian Women's Fashion | Jaipur</title>
+    <meta name="description" content="Behna - Curating timeless Indian elegance for the modern woman. Premium women's apparel crafted in Jaipur.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #1A1614;
+            --blanc: #FFFFFF;
+            --cream: #FBF9F7;
+            --stone: #EDE8E3;
+            --sand: #D8D0C7;
+            --charcoal: #2D2926;
+            --taupe: #8C857B;
+            --terracotta: #C4785A;
+            --gold: #B8926A;
+            --deep-rose: #9E6B6B;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--cream);
+            color: var(--noir);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--terracotta);
+            border-radius: 3px;
+        }
+
+        /* Typography */
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Custom Cursor - Desktop Only */
+        .cursor {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--noir);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            display: none;
+        }
+
+        .cursor.active {
+            opacity: 1;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--terracotta);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .cursor.hovering {
+            width: 70px;
+            height: 70px;
+            background: rgba(196, 120, 90, 0.1);
+            border-color: var(--terracotta);
+        }
+
+        @media (min-width: 1025px) {
+            body {
+                cursor: none;
+            }
+            .cursor, .cursor-dot {
+                display: block;
+            }
+        }
+
+        /* Page Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--noir);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            color: var(--blanc);
+            overflow: hidden;
+        }
+
+        .loader-logo span {
+            display: inline-block;
+            animation: loadText 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .loader-tagline {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            color: var(--terracotta);
+            text-transform: uppercase;
+        }
+
+        .loader-progress {
+            width: 150px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-progress::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: var(--terracotta);
+            animation: loadProgress 2s ease forwards;
+        }
+
+        @keyframes loadText {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes loadProgress {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(251, 249, 247, 0.97);
+            padding: 1rem 5%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            color: var(--noir);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--terracotta);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-center a {
+            color: var(--noir);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-center a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--terracotta);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .nav-center a:hover {
+            color: var(--terracotta);
+        }
+
+        .nav-center a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            color: var(--noir);
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .nav-icon:hover {
+            color: var(--terracotta);
+        }
+
+        .cart-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: var(--terracotta);
+            color: var(--blanc);
+            border-radius: 50%;
+            font-size: 0.6rem;
+            margin-left: 0.3rem;
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .menu-btn span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--noir);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .menu-btn.active span:first-child {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active span:last-child {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--cream);
+            z-index: 999;
+            padding: 100px 40px 40px;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--sand);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1.2rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--noir);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--terracotta);
+            padding-left: 10px;
+        }
+
+        .mobile-menu-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--sand);
+        }
+
+        .mobile-menu-footer p {
+            font-size: 0.85rem;
+            color: var(--taupe);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .mobile-menu-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .mobile-menu-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            padding: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(8rem, 22vw, 28vw);
+            font-weight: 300;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(26, 22, 20, 0.06);
+            letter-spacing: -0.03em;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            z-index: 0;
+            user-select: none;
+        }
+
+        .hero-content {
+            width: 100%;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-left {
+            padding-right: 1rem;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: var(--taupe);
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--terracotta);
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title span {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title span em {
+            display: block;
+            font-style: italic;
+            color: var(--terracotta);
+            transform: translateY(100%);
+            animation: slideUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        .hero-title span:nth-child(2) em {
+            animation-delay: 0.15s;
+        }
+
+        .hero-title span:nth-child(3) em {
+            animation-delay: 0.3s;
+            font-style: normal;
+            color: var(--noir);
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .hero-center {
+            position: relative;
+            height: 75vh;
+            max-height: 700px;
+        }
+
+        .hero-image-main {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.15);
+            animation: heroZoom 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        @keyframes heroZoom {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            animation: overlayReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes overlayReveal {
+            to {
+                transform: translateY(-101%);
+            }
+        }
+
+        .hero-image-frame {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 1px solid var(--sand);
+            pointer-events: none;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 75vh;
+            max-height: 700px;
+            padding-left: 1rem;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            line-height: 1.9;
+            font-weight: 300;
+            color: var(--charcoal);
+            max-width: 300px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--noir);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            color: var(--terracotta);
+            gap: 1.5rem;
+        }
+
+        .hero-cta-line {
+            width: 50px;
+            height: 1px;
+            background: var(--noir);
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover .hero-cta-line {
+            width: 70px;
+            background: var(--terracotta);
+        }
+
+        .hero-floating-img {
+            position: absolute;
+            z-index: 3;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+        }
+
+        .hero-floating-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-floating-img:hover img {
+            transform: scale(1.08);
+        }
+
+        .hero-floating-1 {
+            width: 180px;
+            height: 250px;
+            bottom: 8%;
+            left: 32%;
+            animation: floatIn1 1.2s 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-floating-2 {
+            width: 140px;
+            height: 200px;
+            top: 12%;
+            right: 28%;
+            animation: floatIn2 1.2s 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatIn1 {
+            from {
+                opacity: 0;
+                transform: translateY(60px) rotate(-4deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(-2deg);
+            }
+        }
+
+        @keyframes floatIn2 {
+            from {
+                opacity: 0;
+                transform: translateY(-60px) rotate(4deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(2deg);
+            }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 5%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--taupe);
+        }
+
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background: var(--sand);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--terracotta);
+            animation: scrollAnim 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollAnim {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        /* Marquee */
+        .marquee-container {
+            padding: 2.5rem 0;
+            background: var(--noir);
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 50s linear infinite;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding: 0 3rem;
+            white-space: nowrap;
+        }
+
+        .marquee-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 400;
+            color: var(--blanc);
+            letter-spacing: 0.08em;
+        }
+
+        .marquee-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        .section-title span {
+            display: block;
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        .section-link {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--noir);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--noir);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .section-link:hover {
+            gap: 1.2rem;
+            border-color: var(--terracotta);
+            color: var(--terracotta);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 280px);
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .category-card:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        .category-card:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .category-card:hover .category-image {
+            transform: scale(1.06);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 22, 20, 0.7) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            transition: background 0.4s ease;
+        }
+
+        .category-card:hover .category-overlay {
+            background: linear-gradient(to top, rgba(26, 22, 20, 0.85) 0%, rgba(26, 22, 20, 0.2) 100%);
+        }
+
+        .category-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.4rem, 2vw, 1.8rem);
+            font-weight: 400;
+            color: var(--blanc);
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover .category-name {
+            transform: translateY(0);
+        }
+
+        .category-count {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--blanc);
+            margin-top: 0.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .category-card:hover .category-count {
+            transform: translateY(0);
+            opacity: 0.8;
+        }
+
+        /* Editorial Section */
+        .editorial {
+            padding: 0 5% 8rem;
+        }
+
+        .editorial-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 85vh;
+            overflow: hidden;
+        }
+
+        .editorial-left {
+            background: var(--noir);
+            padding: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .editorial-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 2rem;
+        }
+
+        .editorial-tag::before {
+            content: '◈';
+            font-size: 0.6rem;
+        }
+
+        .editorial-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-weight: 400;
+            color: var(--blanc);
+            line-height: 1.15;
+            margin-bottom: 2rem;
+        }
+
+        .editorial-title em {
+            font-style: italic;
+            color: var(--stone);
+        }
+
+        .editorial-text {
+            font-size: 0.92rem;
+            line-height: 2;
+            color: var(--stone);
+            font-weight: 300;
+            max-width: 420px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 2.2rem;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: var(--blanc);
+            text-decoration: none;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--blanc);
+            transform: translateX(-101%);
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-outline:hover {
+            color: var(--noir);
+            border-color: var(--blanc);
+        }
+
+        .btn-outline:hover::before {
+            transform: translateX(0);
+        }
+
+        .editorial-right {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .editorial-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .editorial-right:hover .editorial-image {
+            transform: scale(1.03);
+        }
+
+        .editorial-badge {
+            position: absolute;
+            bottom: 3rem;
+            right: 3rem;
+            width: 110px;
+            height: 110px;
+            background: var(--blanc);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: floatBadge 6s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .editorial-badge span {
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+        }
+
+        .editorial-badge strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--noir);
+        }
+
+        /* Products Showcase */
+        .products {
+            padding: 8rem 5%;
+            background: var(--blanc);
+        }
+
+        .products-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 4rem;
+        }
+
+        .products-header .section-title {
+            margin-bottom: 1.2rem;
+        }
+
+        .products-subtitle {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--taupe);
+            font-weight: 300;
+        }
+
+        .products-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--taupe);
+            cursor: pointer;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            color: var(--noir);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--terracotta);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem 1.5rem;
+        }
+
+        .product-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+            background: var(--cream);
+        }
+
+        .product-image-wrapper::before {
+            content: '';
+            display: block;
+            padding-top: 135%;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .product-image.secondary {
+            opacity: 0;
+        }
+
+        .product-card:hover .product-image.primary {
+            opacity: 0;
+        }
+
+        .product-card:hover .product-image.secondary {
+            opacity: 1;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.4rem;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.9rem 0.5rem;
+            background: var(--blanc);
+            border: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--noir);
+            color: var(--blanc);
+        }
+
+        .action-btn.wishlist {
+            flex: 0 0 45px;
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.35rem 0.7rem;
+            background: var(--noir);
+            color: var(--blanc);
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .product-tag.new {
+            background: var(--terracotta);
+        }
+
+        .product-tag.sale {
+            background: var(--deep-rose);
+        }
+
+        .product-info {
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 0.88rem;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+            font-weight: 400;
+        }
+
+        .product-price {
+            font-size: 0.82rem;
+            color: var(--taupe);
+            letter-spacing: 0.03em;
+        }
+
+        .product-price .original {
+            text-decoration: line-through;
+            margin-right: 0.5rem;
+            color: var(--sand);
+        }
+
+        .product-price .sale {
+            color: var(--deep-rose);
+        }
+
+        .product-colors {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 0.7rem;
+        }
+
+        .color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid var(--sand);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .color-dot:hover {
+            transform: scale(1.15);
+        }
+
+        /* Collection Showcase */
+        .collection-showcase {
+            padding: 6rem 5%;
+            background: var(--stone);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .showcase-item {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .showcase-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            background: linear-gradient(to top, rgba(26, 22, 20, 0.6) 0%, transparent 50%);
+        }
+
+        .showcase-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--blanc);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--blanc);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .showcase-btn:hover {
+            gap: 1.2rem;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 10rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-bg-text {
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(10rem, 18vw, 22vw);
+            font-weight: 300;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(26, 22, 20, 0.04);
+            bottom: 5%;
+            right: -5%;
+            z-index: 0;
+        }
+
+        .story-wrapper {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-images {
+            position: relative;
+            height: 75vh;
+            max-height: 650px;
+        }
+
+        .story-img {
+            position: absolute;
+            overflow: hidden;
+        }
+
+        .story-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-img-1 {
+            width: 65%;
+            height: 75%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .story-img-2 {
+            width: 50%;
+            height: 45%;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            border: 6px solid var(--cream);
+        }
+
+        .story-content {
+            padding-right: 2rem;
+        }
+
+        .story-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-tag::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--terracotta);
+        }
+
+        .story-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text {
+            font-size: 0.95rem;
+            line-height: 2;
+            color: var(--charcoal);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding-top: 2.5rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--sand);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 400;
+            color: var(--terracotta);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            color: var(--taupe);
+            margin-top: 0.4rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 5%;
+            background: var(--stone);
+        }
+
+        .testimonials-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .testimonial-content {
+            flex: 1;
+        }
+
+        .quote-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(6rem, 10vw, 10rem);
+            line-height: 0.5;
+            color: var(--sand);
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            color: var(--charcoal);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .author-image {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+        }
+
+        .author-title {
+            font-size: 0.78rem;
+            color: var(--taupe);
+            margin-top: 0.2rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 2.5rem;
+        }
+
+        .nav-dot {
+            width: 35px;
+            height: 2px;
+            background: var(--sand);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active,
+        .nav-dot:hover {
+            background: var(--terracotta);
+            width: 50px;
+        }
+
+        .testimonial-image {
+            flex: 0.75;
+            height: 550px;
+            overflow: hidden;
+        }
+
+        .testimonial-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Instagram Section */
+        .instagram {
+            padding: 8rem 5%;
+        }
+
+        .instagram-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .instagram-handle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .instagram-handle a {
+            color: var(--noir);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .instagram-handle a:hover {
+            color: var(--terracotta);
+        }
+
+        .instagram-tagline {
+            color: var(--taupe);
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.8rem;
+        }
+
+        .instagram-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .instagram-item::before {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
+
+        .instagram-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .instagram-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .instagram-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(196, 120, 90, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .instagram-item:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        .instagram-icon {
+            color: var(--blanc);
+            font-size: 1.3rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 6rem 5%;
+            background: var(--noir);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30L30 0z' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .newsletter-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-content {
+            max-width: 450px;
+        }
+
+        .newsletter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 400;
+            color: var(--blanc);
+            margin-bottom: 0.8rem;
+        }
+
+        .newsletter-text {
+            font-size: 0.9rem;
+            color: var(--stone);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 280px;
+            padding: 1.1rem 1.3rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--blanc);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.88rem;
+            letter-spacing: 0.03em;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--terracotta);
+        }
+
+        .newsletter-btn {
+            padding: 1.1rem 2.2rem;
+            background: var(--terracotta);
+            border: none;
+            color: var(--blanc);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--blanc);
+            padding: 5rem 5% 2.5rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-brand .logo {
+            color: var(--blanc);
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .footer-desc {
+            font-size: 0.88rem;
+            line-height: 1.9;
+            color: var(--stone);
+            font-weight: 300;
+            max-width: 280px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanc);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        .footer-column h4 {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: var(--stone);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--terracotta);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact-item span {
+            color: var(--terracotta);
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom {
+            padding-top: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.72rem;
+            color: var(--taupe);
+            letter-spacing: 0.08em;
+        }
+
+        .footer-payments {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .payment-icon {
+            width: 45px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            color: var(--stone);
+            border-radius: 3px;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-legal a {
+            font-size: 0.72rem;
+            color: var(--taupe);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--blanc);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--terracotta);
+            color: var(--blanc);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 900;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--noir);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           RESPONSIVE STYLES
+           ============================================ */
+
+        /* Large Desktop */
+        @media (max-width: 1400px) {
+            .hero-content {
+                gap: 3rem;
+            }
+
+            .hero-floating-1 {
+                width: 160px;
+                height: 220px;
+            }
+
+            .hero-floating-2 {
+                width: 120px;
+                height: 170px;
+            }
+
+            .products-grid {
+                gap: 2rem 1.2rem;
+            }
+        }
+
+        /* Desktop */
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr 1.2fr;
+            }
+
+            .hero-right {
+                display: none;
+            }
+
+            .hero-floating-img {
+                display: none;
+            }
+
+            .hero-center {
+                height: 65vh;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .category-card:nth-child(1) {
+                grid-row: span 1;
+                min-height: 400px;
+            }
+
+            .category-card:nth-child(4) {
+                grid-column: span 1;
+            }
+
+            .category-card {
+                min-height: 300px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .showcase-item:nth-child(3) {
+                grid-column: span 2;
+                height: 350px;
+            }
+
+            .footer-top {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-brand {
+                grid-column: span 3;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Tablet Landscape */
+        @media (max-width: 992px) {
+            nav {
+                padding: 1.2rem 5%;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                padding-top: 100px;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: clamp(2.2rem, 5vw, 3rem);
+            }
+
+            .hero-center {
+                height: 55vh;
+                margin-top: 2rem;
+            }
+
+            .hero-image-frame {
+                display: none;
+            }
+
+            .editorial-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .editorial-left {
+                order: 2;
+                padding: 4rem 3rem;
+            }
+
+            .editorial-right {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .editorial-badge {
+                width: 90px;
+                height: 90px;
+                bottom: 2rem;
+                right: 2rem;
+            }
+
+            .editorial-badge strong {
+                font-size: 1.4rem;
+            }
+
+            .story-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .story-images {
+                height: 50vh;
+                max-height: 450px;
+            }
+
+            .story-content {
+                padding-right: 0;
+            }
+
+            .testimonials-wrapper {
+                flex-direction: column;
+            }
+
+            .testimonial-image {
+                width: 100%;
+                height: 350px;
+                order: -1;
+            }
+
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .newsletter-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .newsletter-content {
+                max-width: 100%;
+            }
+
+            .newsletter-form {
+                width: 100%;
+                max-width: 450px;
+                justify-content: center;
+            }
+
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+        }
+
+        /* Tablet Portrait */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-left {
+                padding-right: 0;
+            }
+
+            .hero-tag {
+                justify-content: center;
+            }
+
+            .hero-tag::before {
+                display: none;
+            }
+
+            .hero-center {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .scroll-hint {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .categories {
+                padding: 5rem 5%;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card:nth-child(1) {
+                min-height: 350px;
+            }
+
+            .category-card {
+                min-height: 280px;
+            }
+
+            .category-card:nth-child(4) {
+                grid-column: span 1;
+            }
+
+            .products {
+                padding: 5rem 5%;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem 1rem;
+            }
+
+            .products-tabs {
+                gap: 1rem;
+            }
+
+            .tab-btn {
+                font-size: 0.7rem;
+            }
+
+            .collection-showcase {
+                padding: 4rem 5%;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-item,
+            .showcase-item:nth-child(3) {
+                height: 350px;
+                grid-column: span 1;
+            }
+
+            .story {
+                padding: 5rem 5%;
+            }
+
+            .story-images {
+                height: 45vh;
+                min-height: 350px;
+            }
+
+            .story-img-1 {
+                width: 70%;
+            }
+
+            .story-img-2 {
+                width: 55%;
+                height: 50%;
+            }
+
+            .story-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .testimonials {
+                padding: 5rem 5%;
+            }
+
+            .testimonial-image {
+                height: 300px;
+            }
+
+            .instagram {
+                padding: 5rem 5%;
+            }
+
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .newsletter {
+                padding: 4rem 5%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                min-width: 100%;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+            }
+
+            footer {
+                padding: 4rem 5% 2rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Mobile Landscape */
+        @media (max-width: 576px) {
+            nav {
+                padding: 1rem 4%;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+                letter-spacing: 0.15em;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .nav-icon {
+                display: none;
+            }
+
+            .nav-icon:last-of-type {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero-tag {
+                font-size: 0.65rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-center {
+                height: 45vh;
+                min-height: 300px;
+            }
+
+            .marquee-text {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .editorial-left {
+                padding: 3rem 1.5rem;
+            }
+
+            .editorial-title {
+                font-size: 1.8rem;
+            }
+
+            .editorial-text {
+                font-size: 0.85rem;
+            }
+
+            .btn-outline {
+                padding: 1rem 1.8rem;
+                font-size: 0.68rem;
+            }
+
+            .product-name {
+                font-size: 0.8rem;
+            }
+
+            .product-price {
+                font-size: 0.75rem;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .action-btn.wishlist {
+                flex: 1;
+            }
+
+            .story-title {
+                font-size: 1.8rem;
+            }
+
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-mark {
+                font-size: 5rem;
+            }
+
+            .testimonial-text {
+                font-size: 1.4rem;
+            }
+
+            .instagram-header .section-title {
+                font-size: 1.5rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand {
+                grid-column: span 1;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+
+            .footer-contact-item {
+                justify-content: center;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 1.7rem;
+            }
+
+            .hero-cta {
+                font-size: 0.7rem;
+            }
+
+            .category-name {
+                font-size: 1.2rem;
+            }
+
+            .products-grid {
+                gap: 1.2rem 0.8rem;
+            }
+
+            .product-colors {
+                display: none;
+            }
+
+            .showcase-title {
+                font-size: 1.5rem;
+            }
+
+            .newsletter-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-logo">
+            <span style="animation-delay: 0s;">B</span>
+            <span style="animation-delay: 0.1s;">E</span>
+            <span style="animation-delay: 0.2s;">H</span>
+            <span style="animation-delay: 0.3s;">N</span>
+            <span style="animation-delay: 0.4s;">A</span>
+        </div>
+        <div class="loader-tagline">Crafted in Jaipur</div>
+        <div class="loader-progress"></div>
+    </div>
 
-<!-- ═══════════ CARD 1: Floating Gallery ═══════════ -->
-<article class="card-floating">
-  <div class="decor decor-1"></div>
-  <div class="decor decor-2"></div>
-  <div class="img-stack">
-    <div class="img-main">
-      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Luxury Estate">
-    </div>
-    <div class="price-float">$4.2M</div>
-  </div>
-  <div class="content">
-    <div class="eyebrow">Exclusive Listing</div>
-    <h3>The Horizon Estate</h3>
-    <div class="location">
-      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Malibu, California</span>
-    </div>
-    <div class="stats">
-      <div class="stat-pill">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        5 Beds
-      </div>
-      <div class="stat-pill">
-        <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/></svg>
-        4 Baths
-      </div>
-      <div class="stat-pill">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-        6,400 ft²
-      </div>
-    </div>
-  </div>
-</article>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
 
-<!-- ═══════════ CARD 2: Split Reveal ═══════════ -->
-<article class="card-split">
-  <div class="visual">
-    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Modern Penthouse">
-    <div class="vertical-tag">Penthouse Living</div>
-  </div>
-  <div class="info">
-    <div class="type-badge">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#new">New Arrivals</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#clothing">Clothing</a></li>
+            <li><a href="#accessories">Accessories</a></li>
+            <li><a href="#editorial">Editorial</a></li>
+            <li><a href="#about">Our Story</a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+            <p>
+                Behna Clothing Studio<br>
+                Plot Number: 60, Lalarpura<br>
+                Jaipur, Rajasthan 302034
+            </p>
+            <p>
+                <a href="tel:08000517189" style="color: var(--terracotta);">080005 17189</a>
+            </p>
+            <div class="mobile-menu-social">
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">PIN</a>
+            </div>
+        </div>
     </div>
-    <h3>Skyline Penthouse</h3>
-    <p class="address">432 Park Avenue, Manhattan</p>
-    <div class="stat-list">
-      <div class="stat-row">
-        <span class="label">Bedrooms</span>
-        <span class="value">4</span>
-      </div>
-      <div class="stat-row">
-        <span class="label">Bathrooms</span>
-        <span class="value">5</span>
-      </div>
-      <div class="stat-row">
-        <span class="label">Living Area</span>
-        <span class="value">8,200 ft²</span>
-      </div>
-    </div>
-    <div class="bottom">
-      <div class="price">$18.5M <span>/ USD</span></div>
-      <div class="cta-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </div>
-    </div>
-  </div>
-</article>
 
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">BEHNA</a>
+        <ul class="nav-center">
+            <li><a href="#new">New In</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#sarees">Sarees</a></li>
+            <li><a href="#kurtas">Kurtas</a></li>
+            <li><a href="#contemporary">Contemporary</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="nav-icon">Search</button>
+            <button class="nav-icon">Account</button>
+            <button class="nav-icon">Bag<span class="cart-count">2</span></button>
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-<!-- ═══════════ CARD 3: Cinematic Frame ═══════════ -->
-<article class="card-cinematic">
-  <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80" alt="Villa">
-  
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
-  
-  <div class="overlay">
-    <div class="tag-row">
-      <span class="tag gold">Featured</span>
-      <span class="tag">Waterfront</span>
-    </div>
-    
-    <h3>Villa Méditerranée</h3>
-    
-    <div class="meta">
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Côte d'Azur, France</span>
-      </div>
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-        <span>12,400 ft²</span>
-      </div>
-    </div>
-    
-    <div class="price-row">
-      <div class="price">€15,200,000</div>
-      <a href="#" class="view-btn">
-        View Property
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</article>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-text serif">बहना</div>
+        
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-tag">Summer Collection 2024</div>
+                <h1 class="hero-title">
+                    <span><em>Timeless</em></span>
+                    <span><em>Indian</em></span>
+                    <span><em>Elegance</em></span>
+                </h1>
+            </div>
+            
+            <div class="hero-center">
+                <div class="hero-image-main">
+                    <div class="hero-image-overlay"></div>
+                    <div class="hero-image-frame"></div>
+                    <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800&h=1200&fit=crop" alt="Behna Fashion">
+                </div>
+            </div>
+            
+            <div class="hero-right">
+                <p class="hero-desc">
+                    Discover a curated collection where traditional Indian craftsmanship meets contemporary design. Each piece tells a story of heritage and modern elegance.
+                </p>
+                <a href="#collections" class="hero-cta">
+                    <span>Explore Collection</span>
+                    <span class="hero-cta-line"></span>
+                </a>
+            </div>
+        </div>
 
+        <div class="hero-floating-img hero-floating-1">
+            <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=600&fit=crop" alt="Indian Fashion">
+        </div>
+        <div class="hero-floating-img hero-floating-2">
+            <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=600&fit=crop" alt="Contemporary Fashion">
+        </div>
 
-<!-- ═══════════ CARD 4: Minimal Stack ═══════════ -->
-<article class="card-stack">
-  <div class="img-holder">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Modern Home">
-    
-    <div class="status">
-      <span class="dot"></span>
-      Available
-    </div>
-    
-    <div class="actions">
-      <button class="action-btn" aria-label="Save">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-      <button class="action-btn" aria-label="Share">
-        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      </button>
-    </div>
-  </div>
-  
-  <div class="info-card">
-    <h3>Pacific Heights Residence</h3>
-    <div class="loc">
-      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      San Francisco, CA
-    </div>
-    <div class="features">
-      <div class="feat">
-        <div class="feat-val">4</div>
-        <div class="feat-label">Beds</div>
-      </div>
-      <div class="feat">
-        <div class="feat-val">3</div>
-        <div class="feat-label">Baths</div>
-      </div>
-      <div class="feat">
-        <div class="feat-val">3,200</div>
-        <div class="feat-label">Sq Ft</div>
-      </div>
-    </div>
-    <div class="divider"></div>
-    <div class="footer">
-      <div class="price">$2.8M</div>
-      <button class="book-btn">View Tour</button>
-    </div>
-  </div>
-</article>
+        <div class="scroll-hint">
+            <span class="scroll-line"></span>
+            <span>Discover more</span>
+        </div>
+    </section>
 
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item">
+                <span class="marquee-text">Free Shipping Across India</span>
+                <span class="marquee-dot"></span>
+                <span class="marquee-text">Handcrafted in Jaipur</span>
+                <span class="marquee-dot"></span>
+                <span class="marquee-text">Sustainable Fabrics</span>
+                <span class="marquee-dot"></span>
+                <span class="marquee-text">Easy Returns</span>
+                <span class="marquee-dot"></span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-text">Free Shipping Across India</span>
+                <span class="marquee-dot"></span>
+                <span class="marquee-text">Handcrafted in Jaipur</span>
+                <span class="marquee-dot"></span>
+                <span class="marquee-text">Sustainable Fabrics</span>
+                <span class="marquee-dot"></span>
+                <span class="marquee-text">Easy Returns</span>
+                <span class="marquee-dot"></span>
+            </div>
+        </div>
+    </div>
 
-<!-- ═══════════ CARD 5: Glass Morphism ═══════════ -->
-<article class="card-glass">
-  <div class="img-wrap">
-    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Contemporary Villa">
-    <div class="img-counter">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      12 Photos
-    </div>
-    <div class="featured-badge">Premium</div>
-  </div>
-  
-  <div class="body">
-    <div class="header-row">
-      <h3>Beverly Hills Contemporary</h3>
-      <div class="rating">
-        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        4.9
-      </div>
-    </div>
-    
-    <div class="location">
-      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Beverly Hills, California
-    </div>
-    
-    <div class="amenities">
-      <div class="amenity">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        6 Beds
-      </div>
-      <div class="amenity">
-        <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1z"/></svg>
-        5 Baths
-      </div>
-      <div class="amenity">
-        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="23 3 16 8.5 16 16 23 21 23 3"/></svg>
-        Pool
-      </div>
-    </div>
-    
-    <div class="bottom-row">
-      <div class="price-block">
-        <span class="price-label">Asking Price</span>
-        <span class="price-val">$7,850,000</span>
-      </div>
-      <button class="cta">
-        Explore
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </div>
-</article>
+    <!-- Categories -->
+    <section class="categories" id="collections">
+        <div class="section-header">
+            <h2 class="section-title">
+                Shop by
+                <span>Category</span>
+            </h2>
+            <a href="#" class="section-link">
+                View All
+                <span>→</span>
+            </a>
+        </div>
+        
+        <div class="categories-grid">
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&h=900&fit=crop" alt="Sarees" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Sarees</h3>
+                    <span class="category-count">148 PIECES</span>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1583391733981-8b530c0e8a05?w=600&h=400&fit=crop" alt="Kurtas" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Kurtas & Suits</h3>
+                    <span class="category-count">96 PIECES</span>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&h=400&fit=crop" alt="Lehengas" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Lehengas</h3>
+                    <span class="category-count">64 PIECES</span>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&h=400&fit=crop" alt="Contemporary" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Contemporary</h3>
+                    <span class="category-count">112 PIECES</span>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&h=400&fit=crop" alt="Dupattas" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Dupattas & Stoles</h3>
+                    <span class="category-count">78 PIECES</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Editorial Section -->
+    <section class="editorial" id="editorial">
+        <div class="editorial-wrapper">
+            <div class="editorial-left">
+                <span class="editorial-tag">The Jaipur Edit</span>
+                <h2 class="editorial-title">
+                    Where Heritage Meets
+                    <em>Modern Grace</em>
+                </h2>
+                <p class="editorial-text">
+                    Our Summer collection draws inspiration from the majestic forts and vibrant bazaars of Jaipur. Each piece celebrates the rich textile traditions of Rajasthan while embracing contemporary silhouettes.
+                </p>
+                <a href="#" class="btn-outline">
+                    Discover the Story
+                    <span>→</span>
+                </a>
+            </div>
+            <div class="editorial-right">
+                <img src="https://images.unsplash.com/photo-1583391733981-8b530c0e8a05?w=800&h=1000&fit=crop" alt="Editorial" class="editorial-image">
+                <div class="editorial-badge">
+                    <span>New</span>
+                    <strong>SS24</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="new">
+        <div class="products-header">
+            <h2 class="section-title serif">Curated Selection</h2>
+            <p class="products-subtitle">
+                Handpicked essentials that define modern Indian luxury. Timeless designs meet exceptional craftsmanship.
+            </p>
+        </div>
+
+        <div class="products-tabs">
+            <button class="tab-btn active">All</button>
+            <button class="tab-btn">New Arrivals</button>
+            <button class="tab-btn">Best Sellers</button>
+            <button class="tab-btn">Festive Edit</button>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-tag new">New</span>
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1583391733981-8b530c0e8a05?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Bandhani Silk Saree</h3>
+                    <div class="product-price">₹12,500</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #C4785A;"></span>
+                        <span class="color-dot" style="background: #9E6B6B;"></span>
+                        <span class="color-dot" style="background: #1A1614;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chanderi Anarkali Set</h3>
+                    <div class="product-price">₹8,900</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #E8E3D8;"></span>
+                        <span class="color-dot" style="background: #B8926A;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-tag sale">Sale</span>
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cotton Printed Dress</h3>
+                    <div class="product-price">
+                        <span class="original">₹6,500</span>
+                        <span class="sale">₹4,550</span>
+                    </div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #2D2926;"></span>
+                        <span class="color-dot" style="background: #C4785A;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Block Print Kurta Set</h3>
+                    <div class="product-price">₹5,400</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #FFFFFF; border-color: #ccc;"></span>
+                        <span class="color-dot" style="background: #D8D0C7;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-tag new">New</span>
+                    <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Embroidered Palazzo Set</h3>
+                    <div class="product-price">₹7,200</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #B8926A;"></span>
+                        <span class="color-dot" style="background: #9E6B6B;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Silk Blend Shirt</h3>
+                    <div class="product-price">₹3,800</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #1A1614;"></span>
+                        <span class="color-dot" style="background: #E8E3D8;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1583391733981-8b530c0e8a05?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Zari Work Dupatta</h3>
+                    <div class="product-price">₹4,200</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #C4785A;"></span>
+                        <span class="color-dot" style="background: #B8926A;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&h=650&fit=crop" alt="Product" class="product-image primary">
+                    <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=500&h=650&fit=crop" alt="Product Hover" class="product-image secondary">
+                    <div class="product-actions">
+                        <button class="action-btn">Quick Add</button>
+                        <button class="action-btn wishlist">♡</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Linen Co-ord Set</h3>
+                    <div class="product-price">₹5,900</div>
+                    <div class="product-colors">
+                        <span class="color-dot" style="background: #FFFFFF; border-color: #ccc;"></span>
+                        <span class="color-dot" style="background: #2D2926;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Showcase -->
+    <section class="collection-showcase">
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&h=700&fit=crop" alt="Festive Collection">
+                <div class="showcase-content">
+                    <span class="showcase-label">Limited Edition</span>
+                    <h3 class="showcase-title">Festive Collection</h3>
+                    <a href="#" class="showcase-btn">Shop Now →</a>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=700&fit=crop" alt="Everyday Elegance">
+                <div class="showcase-content">
+                    <span class="showcase-label">New Season</span>
+                    <h3 class="showcase-title">Everyday Elegance</h3>
+                    <a href="#" class="showcase-btn">Shop Now →</a>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=1200&h=500&fit=crop" alt="Bridal Edit">
+                <div class="showcase-content">
+                    <span class="showcase-label">Exclusive</span>
+                    <h3 class="showcase-title">The Bridal Edit</h3>
+                    <a href="#" class="showcase-btn">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story" id="about">
+        <div class="story-bg-text serif">बहना</div>
+        <div class="story-wrapper">
+            <div class="story-images">
+                <div class="story-img story-img-1">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop" alt="Our Story">
+                </div>
+                <div class="story-img story-img-2">
+                    <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=500&h=400&fit=crop" alt="Craftsmanship">
+                </div>
+            </div>
+            
+            <div class="story-content">
+                <span class="story-tag">Our Story</span>
+                <h2 class="story-title">
+                    Celebrating the Spirit of Indian Womanhood
+                </h2>
+                <p class="story-text">
+                    Born in the Pink City of Jaipur, Behna celebrates the bond between women — sisters, mothers, daughters, and friends. Our name 'Behna' meaning 'sister' in Hindi, reflects our commitment to creating pieces that honor every woman's unique story.
+                </p>
+                <p class="story-text">
+                    Each garment is thoughtfully designed and meticulously crafted by local artisans, preserving centuries-old techniques while embracing contemporary aesthetics.
+                </p>
+                
+                <div class="story-stats">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Artisan Partners</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Handcrafted</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-wrapper">
+            <div class="testimonial-content">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">
+                    Behna understands the modern Indian woman perfectly. Their pieces are not just beautiful — they tell a story of our heritage while fitting seamlessly into contemporary life.
+                </p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop" alt="Author" class="author-image">
+                    <div>
+                        <div class="author-name">PRIYA SHARMA</div>
+                        <div class="author-title">Fashion Editor, Vogue India</div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <div class="nav-dot active"></div>
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot"></div>
+                </div>
+            </div>
+            <div class="testimonial-image">
+                <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&h=800&fit=crop" alt="Testimonial">
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram -->
+    <section class="instagram">
+        <div class="instagram-header">
+            <div class="instagram-handle">
+                <a href="#">@behnaclothing</a>
+            </div>
+            <p class="instagram-tagline">Follow our journey</p>
+        </div>
+        
+        <div class="instagram-grid">
+            <div class="instagram-item">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=400&fit=crop" alt="Instagram">
+                <div class="instagram-overlay">
+                    <span class="instagram-icon">♡</span>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="https://images.unsplash.com/photo-1583391733981-8b530c0e8a05?w=400&h=400&fit=crop" alt="Instagram">
+                <div class="instagram-overlay">
+                    <span class="instagram-icon">♡</span>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop" alt="Instagram">
+                <div class="instagram-overlay">
+                    <span class="instagram-icon">♡</span>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=400&fit=crop" alt="Instagram">
+                <div class="instagram-overlay">
+                    <span class="instagram-icon">♡</span>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=400&h=400&fit=crop" alt="Instagram">
+                <div class="instagram-overlay">
+                    <span class="instagram-icon">♡</span>
+                </div>
+            </div>
+            <div class="instagram-item">
+                <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=400&fit=crop" alt="Instagram">
+                <div class="instagram-overlay">
+                    <span class="instagram-icon">♡</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-pattern"></div>
+        <div class="newsletter-wrapper">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Join the Behna Family</h2>
+                <p class="newsletter-text">
+                    Be the first to discover new collections, exclusive offers, and stories from our artisan community.
+                </p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="logo serif">BEHNA</a>
+                <p class="footer-desc">
+                    Celebrating the spirit of Indian womanhood through thoughtfully crafted apparel. Each piece tells a story of heritage, craftsmanship, and modern elegance.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Instagram">IG</a>
+                    <a href="#" class="social-link" aria-label="Facebook">FB</a>
+                    <a href="#" class="social-link" aria-label="Pinterest">PIN</a>
+                    <a href="#" class="social-link" aria-label="YouTube">YT</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Sarees</a></li>
+                    <li><a href="#">Kurtas & Suits</a></li>
+                    <li><a href="#">Lehengas</a></li>
+                    <li><a href="#">Contemporary</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Artisan Partners</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns & Exchange</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Visit Us</h4>
+                <div class="footer-contact-item">
+                    <span>📍</span>
+                    <a href="https://maps.google.com" target="_blank">
+                        Plot No. 60, Lalarpura<br>
+                        Jaipur, Rajasthan 302034
+                    </a>
+                </div>
+                <div class="footer-contact-item">
+                    <span>📞</span>
+                    <a href="tel:08000517189">080005 17189</a>
+                </div>
+                <div class="footer-contact-item">
+                    <span>✉️</span>
+                    <a href="mailto:hello@behna.in">hello@behna.in</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © 2024 BEHNA CLOTHING. ALL RIGHTS RESERVED.
+            </div>
+            
+            <div class="footer-payments">
+                <div class="payment-icon">VISA</div>
+                <div class="payment-icon">MC</div>
+                <div class="payment-icon">UPI</div>
+                <div class="payment-icon">PP</div>
+            </div>
+            
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Shipping Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('cursor').classList.add('active');
+            }, 2200);
+        });
+
+        // Custom Cursor (Desktop Only)
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursorDot');
+        
+        if (window.innerWidth > 1024) {
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.12;
+                cursorY += (mouseY - cursorY) * 0.12;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            const hoverElements = document.querySelectorAll('a, button, .product-card, .category-card, .instagram-item, .showcase-item');
+            
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            });
+        }
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function toggleMenu() {
+            menuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                backToTop.classList.add('visible');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Back to Top
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const fadeElements = document.querySelectorAll('.category-card, .product-card, .story-img, .testimonial-content, .showcase-item, .instagram-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) ${(index % 4) * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Product tabs functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Testimonial navigation
+        const navDots = document.querySelectorAll('.nav-dot');
+        
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                navDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+            });
+        });
+
+        // Parallax effect for story images (Desktop only)
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', () => {
+                const storySection = document.querySelector('.story');
+                if (storySection) {
+                    const rect = storySection.getBoundingClientRect();
+                    const scrolled = window.innerHeight - rect.top;
+                    
+                    if (scrolled > 0 && rect.bottom > 0) {
+                        const storyImg1 = document.querySelector('.story-img-1');
+                        const storyImg2 = document.querySelector('.story-img-2');
+                        
+                        if (storyImg1 && storyImg2) {
+                            storyImg1.style.transform = `translateY(${scrolled * 0.03}px)`;
+                            storyImg2.style.transform = `translateY(${-scrolled * 0.02}px)`;
+                        }
+                    }
+                }
+            });
+        }
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = e.target.querySelector('input');
+            if (input.value) {
+                alert('Thank you for subscribing to Behna!');
+                input.value = '';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import "./About.css";
+import PropertySlider from "./PropertySlider";
 
 type AboutProps = {
   introKicker?: string;
@@ -198,49 +199,8 @@ const About: React.FC<AboutProps> = ({
         </h2>
       </div>
 
-      {/* 2) Two-column: bigger text left, taller image right */}
-      <div className="rg-about__feature rg-about__watermark">
-        <div className="rg-about__featureInner">
-          <div className="rg-about__copy">
-            <div className="rg-about__eyebrow" data-gsap="fade-up">
-              {sectionKicker}
-            </div>
-
-            <h3
-              className="rg-about__capsTitle rg-about__capsTitle--big"
-              data-gsap="fade-up"
-              data-gsap-delay="0.1"
-            >
-              {sectionTitle.split("\n").map((line, idx) => (
-                <span key={idx} className="rg-about__capsLine">
-                  {line}
-                </span>
-              ))}
-            </h3>
-
-            <p
-              className="rg-about__body rg-about__body--big"
-              data-gsap="fade-up"
-              data-gsap-delay="0.2"
-            >
-              {sectionBody}
-            </p>
-        </div>
-
-        <figure
-          className="rg-about__wideFigure rg-about__wideFigure--tall"
-          data-gsap="clip-smooth-down"
-          data-gsap-start="top 65%"
-        >
-          <AutoSlider
-            images={imageWideSlides}
-            alt="Real Gold Properties lifestyle"
-            imgClassName="rg-about__wideImg"
-            heightClassName="rg-about__wideImg--tall"
-          />
-        </figure>
-      </div>
-    </div>
+      {/* 2) Full-width property slider (replaces two-column feature) */}
+      <PropertySlider />
 
       {/* 3) Single split: left image, right content */}
       <div className="rg-about__split rg-about__watermark--arch">
