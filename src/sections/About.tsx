@@ -7,11 +7,6 @@ type AboutProps = {
   introKicker?: string;
   introHeadline?: string;
 
-  sectionKicker?: string;
-  sectionTitle?: string;
-  sectionBody?: string;
-
-  imageWideSlides?: string[];
   splitKicker?: string;
   splitTitle?: string;
   splitBody?: string;
@@ -164,15 +159,6 @@ const AutoSlider: React.FC<AutoSliderProps> = ({
 const About: React.FC<AboutProps> = ({
   introKicker = "REAL GOLD PROPERTIES",
   introHeadline = "A modern real estate partner — buying, selling, and renting with local expertise and genuine care.",
-
-  sectionKicker = "MAKING MOVES",
-  sectionTitle = "HOMES BOUGHT & SOLD WITH CLARITY.\nRENTALS HANDLED WITH CARE.\nLOCAL INSIGHT THAT SAVES YOU TIME.",
-  sectionBody = "From first inspection to final signature, we make the process feel calm and transparent. Whether you're upgrading, investing, or finding the right rental, we focus on the details that matter — pricing, presentation, and smooth communication.",
-  imageWideSlides = [
-    "https://images.unsplash.com/photo-1505692952047-1a78307da8f2?auto=format&fit=crop&w=1800&q=85",
-    "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1800&q=85",
-    "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1800&q=85",
-  ],
 
   splitKicker = "LOCAL ADVANTAGE",
   splitTitle = "A TEAM THAT KNOWS THE MARKET.\nA PROCESS THAT FEELS EASY.",
