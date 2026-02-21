@@ -41,9 +41,9 @@ export default function HomePage({ ready = false }: { ready?: boolean }) {
   return (
     <div ref={pageRef}>
       <HeroSection ready={ready} />
-      <About />
-      <NewAbout />
       <PropertyListingSection />
+      <About />
+
       <ServiceSelection />
       <PhilosophyPillars />
       <WhyUs />

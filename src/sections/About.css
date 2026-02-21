@@ -116,6 +116,7 @@
   overflow: hidden;
   background: transparent;
   box-shadow: 0 18px 40px rgba(0, 3, 46, 0.08);
+  position: relative;
 }
 
 .rg-about__wideFigure--tall {
@@ -127,6 +128,8 @@
   width: 100%;
   height: clamp(240px, 28vw, 360px);
   object-fit: cover;
+  flex: 0 0 100%;
+  transition: transform 800ms ease, opacity 800ms ease;
 }
 
 /* ✅ Bigger height */
@@ -136,8 +139,7 @@
 
 /* Watermarks */
 .rg-about__watermark,
-.rg-about__watermark--arch,
-.rg-about__watermark--columns {
+.rg-about__watermark--arch {
   position: relative;
 }
 
@@ -162,6 +164,7 @@
   overflow: hidden;
   background: transparent;
   box-shadow: 0 18px 40px rgba(0, 3, 46, 0.08);
+  position: relative;
 }
 
 .rg-about__splitImg {
@@ -169,6 +172,8 @@
   width: 100%;
   height: clamp(320px, 34vw, 520px);
   object-fit: cover;
+  flex: 0 0 100%;
+  transition: transform 800ms ease, opacity 800ms ease;
 }
 
 .rg-about__splitCopy {
@@ -239,6 +244,7 @@
   overflow: hidden;
   background: transparent;
   box-shadow: 0 18px 40px rgba(0, 3, 46, 0.08);
+  position: relative;
 }
 
 .rg-about__bottomImg {
@@ -246,6 +252,56 @@
   width: 100%;
   height: clamp(260px, 28vw, 420px);
   object-fit: cover;
+  flex: 0 0 100%;
+  transition: transform 800ms ease, opacity 800ms ease;
+}
+
+/* Slider */
+.rg-about__slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+
+.rg-about__sliderTrack {
+  display: flex;
+  width: 100%;
+  transform: translateX(0%);
+  transition: transform 900ms cubic-bezier(0.22, 0.7, 0.2, 1);
+  will-change: transform;
+}
+
+.rg-about__slideImg {
+  display: block;
+}
+
+.rg-about__sliderPagination {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.rg-about__sliderDot {
+  pointer-events: auto;
+  width: 24px;
+  height: 4px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(8, 30, 120, 0.65);
+  transition: transform 250ms ease, background 250ms ease;
+  cursor: pointer;
+}
+
+.rg-about__sliderDot.is-active {
+  background: var(--rg-gold);
+  transform: scaleX(1.1);
 }
 
 /* Section 2 — house icon (original position) */
@@ -282,28 +338,10 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M135 375 L135 215 Q135 105 210 105 Q285 105 285 215 L285 375'/%3E%3Cpath d='M95 375 H325'/%3E%3Cpath d='M162 375 L162 228 Q162 150 210 150 Q258 150 258 228 L258 375'/%3E%3Cpath d='M194 113 L210 96 L226 113'/%3E%3Cpath d='M95 352 H135'/%3E%3Cpath d='M285 352 H325'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' opacity='0.55'%3E%3Cpath d='M100 390 H320'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* Section 4 — classical columns (left side of center block) */
-.rg-about__watermark--columns::before {
-  content: "";
-  position: absolute;
-  left: clamp(0.5rem, 1vw, 1.5rem);
-  top: 4%;
-  width: clamp(8.5rem, 16vw, 12rem);
-  height: clamp(8.5rem, 16vw, 12rem);
-  pointer-events: none;
-  opacity: 0.075;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: left top;
-  filter: blur(0.12px);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M90 185 L210 95 L330 185'/%3E%3Cpath d='M82 200 H338'/%3E%3Cpath d='M86 215 H334'/%3E%3Crect x='110' y='215' width='28' height='155'/%3E%3Crect x='196' y='215' width='28' height='155'/%3E%3Crect x='282' y='215' width='28' height='155'/%3E%3Cpath d='M82 370 H338'/%3E%3Cpath d='M74 385 H346'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' opacity='0.55'%3E%3Cpath d='M108 220 H140'/%3E%3Cpath d='M194 220 H226'/%3E%3Cpath d='M280 220 H312'/%3E%3Cpath d='M108 365 H140'/%3E%3Cpath d='M194 365 H226'/%3E%3Cpath d='M280 365 H312'/%3E%3C/g%3E%3C/svg%3E");
-}
-
 /* Responsive */
 @media (max-width: 980px) {
   .rg-about__watermark::before,
-  .rg-about__watermark--arch::before,
-  .rg-about__watermark--columns::before {
+  .rg-about__watermark--arch::before {
     display: none;
   }
 
