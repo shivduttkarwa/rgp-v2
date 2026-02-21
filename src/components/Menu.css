@@ -753,6 +753,20 @@ body.menu-open {
     gap: 1.25rem;
   }
 
+  .menu-social {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .menu-social a {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .menu-social a span {
+    display: none;
+  }
+
   .menu-info-block {
     margin-bottom: 0;
   }
