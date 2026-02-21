@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import HeroSection from "../sections/HeroSection";
 import About from "../sections/About";
-import NewAbout from "../sections/NewAbout";
+
 import PortfolioShowcase from "../sections/PortfolioShowcase";
 import PropertyListingSection from "@/sections/PropertyListingSection";
 import ServiceSelection from "@/sections/ServiceSelection";
