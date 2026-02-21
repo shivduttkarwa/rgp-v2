@@ -17,6 +17,8 @@
   display: grid;
   gap: 0.9rem;
   max-width: 62ch;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .rg-philo__label {
@@ -34,9 +36,10 @@
   font-family: var(--font-title);
   font-weight: 400;
   letter-spacing: 0.01em;
-  line-height: 1.1;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.15;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
   color: var(--rg-text-dark);
+  text-align: center;
 }
 
 .rg-philo__title em {
@@ -45,11 +48,12 @@
 }
 
 .rg-philo__subtitle {
-  margin: 0;
+  margin: 0 auto;
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.7;
   color: var(--rg-text-medium);
   font-weight: 400;
+  text-align: center;
 }
 
 .rg-philo__divider {

@@ -178,7 +178,7 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
           REAL GOLD PROPERTIES
         </span>
         <h3 data-gsap="char-reveal" className="rg-section-title">
-          {heading}
+          Featured <em>Properties</em>
         </h3>
         <p
           data-gsap="fade-up"

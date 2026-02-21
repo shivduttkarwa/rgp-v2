@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #0a0a0a;
+  background: #00032e;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,9 +21,9 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(212, 168, 75, 0.04) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 50%, rgba(212, 168, 75, 0.04) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 50%, rgba(212, 168, 75, 0.06) 0%, transparent 70%);
+    radial-gradient(ellipse at 20% 50%, rgba(249, 195, 7, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 50%, rgba(249, 195, 7, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(249, 195, 7, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -44,11 +44,11 @@
   width: 220px;
   height: 220px;
   border: 2px solid transparent;
-  border-top: 2px solid #d4a84b;
-  border-right: 2px solid #f5d67b;
+  border-top: 2px solid #f9c307;
+  border-right: 2px solid #fad840;
   border-radius: 50%;
   animation: plRotate 2.5s linear infinite;
-  filter: drop-shadow(0 0 8px rgba(212, 168, 75, 0.3));
+  filter: drop-shadow(0 0 8px rgba(249, 195, 7, 0.3));
 }
 
 
@@ -63,8 +63,8 @@
   width: 190px;
   height: 190px;
   border: 1px solid transparent;
-  border-bottom: 1px solid #b8860b;
-  border-left: 1px solid #d4a84b;
+  border-bottom: 1px solid #f9c307;
+  border-left: 1px solid #f9c307;
   border-radius: 50%;
   animation: plRotateReverse 2s linear infinite;
 }
@@ -79,7 +79,7 @@
   position: absolute;
   width: 170px;
   height: 170px;
-  border: 1px dashed rgba(212, 168, 75, 0.15);
+  border: 1px dashed rgba(249, 195, 7, 0.15);
   border-radius: 50%;
   animation: plRotate 8s linear infinite;
 }
@@ -94,7 +94,7 @@
 .preloader-house-icon svg {
   width: 80px;
   height: 80px;
-  filter: drop-shadow(0 0 15px rgba(212, 168, 75, 0.4));
+  filter: drop-shadow(0 0 15px rgba(249, 195, 7, 0.4));
 }
 
 .preloader-house-icon svg .house-path {
@@ -116,7 +116,7 @@
 
 .preloader-house-icon svg .key-path {
   fill: none;
-  stroke: #f5d67b;
+  stroke: #f9c307;
   stroke-width: 1.2;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
@@ -137,8 +137,8 @@
 }
 
 @keyframes plGlowPulse {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 168, 75, 0.3)); }
-  50%      { filter: drop-shadow(0 0 20px rgba(212, 168, 75, 0.6)); }
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(249, 195, 7, 0.3)); }
+  50%      { filter: drop-shadow(0 0 20px rgba(249, 195, 7, 0.6)); }
 }
 
 /* progress removed */
@@ -159,20 +159,20 @@
 }
 
 .preloader-corner-tl { top: 28px; left: 28px; }
-.preloader-corner-tl::before { top: 0; left: 0; width: 36px; height: 1px; background: linear-gradient(90deg,  #d4a84b, transparent); }
-.preloader-corner-tl::after  { top: 0; left: 0; width: 1px;  height: 36px; background: linear-gradient(180deg, #d4a84b, transparent); }
+.preloader-corner-tl::before { top: 0; left: 0; width: 36px; height: 1px; background: linear-gradient(90deg,  #f9c307, transparent); }
+.preloader-corner-tl::after  { top: 0; left: 0; width: 1px;  height: 36px; background: linear-gradient(180deg, #f9c307, transparent); }
 
 .preloader-corner-tr { top: 28px; right: 28px; }
-.preloader-corner-tr::before { top: 0; right: 0; width: 36px; height: 1px; background: linear-gradient(270deg, #d4a84b, transparent); }
-.preloader-corner-tr::after  { top: 0; right: 0; width: 1px;  height: 36px; background: linear-gradient(180deg, #d4a84b, transparent); }
+.preloader-corner-tr::before { top: 0; right: 0; width: 36px; height: 1px; background: linear-gradient(270deg, #f9c307, transparent); }
+.preloader-corner-tr::after  { top: 0; right: 0; width: 1px;  height: 36px; background: linear-gradient(180deg, #f9c307, transparent); }
 
 .preloader-corner-bl { bottom: 28px; left: 28px; }
-.preloader-corner-bl::before { bottom: 0; left: 0; width: 36px; height: 1px; background: linear-gradient(90deg,  #d4a84b, transparent); }
-.preloader-corner-bl::after  { bottom: 0; left: 0; width: 1px;  height: 36px; background: linear-gradient(0deg,   #d4a84b, transparent); }
+.preloader-corner-bl::before { bottom: 0; left: 0; width: 36px; height: 1px; background: linear-gradient(90deg,  #f9c307, transparent); }
+.preloader-corner-bl::after  { bottom: 0; left: 0; width: 1px;  height: 36px; background: linear-gradient(0deg,   #f9c307, transparent); }
 
 .preloader-corner-br { bottom: 28px; right: 28px; }
-.preloader-corner-br::before { bottom: 0; right: 0; width: 36px; height: 1px; background: linear-gradient(270deg, #d4a84b, transparent); }
-.preloader-corner-br::after  { bottom: 0; right: 0; width: 1px;  height: 36px; background: linear-gradient(0deg,   #d4a84b, transparent); }
+.preloader-corner-br::before { bottom: 0; right: 0; width: 36px; height: 1px; background: linear-gradient(270deg, #f9c307, transparent); }
+.preloader-corner-br::after  { bottom: 0; right: 0; width: 1px;  height: 36px; background: linear-gradient(0deg,   #f9c307, transparent); }
 
 @keyframes plCornerFade {
   to { opacity: 0.4; }

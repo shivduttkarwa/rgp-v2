@@ -3,28 +3,28 @@
    ════════════════════════════════════════════════════════ */
 
 :root {
-  /* Vibrant Beige Theme */
-  --rg-beige-light: #FFF8F0;
-  --rg-beige: #F5EFE6;
-  --rg-beige-dark: #E8DCC8;
-  --rg-beige-darker: #D4C4B0;
+  /* Navy Dark Theme */
+  --rg-beige-light: #00032e;   /* main page background */
+  --rg-beige: #05094a;         /* secondary background */
+  --rg-beige-dark: #0a1260;    /* cards / panels */
+  --rg-beige-darker: #0f1870;  /* borders / subtle lines */
 
   /* Text Colors */
-  --rg-text-dark: #2C1810;
-  --rg-text-medium: #5C4D42;
-  --rg-text-light: #8B7968;
+  --rg-text-dark: #ffffff;
+  --rg-text-medium: rgba(255, 255, 255, 0.72);
+  --rg-text-light: rgba(255, 255, 255, 0.45);
 
   /* Accent Colors */
-  --rg-gold: #D4A056;
-  --rg-amber: #E78B48;
-  --rg-crimson: #C85A47;
+  --rg-gold: #f9c307;
+  --rg-amber: #f9c307;
+  --rg-crimson: #f9c307;
 
-  /* Legacy support (updated to beige theme) */
-  --rg-navy: #3E2C24;
-  --rg-dark: #F5EFE6;
-  --rg-darker: #FFF8F0;
-  --rg-ink: #2C1810;
-  --rg-ink-2: rgba(44, 24, 16, 0.72);
+  /* Legacy support (updated to navy theme) */
+  --rg-navy: #00032e;
+  --rg-dark: #000220;
+  --rg-darker: #00032e;
+  --rg-ink: #ffffff;
+  --rg-ink-2: rgba(255, 255, 255, 0.72);
 
   /* Layout */
   --rg-max: 90rem;
@@ -36,13 +36,13 @@
   --font-body: "Bricolage Grotesque", sans-serif;
 
   /* Extended theme (About page) */
-  --bg: #f7f0de; /* warm cream */
-  --ink: #2d3b2f; /* body text */
-  --green: #3f6248; /* primary green */
-  --green-2: #355a41; /* darker */
-  --line: rgba(63, 98, 72, 0.22); /* dividers */
-  --accent: #bf6d2d; /* warm orange */
-  --max: 1180px; /* content width */
+  --bg: #00032e;
+  --ink: #ffffff;
+  --green: #f9c307;          /* primary accent → gold */
+  --green-2: #d4a200;        /* darker gold */
+  --line: rgba(249, 195, 7, 0.22);
+  --accent: #f9c307;
+  --max: 1180px;
   --pad: clamp(18px, 2.2vw, 30px);
   --radius: 14px;
 }
@@ -67,12 +67,18 @@
 .rg-section-title {
   font-family: var(--font-title);
   font-weight: 400;
-  color: var(--rg-navy);
+  color: var(--rg-text-dark);
   line-height: 1.12;
   letter-spacing: 0.01em;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.15;
   text-align: center;
   margin: 0;
+}
+
+.rg-section-title em {
+  font-style: normal;
+  color: var(--rg-gold);
 }
 
 /* Prose below a section title */
@@ -94,7 +100,7 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--rg-beige-light);
+  background: var(--rg-navy);
   color: var(--rg-text-dark);
   min-height: 100vh;
 }

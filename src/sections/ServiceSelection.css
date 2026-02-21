@@ -108,24 +108,24 @@
 
 /* ===== Card Themes ===== */
 
-/* Buy Card - Elegant Light Theme (First Card) */
+/* Buy Card - Darkest Navy Shade (First Card) */
 .svc-card--buy {
-  background-color: var(--rg-beige-light);
-  color: var(--rg-text-dark);
-  border: 1px solid var(--rg-beige-dark);
+  background-color: #060e5c;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .svc-card--buy .svc-card__icon-wrap {
-  background-color: var(--rg-navy);
-  color: var(--rg-beige-light);
+  background-color: var(--rg-gold);
+  color: #00032e;
 }
 
 .svc-card--buy .svc-card__headline {
-  color: var(--rg-navy);
+  color: var(--rg-gold);
 }
 
 .svc-card--buy .svc-card__title {
-  color: var(--rg-text-dark);
+  color: #ffffff;
 }
 
 .svc-card--buy .svc-card__title-sub {
@@ -133,40 +133,40 @@
 }
 
 .svc-card--buy .svc-card__desc {
-  color: var(--rg-text-light);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .svc-card--buy .svc-card__feature {
-  color: var(--rg-text-medium);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .svc-card--buy .svc-card__feature-dot {
-  background-color: var(--rg-navy);
+  background-color: var(--rg-gold);
 }
 
 .svc-card--buy .svc-card__btn {
-  background-color: var(--rg-navy);
-  color: var(--rg-beige-light);
+  background-color: var(--rg-gold);
+  color: #00032e;
 }
 
 .svc-card--buy .svc-card__btn:hover {
-  background-color: var(--rg-text-dark);
+  background-color: #fad840;
 }
 
 .svc-card--buy .svc-card__bg-icon {
-  color: var(--rg-beige-dark);
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.04);
+  opacity: 1;
 }
 
-/* Sell Card - Warm Gold Theme (Second Card) */
+/* Sell Card - Mid Navy Shade (Second Card) */
 .svc-card--sell {
-  background-color: var(--rg-navy);
-  color: var(--rg-beige-light);
+  background-color: #060e5c;
+  color: #ffffff;
 }
 
 .svc-card--sell .svc-card__icon-wrap {
   background-color: var(--rg-gold);
-  color: var(--rg-navy);
+  color: #00032e;
 }
 
 .svc-card--sell .svc-card__headline {
@@ -174,19 +174,19 @@
 }
 
 .svc-card--sell .svc-card__title {
-  color: var(--rg-beige-light);
+  color: #ffffff;
 }
 
 .svc-card--sell .svc-card__title-sub {
-  color: var(--rg-beige-darker);
+  color: var(--rg-gold);
 }
 
 .svc-card--sell .svc-card__desc {
-  color: rgba(255, 248, 240, 0.7);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .svc-card--sell .svc-card__feature {
-  color: rgba(255, 248, 240, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .svc-card--sell .svc-card__feature-dot {
@@ -195,64 +195,64 @@
 
 .svc-card--sell .svc-card__btn {
   background-color: var(--rg-gold);
-  color: var(--rg-navy);
+  color: #00032e;
 }
 
 .svc-card--sell .svc-card__btn:hover {
-  background-color: var(--rg-beige-light);
+  background-color: #fad840;
 }
 
 .svc-card--sell .svc-card__bg-icon {
-  color: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.04);
 }
 
-/* Rent Card - Warm Accent Theme (Third Card) */
+/* Rent Card - Lightest Navy Shade (Third Card) */
 .svc-card--rent {
-  background-color: var(--rg-beige-dark);
-  color: var(--rg-text-dark);
+  background-color: #060e5c;
+  color: #ffffff;
 }
 
 .svc-card--rent .svc-card__icon-wrap {
-  background-color: var(--rg-amber);
-  color: #fff;
+  background-color: var(--rg-gold);
+  color: #00032e;
 }
 
 .svc-card--rent .svc-card__headline {
-  color: var(--rg-amber);
+  color: var(--rg-gold);
 }
 
 .svc-card--rent .svc-card__title {
-  color: var(--rg-text-dark);
+  color: #ffffff;
 }
 
 .svc-card--rent .svc-card__title-sub {
-  color: var(--rg-amber);
+  color: var(--rg-gold);
 }
 
 .svc-card--rent .svc-card__desc {
-  color: var(--rg-text-medium);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .svc-card--rent .svc-card__feature {
-  color: var(--rg-text-medium);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .svc-card--rent .svc-card__feature-dot {
-  background-color: var(--rg-amber);
+  background-color: var(--rg-gold);
 }
 
 .svc-card--rent .svc-card__btn {
-  background-color: var(--rg-amber);
-  color: #fff;
+  background-color: var(--rg-gold);
+  color: #00032e;
 }
 
 .svc-card--rent .svc-card__btn:hover {
-  background-color: var(--rg-crimson);
+  background-color: #fad840;
 }
 
 .svc-card--rent .svc-card__bg-icon {
-  color: var(--rg-beige-darker);
-  opacity: 0.4;
+  color: rgba(255, 255, 255, 0.04);
+  opacity: 1;
 }
 
 /* ===== Card Header ===== */
@@ -394,7 +394,7 @@
 .svc-cta {
   position: relative;
   min-height: 30vh;
-  background-color: var(--rg-navy);
+  background-color: var(--rg-gold);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -464,7 +464,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--rg-gold);
+  color: rgba(0, 3, 46, 0.6);
   margin-bottom: 1rem;
 }
 
@@ -472,20 +472,20 @@
   font-family: var(--font-title);
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 400;
-  color: var(--rg-beige-light);
+  color: #00032e;
   margin: 0 0 1rem 0;
   line-height: 1.2;
 }
 
 .svc-cta__title em {
   font-style: normal;
-  color: var(--rg-gold);
+  color: #00032e;
 }
 
 .svc-cta__text {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: rgba(255, 248, 240, 0.7);
+  color: rgba(0, 3, 46, 0.65);
   margin: 0 0 2rem 0;
   line-height: 1.7;
   max-width: 36rem;
@@ -523,23 +523,23 @@
 }
 
 .svc-cta__btn--primary {
-  background-color: var(--rg-gold);
-  color: var(--rg-navy);
+  background-color: #00032e;
+  color: #f9c307;
 }
 
 .svc-cta__btn--primary:hover {
-  background-color: var(--rg-beige-light);
+  background-color: #060e5c;
 }
 
 .svc-cta__btn--secondary {
   background-color: transparent;
-  color: var(--rg-beige-light);
-  border: 1px solid rgba(255, 248, 240, 0.3);
+  color: #00032e;
+  border: 1px solid rgba(0, 3, 46, 0.3);
 }
 
 .svc-cta__btn--secondary:hover {
-  background-color: rgba(255, 248, 240, 0.1);
-  border-color: rgba(255, 248, 240, 0.5);
+  background-color: rgba(0, 3, 46, 0.08);
+  border-color: rgba(0, 3, 46, 0.5);
 }
 
 @media (max-width: 480px) {
@@ -562,7 +562,7 @@
   align-items: center;
   gap: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 248, 240, 0.1);
+  border-top: 1px solid rgba(0, 3, 46, 0.15);
 }
 
 @media (max-width: 640px) {
@@ -589,7 +589,7 @@
   font-family: var(--font-title);
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 400;
-  color: var(--rg-gold);
+  color: #00032e;
   line-height: 1;
 }
 
@@ -597,7 +597,7 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
-  color: rgba(255, 248, 240, 0.5);
+  color: rgba(0, 3, 46, 0.6);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }

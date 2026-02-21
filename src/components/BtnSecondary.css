@@ -3,8 +3,8 @@
    Secondary button with elegant fill-on-hover effect
    ════════════════════════════════════════════════════════ */
 .btn-secondary {
-  --btn-secondary-color: #2C1810;
-  --btn-secondary-dark: #FFF8F0;
+  --btn-secondary-color: #ffffff;
+  --btn-secondary-dark: #00032e;
 
   font-family:
     system-ui,

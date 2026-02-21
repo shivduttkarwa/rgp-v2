@@ -44,48 +44,48 @@
 .whyus__wrap {
   width: min(var(--rg-max), calc(100% - var(--rg-pad) * 2));
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 220px 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: clamp(22px, 4vw, 54px);
-  align-items: start;
 }
 
-/* Left label */
+/* Eyebrow label */
 .whyus__label {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 14px;
-  margin-top: clamp(8px, 2vw, 18px);
-  opacity: 0.95;
 }
 
 .whyus__labelBar {
-  width: 6px;
-  height: 30px;
-  background: var(--rg-gold);
-  border-radius: 999px;
+  display: none;
 }
 
 .whyus__labelText {
-  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--rg-gold);
 }
 
 /* Title */
 .whyus__title {
   margin: 0 0 clamp(22px, 3vw, 34px);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
+  font-weight: 400;
   font-family: var(--font-title);
-  font-size: clamp(30px, 3.7vw, 54px);
-  line-height: 1.08;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.15;
   text-align: center;
-  padding-right: clamp(0px, 5vw, 60px);
-  color: #fff;
+  color: var(--rg-text-dark);
+  letter-spacing: 0.01em;
+}
+
+.whyus__title em {
+  font-style: normal;
+  color: var(--rg-gold);
 }
 
 /* List */
@@ -258,19 +258,19 @@
 }
 
 .whyus__tooltipInner {
-  background: rgba(255, 248, 240, 0.88);
-  border: 1px solid rgba(44, 24, 16, 0.18);
+  background: rgba(6, 14, 92, 0.97);
+  border: 1px solid rgba(249, 195, 7, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 14px;
   padding: 14px 14px 12px;
-  box-shadow: 0 18px 60px rgba(44, 24, 16, 0.18);
+  box-shadow: 0 18px 60px rgba(0, 3, 46, 0.5);
 }
 
 .whyus__tooltipKicker {
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--rg-text-light);
+  color: var(--rg-gold);
   margin-bottom: 6px;
   font-weight: 700;
 }
@@ -294,15 +294,6 @@
 /* Responsive */
 @media (max-width: 980px) {
   .whyus__wrap {
-    grid-template-columns: 1fr;
     gap: 18px;
-  }
-
-  .whyus__label {
-    justify-content: center;
-  }
-
-  .whyus__title {
-    padding-right: 0;
   }
 }

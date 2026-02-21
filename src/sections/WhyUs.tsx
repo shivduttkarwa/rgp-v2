@@ -279,9 +279,9 @@ export default function WhyUs() {
             data-gsap="fade-up"
             data-gsap-delay="0.1"
           >
-            Choose Us and Experience
+            Choose Us and <em>Experience</em>
             <br />
-            Extraordinary Advantages
+            <em>Extraordinary</em> Advantages
           </h2>
 
           <ol

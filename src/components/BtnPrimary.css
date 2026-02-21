@@ -3,9 +3,9 @@
    Primary CTA button with elegant gold styling
    ════════════════════════════════════════════════════════ */
 .btn-primary {
-  --btn-primary-color: #D4A056;
-  --btn-primary-hover: #E78B48;
-  --btn-primary-dark: #2C1810;
+  --btn-primary-color: #f9c307;
+  --btn-primary-hover: #fad840;
+  --btn-primary-dark: #00032e;
 
   font-family:
     system-ui,
@@ -24,7 +24,7 @@
   border: 2px solid var(--btn-primary-color);
   border-radius: 1.125rem;
 
-  box-shadow: 0 4px 14px rgba(245, 196, 94, 0.25);
+  box-shadow: 0 4px 14px rgba(249, 195, 7, 0.25);
 
   cursor: pointer;
   text-decoration: none;
@@ -38,13 +38,13 @@
 .btn-primary:hover {
   background: var(--btn-primary-hover);
   border-color: var(--btn-primary-hover);
-  box-shadow: 0 6px 20px rgba(245, 196, 94, 0.35);
+  box-shadow: 0 6px 20px rgba(249, 195, 7, 0.35);
   transform: translateY(-2px);
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(245, 196, 94, 0.25);
+  box-shadow: 0 2px 8px rgba(249, 195, 7, 0.25);
 }
 
 /* Focus state for accessibility */

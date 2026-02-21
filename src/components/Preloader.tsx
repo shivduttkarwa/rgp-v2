@@ -94,13 +94,13 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stopColor="#f5d67b" />
-                <stop offset="50%"  stopColor="#d4a84b" />
-                <stop offset="100%" stopColor="#b8860b" />
+                <stop offset="0%"   stopColor="#fad840" />
+                <stop offset="50%"  stopColor="#f9c307" />
+                <stop offset="100%" stopColor="#d4a200" />
               </linearGradient>
               <linearGradient id="goldGradientFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stopColor="#f5d67b" />
-                <stop offset="100%" stopColor="#d4a84b" />
+                <stop offset="0%"   stopColor="#fad840" />
+                <stop offset="100%" stopColor="#f9c307" />
               </linearGradient>
             </defs>
 
@@ -112,7 +112,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             <path className="house-path" d="M64 35 L64 68"                 style={{ animationDelay: "0.5s" }} />
             <path className="house-path" d="M16 68 L64 68"                 style={{ animationDelay: "0.7s" }} />
             <path className="house-path" d="M33 68 L33 46 L47 46 L47 68"  style={{ animationDelay: "1s" }} />
-            <circle className="house-path" cx="44" cy="57" r="1.5"         style={{ animationDelay: "1.3s", fill: "#d4a84b" }} />
+            <circle className="house-path" cx="44" cy="57" r="1.5"         style={{ animationDelay: "1.3s", fill: "#f9c307" }} />
             <path className="house-path" d="M20 42 L20 54 L30 54 L30 42 Z" style={{ animationDelay: "1.1s" }} />
             <path className="house-path" d="M25 42 L25 54"                 style={{ animationDelay: "1.3s" }} />
             <path className="house-path" d="M20 48 L30 48"                 style={{ animationDelay: "1.3s" }} />
