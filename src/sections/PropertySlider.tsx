@@ -628,7 +628,11 @@ const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
               }}
               className="rg-ps__content"
             >
-              <span className="rg-ps__eyebrow">{slide.eyebrow}</span>
+              <div className="rg-ps__meta">
+                <span className="rg-ps__index">{padded(i)}</span>
+                <span className="rg-ps__eyebrow">{slide.eyebrow}</span>
+                <span className="rg-ps__tag">{slide.tab}</span>
+              </div>
               <h3 className="rg-ps__headline">
                 {slide.headline.split("\n").map((ln, j) => (
                   <span key={j} className="rg-ps__headlineLine">
@@ -637,30 +641,24 @@ const PropertySlider: React.FC<Props> = ({ slides = DEFAULT_SLIDES }) => {
                 ))}
               </h3>
               <p className="rg-ps__body">{slide.body}</p>
-              <div className="rg-ps__stats">
-                {slide.stats.map((st, j) => (
-                  <div key={j} className="rg-ps__stat">
-                    <span className="rg-ps__statValue">{st.value}</span>
-                    <span className="rg-ps__statLabel">{st.label}</span>
-                  </div>
-                ))}
+              <div className="rg-ps__ctaRow">
+                <button className="rg-ps__cta" type="button">
+                  {slide.cta}
+                  <svg
+                    className="rg-ps__ctaArrow"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      d="M4 10h12M12 5l5 5-5 5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
               </div>
-              <button className="rg-ps__cta" type="button">
-                {slide.cta}
-                <svg
-                  className="rg-ps__ctaArrow"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    d="M4 10h12M12 5l5 5-5 5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
             </div>
           </div>
         ))}
