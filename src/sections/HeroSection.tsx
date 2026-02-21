@@ -22,10 +22,13 @@ export default function HeroSection({ ready = false }: { ready?: boolean }) {
     if (!video) return;
 
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("autoplay", "");
+    video.setAttribute("loop", "");
 
     const tryPlay = async () => {
       try {
@@ -35,14 +38,12 @@ export default function HeroSection({ ready = false }: { ready?: boolean }) {
       }
     };
 
-    const fallbackId = window.setTimeout(() => {
-      setVideoReady(true);
-      void tryPlay();
-    }, 1500);
-
     void tryPlay();
-
-    return () => window.clearTimeout(fallbackId);
+    const handlePlaying = () => setVideoReady(true);
+    video.addEventListener("playing", handlePlaying);
+    return () => {
+      video.removeEventListener("playing", handlePlaying);
+    };
   }, []);
 
   // Set initial states on mount — bg fully visible, only content hidden

@@ -1,1445 +1,1130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Team</title>
-<link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --rg-beige-light: #00032e;
-  --rg-beige: #05094a;
-  --rg-beige-dark: #0a1260;
-  --rg-beige-darker: #0f1870;
-  --rg-text-dark: #ffffff;
-  --rg-text-medium: rgba(255, 255, 255, 0.72);
-  --rg-text-light: rgba(255, 255, 255, 0.45);
-  --rg-gold: #f9c307;
-  --rg-amber: #f9c307;
-  --rg-navy: #00032e;
-  --rg-dark: #000220;
-  --rg-radius: 1.125rem;
-  --font-title: "Bona Nova SC", serif;
-  --font-body: "Bricolage Grotesque", sans-serif;
-  --line: rgba(249, 195, 7, 0.22);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--rg-beige-light);
-  font-family: var(--font-body);
-  color: var(--rg-text-dark);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-section {
-  padding: 6rem 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--rg-gold);
-  margin-bottom: 1rem;
-}
-
-.section-label::before {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: var(--rg-gold);
-}
-
-.section-title {
-  font-family: var(--font-title);
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  color: var(--rg-text-dark);
-  line-height: 1.1;
-  margin-bottom: 1rem;
-}
-
-.section-title span {
-  color: var(--rg-gold);
-  font-style: italic;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: var(--rg-text-light);
-  max-width: 500px;
-  line-height: 1.6;
-  font-weight: 300;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   STYLE 1 — "The Expanding Cards"
-   Horizontal layout with dramatic hover expansion
-   ════════════════════════════════════════════════════════════ */
-
-.team-expanding {
-  display: flex;
-  gap: 8px;
-  height: 70vh;
-  min-height: 500px;
-  max-height: 700px;
-  margin-top: 4rem;
-}
-
-.exp-card {
-  position: relative;
-  flex: 1;
-  min-width: 80px;
-  border-radius: 24px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: flex 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.exp-card:hover {
-  flex: 4;
-}
-
-.exp-card img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.exp-card:hover img {
-  transform: scale(1.05);
-}
-
-.exp-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 3, 46, 0.95) 0%,
-    rgba(0, 3, 46, 0.4) 40%,
-    transparent 100%
-  );
-  z-index: 1;
-}
-
-.exp-card .content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  z-index: 2;
-}
-
-.exp-card .number {
-  font-family: var(--font-title);
-  font-size: 0.85rem;
-  color: var(--rg-gold);
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.exp-card:hover .number {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.exp-card h3 {
-  font-family: var(--font-title);
-  font-size: 1.8rem;
-  color: var(--rg-text-dark);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.exp-card:hover h3 {
-  writing-mode: horizontal-tb;
-  transform: rotate(0);
-}
-
-.exp-card .role {
-  font-size: 0.85rem;
-  color: var(--rg-text-light);
-  margin-top: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-}
-
-.exp-card:hover .role {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.exp-card .exp-social {
-  display: flex;
-  gap: 10px;
-  margin-top: 1.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
-}
-
-.exp-card:hover .exp-social {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.exp-card .exp-social a {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.exp-card .exp-social a:hover {
-  background: var(--rg-gold);
-  border-color: var(--rg-gold);
-}
-
-.exp-card .exp-social svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--rg-text-dark);
-  transition: fill 0.3s ease;
-}
-
-.exp-card .exp-social a:hover svg {
-  fill: var(--rg-dark);
-}
-
-/* Vertical accent line */
-.exp-card .accent-line {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  width: 2px;
-  height: 0;
-  background: var(--rg-gold);
-  z-index: 2;
-  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.exp-card:hover .accent-line {
-  height: 60px;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   STYLE 2 — "The Bento Grid"
-   Mixed sizes, asymmetric, editorial feel
-   ════════════════════════════════════════════════════════════ */
-
-.team-bento {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(3, 200px);
-  gap: 16px;
-  margin-top: 4rem;
-}
-
-.bento-card {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  background: var(--rg-beige);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.bento-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(249, 195, 7, 0.2);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-/* Grid positions */
-.bento-card:nth-child(1) { grid-column: 1 / 5; grid-row: 1 / 3; }
-.bento-card:nth-child(2) { grid-column: 5 / 8; grid-row: 1 / 2; }
-.bento-card:nth-child(3) { grid-column: 8 / 13; grid-row: 1 / 2; }
-.bento-card:nth-child(4) { grid-column: 5 / 9; grid-row: 2 / 4; }
-.bento-card:nth-child(5) { grid-column: 9 / 13; grid-row: 2 / 3; }
-.bento-card:nth-child(6) { grid-column: 1 / 5; grid-row: 3 / 4; }
-.bento-card:nth-child(7) { grid-column: 9 / 13; grid-row: 3 / 4; }
-
-.bento-card .bento-img {
-  position: absolute;
-  inset: 0;
-}
-
-.bento-card .bento-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: grayscale(20%);
-}
-
-.bento-card:hover .bento-img img {
-  transform: scale(1.08);
-  filter: grayscale(0%);
-}
-
-.bento-card .bento-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 3, 46, 0.7) 0%,
-    rgba(0, 3, 46, 0.3) 100%
-  );
-  opacity: 0.6;
-  transition: opacity 0.4s ease;
-}
-
-.bento-card:hover .bento-overlay {
-  opacity: 0.8;
-}
-
-.bento-card .bento-content {
-  position: absolute;
-  inset: 0;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  z-index: 2;
-}
-
-.bento-card .bento-tag {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  padding: 6px 12px;
-  background: rgba(249, 195, 7, 0.15);
-  border: 1px solid rgba(249, 195, 7, 0.3);
-  border-radius: 6px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--rg-gold);
-}
-
-.bento-card h3 {
-  font-family: var(--font-title);
-  font-size: 1.4rem;
-  color: var(--rg-text-dark);
-  margin-bottom: 4px;
-}
-
-.bento-card .bento-role {
-  font-size: 0.82rem;
-  color: var(--rg-text-light);
-  font-weight: 300;
-}
-
-/* Large card special treatment */
-.bento-card:nth-child(1) h3,
-.bento-card:nth-child(4) h3 {
-  font-size: 1.8rem;
-}
-
-/* Quote card (non-person) */
-.bento-card.bento-quote {
-  background: linear-gradient(135deg, var(--rg-beige-dark), var(--rg-beige));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-}
-
-.bento-quote .quote-text {
-  font-family: var(--font-title);
-  font-size: 1.1rem;
-  color: var(--rg-text-medium);
-  line-height: 1.5;
-  font-style: italic;
-}
-
-.bento-quote .quote-text span {
-  color: var(--rg-gold);
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   STYLE 3 — "The Orbital Ring"
-   Circular arrangement with central focus
-   ════════════════════════════════════════════════════════════ */
-
-.team-orbital {
-  position: relative;
-  height: 700px;
-  margin-top: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Central element */
-.orbital-center {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: var(--rg-beige);
-  border: 1px solid rgba(249, 195, 7, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-}
-
-.orbital-center::before {
-  content: '';
-  position: absolute;
-  inset: -30px;
-  border-radius: 50%;
-  border: 1px dashed rgba(249, 195, 7, 0.15);
-  animation: spin 30s linear infinite;
-}
-
-.orbital-center::after {
-  content: '';
-  position: absolute;
-  inset: -60px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.orbital-center .center-number {
-  font-family: var(--font-title);
-  font-size: 3.5rem;
-  color: var(--rg-gold);
-  line-height: 1;
-}
-
-.orbital-center .center-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--rg-text-light);
-  margin-top: 8px;
-}
-
-/* Orbiting members */
-.orbital-member {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.orbital-member:hover {
-  transform: scale(1.2);
-  z-index: 20;
-}
-
-.orbital-member img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--rg-beige);
-  transition: border-color 0.3s ease;
-}
-
-.orbital-member:hover img {
-  border-color: var(--rg-gold);
-}
-
-/* Positioning each member */
-.orbital-member:nth-child(2) { top: 50px; left: 50%; transform: translateX(-50%); }
-.orbital-member:nth-child(3) { top: 120px; right: 100px; }
-.orbital-member:nth-child(4) { bottom: 120px; right: 80px; }
-.orbital-member:nth-child(5) { bottom: 50px; left: 50%; transform: translateX(-50%); }
-.orbital-member:nth-child(6) { bottom: 120px; left: 80px; }
-.orbital-member:nth-child(7) { top: 120px; left: 100px; }
-
-/* Info tooltip */
-.orbital-member .orb-info {
-  position: absolute;
-  bottom: -70px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 20px;
-  background: var(--rg-beige);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  text-align: center;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.orbital-member:hover .orb-info {
-  opacity: 1;
-  bottom: -80px;
-}
-
-.orbital-member .orb-info::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid var(--rg-beige);
-}
-
-.orbital-member .orb-name {
-  font-family: var(--font-title);
-  font-size: 0.95rem;
-  color: var(--rg-text-dark);
-}
-
-.orbital-member .orb-role {
-  font-size: 0.72rem;
-  color: var(--rg-gold);
-  margin-top: 2px;
-}
-
-/* Connection lines */
-.orbital-lines {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.orbital-lines svg {
-  width: 100%;
-  height: 100%;
-}
-
-.orbital-lines line {
-  stroke: rgba(249, 195, 7, 0.08);
-  stroke-width: 1;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   STYLE 4 — "The Minimal List"
-   Ultra-clean horizontal reveals
-   ════════════════════════════════════════════════════════════ */
-
-.team-list {
-  margin-top: 4rem;
-}
-
-.list-member {
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-
-.list-member:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.list-member:hover {
-  background: linear-gradient(90deg, transparent, rgba(249, 195, 7, 0.03), transparent);
-}
-
-.list-member .list-num {
-  font-family: var(--font-title);
-  font-size: 0.85rem;
-  color: var(--rg-text-light);
-  width: 30px;
-}
-
-.list-member .list-main {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.list-member .list-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.list-member:hover .list-avatar {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.list-member .list-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.list-member .list-name {
-  font-family: var(--font-title);
-  font-size: 1.5rem;
-  color: var(--rg-text-dark);
-  transition: color 0.3s ease;
-}
-
-.list-member:hover .list-name {
-  color: var(--rg-gold);
-}
-
-.list-member .list-role {
-  font-size: 0.85rem;
-  color: var(--rg-text-light);
-  font-weight: 300;
-}
-
-.list-member .list-social {
-  display: flex;
-  gap: 8px;
-  opacity: 0;
-  transform: translateX(20px);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.list-member:hover .list-social {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.list-member .list-social a {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
-.list-member .list-social a:hover {
-  background: var(--rg-gold);
-  border-color: var(--rg-gold);
-}
-
-.list-member .list-social svg {
-  width: 16px;
-  height: 16px;
-  fill: var(--rg-text-medium);
-  transition: fill 0.3s ease;
-}
-
-.list-member .list-social a:hover svg {
-  fill: var(--rg-dark);
-}
-
-.list-member .list-arrow {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  transition: all 0.4s ease;
-}
-
-.list-member:hover .list-arrow {
-  background: var(--rg-gold);
-  border-color: var(--rg-gold);
-}
-
-.list-member .list-arrow svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--rg-text-light);
-  fill: none;
-  stroke-width: 2;
-  transition: all 0.3s ease;
-  transform: rotate(-45deg);
-}
-
-.list-member:hover .list-arrow svg {
-  stroke: var(--rg-dark);
-  transform: rotate(0deg);
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   STYLE 5 — "The Floating Cards"
-   Scattered, magazine-style layout
-   ════════════════════════════════════════════════════════════ */
-
-.team-floating {
-  position: relative;
-  min-height: 800px;
-  margin-top: 4rem;
-}
-
-.float-card {
-  position: absolute;
-  width: 280px;
-  background: var(--rg-beige);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 24px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.float-card:hover {
-  z-index: 100;
-  transform: scale(1.05) rotate(0deg) !important;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-  border-color: rgba(249, 195, 7, 0.2);
-}
-
-/* Scattered positions with rotations */
-.float-card:nth-child(1) { top: 0; left: 5%; transform: rotate(-3deg); }
-.float-card:nth-child(2) { top: 80px; left: 35%; transform: rotate(2deg); }
-.float-card:nth-child(3) { top: 40px; right: 8%; transform: rotate(-2deg); }
-.float-card:nth-child(4) { top: 400px; left: 15%; transform: rotate(4deg); }
-.float-card:nth-child(5) { top: 450px; right: 20%; transform: rotate(-3deg); }
-
-.float-card .float-img {
-  height: 200px;
-  overflow: hidden;
-}
-
-.float-card .float-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.float-card:hover .float-img img {
-  transform: scale(1.1);
-}
-
-.float-card .float-body {
-  padding: 1.5rem;
-}
-
-.float-card .float-role {
-  display: inline-block;
-  padding: 4px 10px;
-  background: rgba(249, 195, 7, 0.1);
-  border-radius: 4px;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--rg-gold);
-  margin-bottom: 10px;
-}
-
-.float-card h3 {
-  font-family: var(--font-title);
-  font-size: 1.3rem;
-  color: var(--rg-text-dark);
-  margin-bottom: 6px;
-}
-
-.float-card .float-bio {
-  font-size: 0.82rem;
-  color: var(--rg-text-light);
-  line-height: 1.5;
-  font-weight: 300;
-}
-
-.float-card .float-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  margin-top: 1rem;
-}
-
-.float-card .float-social {
-  display: flex;
-  gap: 6px;
-}
-
-.float-card .float-social a {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.float-card .float-social a:hover {
-  background: rgba(249, 195, 7, 0.15);
-}
-
-.float-card .float-social svg {
-  width: 14px;
-  height: 14px;
-  fill: var(--rg-text-light);
-  transition: fill 0.3s ease;
-}
-
-.float-card .float-social a:hover svg {
-  fill: var(--rg-gold);
-}
-
-.float-card .float-link {
-  font-size: 0.78rem;
-  color: var(--rg-gold);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap 0.3s ease;
-}
-
-.float-card:hover .float-link {
-  gap: 10px;
-}
-
-.float-card .float-link svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--rg-gold);
-  fill: none;
-  stroke-width: 2;
-}
-
-
-/* ════════════════════════════════════════════════════════════
-   DIVIDER
-   ════════════════════════════════════════════════════════════ */
-
-.section-divider {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.section-divider .line {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(249, 195, 7, 0.2) 50%,
-    transparent
-  );
-}
-
-
-/* ════════════════════════════════════════════════════════════
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --rg-beige-light: #00032e;
+            --rg-beige: #05094a;
+            --rg-beige-dark: #0a1260;
+            --rg-beige-darker: #0f1870;
+            --rg-text-dark: #ffffff;
+            --rg-text-medium: rgba(255, 255, 255, 0.72);
+            --rg-text-light: rgba(255, 255, 255, 0.45);
+            --rg-gold: #f9c307;
+            --rg-amber: #f9c307;
+            --rg-navy: #00032e;
+            --rg-dark: #000220;
+            --rg-radius: 1.125rem;
+            --font-title: "Bona Nova SC", serif;
+            --font-body: "Bricolage Grotesque", sans-serif;
+            --line: rgba(249, 195, 7, 0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--rg-beige-light);
+            font-family: var(--font-body);
+            color: var(--rg-text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   SECTION HEADER
+   ═══════════════════════════════════════════════════════════ */
+
+        .team-section {
+            padding: 6rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .section-header-left {
+            max-width: 600px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--rg-gold);
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--rg-text-dark);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            color: var(--rg-gold);
+            font-style: italic;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--rg-text-light);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .section-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .team-count {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .team-count-number {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            color: var(--rg-gold);
+            line-height: 1;
+        }
+
+        .team-count-label {
+            font-size: 0.75rem;
+            color: var(--rg-text-light);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   EXPANDING CARDS CONTAINER
+   ═══════════════════════════════════════════════════════════ */
+
+        .team-expanding {
+            display: flex;
+            gap: 10px;
+            height: 75vh;
+            min-height: 550px;
+            max-height: 750px;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   INDIVIDUAL CARD
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card {
+            position: relative;
+            flex: 1;
+            min-width: 90px;
+            border-radius: 28px;
+            overflow: hidden;
+            cursor: pointer;
+
+            /* Smooth flex transition */
+            transition: flex 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exp-card:hover {
+            flex: 5;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   CARD IMAGE
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card .card-image {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .exp-card .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.6s ease;
+            filter: saturate(0.8);
+        }
+
+        .exp-card:hover .card-image img {
+            transform: scale(1.08);
+            filter: saturate(1);
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   GRADIENT OVERLAYS
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,
+                    rgba(0, 2, 32, 0.95) 0%,
+                    rgba(0, 2, 32, 0.6) 35%,
+                    rgba(0, 2, 32, 0.2) 60%,
+                    transparent 100%);
+            z-index: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .exp-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                    rgba(249, 195, 7, 0.08) 0%,
+                    transparent 50%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .exp-card:hover::after {
+            opacity: 1;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   DECORATIVE ELEMENTS
+   ═══════════════════════════════════════════════════════════ */
+
+        /* Vertical Gold Accent Line */
+        .exp-card .accent-line {
+            position: absolute;
+            top: 2.5rem;
+            left: 2rem;
+            width: 2px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--rg-gold), transparent);
+            z-index: 3;
+            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .exp-card:hover .accent-line {
+            height: 80px;
+        }
+
+        /* Corner Frame */
+        .exp-card .corner-frame {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            z-index: 3;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease 0.3s,
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+
+        .exp-card:hover .corner-frame {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .corner-frame::before,
+        .corner-frame::after {
+            content: '';
+            position: absolute;
+            background: var(--rg-gold);
+        }
+
+        .corner-frame::before {
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 1px;
+        }
+
+        .corner-frame::after {
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   CARD NUMBER (Top Left - Always Visible)
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card .card-number {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 4;
+            font-family: var(--font-title);
+            font-size: 0.85rem;
+            color: var(--rg-gold);
+            opacity: 0.5;
+            transition: opacity 0.5s ease,
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exp-card:hover .card-number {
+            opacity: 1;
+            transform: translateY(100px);
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   COLLAPSED STATE - VERTICAL NAME
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card .vertical-name {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 1.8rem;
+            z-index: 4;
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            color: var(--rg-text-dark);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            transition: opacity 0.4s ease,
+                transform 0.4s ease;
+        }
+
+        .exp-card:hover .vertical-name {
+            opacity: 0;
+            transform: rotate(180deg) translateY(-20px);
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   EXPANDED STATE - MAIN CONTENT
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card .content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+            z-index: 4;
+        }
+
+        /* Name */
+        .exp-card .member-name {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            color: var(--rg-text-dark);
+            line-height: 1.1;
+            margin-bottom: 0.3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.15s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+        }
+
+        .exp-card:hover .member-name {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Role */
+        .exp-card .member-role {
+            font-size: 0.9rem;
+            color: var(--rg-gold);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.2s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .exp-card:hover .member-role {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .exp-card .content-divider {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--rg-gold), transparent);
+            margin-bottom: 1.2rem;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+        }
+
+        .exp-card:hover .content-divider {
+            width: 100%;
+        }
+
+        /* Bio */
+        .exp-card .member-bio {
+            font-size: 0.88rem;
+            color: var(--rg-text-medium);
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            max-width: 400px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.3s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+
+        .exp-card:hover .member-bio {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stats Row */
+        .exp-card .member-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.35s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
+        }
+
+        .exp-card:hover .member-stats {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .exp-card .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exp-card .stat-value {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            color: var(--rg-text-dark);
+            line-height: 1;
+        }
+
+        .exp-card .stat-label {
+            font-size: 0.7rem;
+            color: var(--rg-text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        /* Expertise Tags */
+        .exp-card .member-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.8rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.4s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+        }
+
+        .exp-card:hover .member-tags {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .exp-card .tag {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            font-size: 0.72rem;
+            color: var(--rg-text-medium);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .exp-card .tag:hover {
+            background: rgba(249, 195, 7, 0.1);
+            border-color: rgba(249, 195, 7, 0.3);
+            color: var(--rg-gold);
+        }
+
+        /* Actions Row */
+        .exp-card .member-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.45s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.45s;
+        }
+
+        .exp-card:hover .member-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* View Profile Button */
+        .exp-card .btn-profile {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: var(--rg-gold);
+            border: none;
+            border-radius: 14px;
+            color: var(--rg-dark);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exp-card .btn-profile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(249, 195, 7, 0.25);
+        }
+
+        .exp-card .btn-profile svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--rg-dark);
+            fill: none;
+            stroke-width: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .exp-card .btn-profile:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Social Links */
+        .exp-card .social-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .exp-card .social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exp-card .social-link:hover {
+            background: rgba(249, 195, 7, 0.15);
+            border-color: rgba(249, 195, 7, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .exp-card .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--rg-text-medium);
+            transition: fill 0.3s ease;
+        }
+
+        .exp-card .social-link:hover svg {
+            fill: var(--rg-gold);
+        }
+
+        /* Email Link */
+        .exp-card .email-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: var(--rg-text-medium);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exp-card .email-link:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--rg-text-dark);
+        }
+
+        .exp-card .email-link svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
+   QUOTE HIGHLIGHT (Optional - for one card)
+   ═══════════════════════════════════════════════════════════ */
+
+        .exp-card .member-quote {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease 0.32s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.32s;
+        }
+
+        .exp-card:hover .member-quote {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .exp-card .member-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--rg-gold);
+            border-radius: 1px;
+        }
+
+        .exp-card .member-quote p {
+            font-size: 0.9rem;
+            color: var(--rg-text-medium);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════
    RESPONSIVE
-   ════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════ */
 
-@media (max-width: 1024px) {
-  .team-expanding {
-    flex-direction: column;
-    height: auto;
-    max-height: none;
-  }
-  
-  .exp-card {
-    min-height: 200px;
-    flex: none !important;
-  }
-  
-  .exp-card:hover {
-    flex: none !important;
-  }
-  
-  .exp-card h3 {
-    writing-mode: horizontal-tb !important;
-    transform: none !important;
-  }
-  
-  .team-bento {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-  }
-  
-  .bento-card {
-    grid-column: auto !important;
-    grid-row: auto !important;
-    min-height: 250px;
-  }
-  
-  .team-orbital {
-    height: auto;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem 0;
-  }
-  
-  .orbital-member {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-  }
-  
-  .orbital-center::before,
-  .orbital-center::after {
-    display: none;
-  }
-  
-  .team-floating {
-    position: relative;
-    min-height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-  
-  .float-card {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    transform: none !important;
-    width: calc(50% - 0.5rem);
-    max-width: 320px;
-  }
-}
+        @media (max-width: 1200px) {
+            .team-expanding {
+                height: auto;
+                max-height: none;
+                flex-direction: column;
+                gap: 12px;
+            }
 
-@media (max-width: 768px) {
-  .list-member {
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
-  }
-  
-  .list-member .list-num {
-    display: none;
-  }
-  
-  .list-member .list-social {
-    display: none;
-  }
-  
-  .team-bento {
-    grid-template-columns: 1fr;
-  }
-  
-  .float-card {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-</style>
+            .exp-card {
+                min-height: 120px;
+                flex: none !important;
+            }
+
+            .exp-card:hover {
+                flex: none !important;
+                min-height: 450px;
+            }
+
+            .exp-card .vertical-name {
+                writing-mode: horizontal-tb;
+                transform: none;
+                bottom: 2rem;
+                left: 2rem;
+            }
+
+            .exp-card:hover .vertical-name {
+                transform: translateY(-20px);
+            }
+
+            .exp-card .member-name {
+                font-size: 1.8rem;
+            }
+
+            .exp-card .member-stats {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-section {
+                padding: 4rem 1.25rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-header-right {
+                align-self: flex-start;
+            }
+
+            .exp-card .content {
+                padding: 1.75rem;
+            }
+
+            .exp-card .member-name {
+                font-size: 1.5rem;
+            }
+
+            .exp-card .member-stats {
+                gap: 1rem;
+            }
+
+            .exp-card .stat-value {
+                font-size: 1.3rem;
+            }
+
+            .exp-card .member-actions {
+                flex-wrap: wrap;
+            }
+
+            .exp-card .btn-profile {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════
-     STYLE 1: THE EXPANDING CARDS
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <span class="section-label">Our Collective</span>
-  <h2 class="section-title">Meet the <span>Visionaries</span></h2>
-  <p class="section-subtitle">A curated ensemble of creative minds shaping the future of luxury real estate.</p>
-  
-  <div class="team-expanding">
-    <article class="exp-card">
-      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="James Morrison">
-      <div class="accent-line"></div>
-      <div class="content">
-        <span class="number">01</span>
-        <h3>James Morrison</h3>
-        <p class="role">Founder & CEO</p>
-        <div class="exp-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
-        </div>
-      </div>
-    </article>
-    
-    <article class="exp-card">
-      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Sarah Chen">
-      <div class="accent-line"></div>
-      <div class="content">
-        <span class="number">02</span>
-        <h3>Sarah Chen</h3>
-        <p class="role">Creative Director</p>
-        <div class="exp-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        </div>
-      </div>
-    </article>
-    
-    <article class="exp-card">
-      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" alt="Michael Ross">
-      <div class="accent-line"></div>
-      <div class="content">
-        <span class="number">03</span>
-        <h3>Michael Ross</h3>
-        <p class="role">Head of Sales</p>
-        <div class="exp-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
-      </div>
-    </article>
-    
-    <article class="exp-card">
-      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" alt="Emma Williams">
-      <div class="accent-line"></div>
-      <div class="content">
-        <span class="number">04</span>
-        <h3>Emma Williams</h3>
-        <p class="role">Lead Architect</p>
-        <div class="exp-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
-      </div>
-    </article>
-    
-    <article class="exp-card">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="David Park">
-      <div class="accent-line"></div>
-      <div class="content">
-        <span class="number">05</span>
-        <h3>David Park</h3>
-        <p class="role">Investment Director</p>
-        <div class="exp-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
+    <section class="team-section">
+
+        <!-- Section Header -->
+        <header class="section-header">
+            <div class="section-header-left">
+                <span class="section-label">Our Collective</span>
+                <h2 class="section-title">Meet the <span>Visionaries</span></h2>
+                <p class="section-subtitle">A curated ensemble of creative minds and industry veterans shaping the
+                    future of luxury real estate.</p>
+            </div>
+            <div class="section-header-right">
+                <div class="team-count">
+                    <span class="team-count-number">24</span>
+                    <span class="team-count-label">Team Members</span>
+                </div>
+            </div>
+        </header>
 
 
-<div class="section-divider"><div class="line"></div></div>
+        <!-- Expanding Cards -->
+        <div class="team-expanding">
+
+            <!-- Card 1 - Founder -->
+            <article class="exp-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="James Morrison"
+                        loading="lazy">
+                </div>
+
+                <div class="accent-line"></div>
+                <div class="corner-frame"></div>
+                <span class="card-number">01</span>
+
+                <h3 class="vertical-name">James Morrison</h3>
+
+                <div class="content">
+                    <h3 class="member-name">James Morrison</h3>
+                    <p class="member-role">Founder & Chief Executive</p>
+                    <div class="content-divider"></div>
+
+                    <p class="member-bio">Visionary leader with over two decades of experience reshaping luxury real
+                        estate across three continents. Pioneer of the boutique estate concept.</p>
+
+                    <div class="member-stats">
+                        <div class="stat">
+                            <span class="stat-value">22</span>
+                            <span class="stat-label">Years Exp.</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">$4.2B</span>
+                            <span class="stat-label">Sales Volume</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">340+</span>
+                            <span class="stat-label">Properties</span>
+                        </div>
+                    </div>
+
+                    <div class="member-tags">
+                        <span class="tag">Luxury Estates</span>
+                        <span class="tag">Investment Strategy</span>
+                        <span class="tag">Market Analysis</span>
+                    </div>
+
+                    <div class="member-actions">
+                        <button class="btn-profile">
+                            View Profile
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="X/Twitter">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 4l11.733 16h4.267l-11.733-16z" />
+                                    <path d="M4 20l6.768-6.768m2.46-2.46l6.772-6.772" />
+                                </svg>
+                            </a>
+                        </div>
+                        <a href="mailto:james@luxestate.com" class="email-link">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Email
+                        </a>
+                    </div>
+                </div>
+            </article>
 
 
-<!-- ═══════════════════════════════════════════════════════════
-     STYLE 2: THE BENTO GRID
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <span class="section-label">Leadership</span>
-  <h2 class="section-title">The <span>Ensemble</span></h2>
-  <p class="section-subtitle">Diverse talents united by a singular vision of excellence.</p>
-  
-  <div class="team-bento">
-    <article class="bento-card">
-      <div class="bento-img">
-        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=600&q=80" alt="Alexander Reid">
-      </div>
-      <div class="bento-overlay"></div>
-      <div class="bento-content">
-        <span class="bento-tag">Founder</span>
-        <h3>Alexander Reid</h3>
-        <p class="bento-role">Chief Executive Officer</p>
-      </div>
-    </article>
-    
-    <article class="bento-card bento-quote">
-      <p class="quote-text">"We don't just sell properties.<br>We craft <span>legacies</span>."</p>
-    </article>
-    
-    <article class="bento-card">
-      <div class="bento-img">
-        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&q=80" alt="Victoria Shaw">
-      </div>
-      <div class="bento-overlay"></div>
-      <div class="bento-content">
-        <h3>Victoria Shaw</h3>
-        <p class="bento-role">Chief Design Officer</p>
-      </div>
-    </article>
-    
-    <article class="bento-card">
-      <div class="bento-img">
-        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" alt="Marcus Chen">
-      </div>
-      <div class="bento-overlay"></div>
-      <div class="bento-content">
-        <span class="bento-tag">Partner</span>
-        <h3>Marcus Chen</h3>
-        <p class="bento-role">Managing Director</p>
-      </div>
-    </article>
-    
-    <article class="bento-card">
-      <div class="bento-img">
-        <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&q=80" alt="Isabella Torres">
-      </div>
-      <div class="bento-overlay"></div>
-      <div class="bento-content">
-        <h3>Isabella Torres</h3>
-        <p class="bento-role">Head of Marketing</p>
-      </div>
-    </article>
-    
-    <article class="bento-card">
-      <div class="bento-img">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="Thomas Wright">
-      </div>
-      <div class="bento-overlay"></div>
-      <div class="bento-content">
-        <h3>Thomas Wright</h3>
-        <p class="bento-role">Legal Counsel</p>
-      </div>
-    </article>
-    
-    <article class="bento-card">
-      <div class="bento-img">
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Nina Patel">
-      </div>
-      <div class="bento-overlay"></div>
-      <div class="bento-content">
-        <h3>Nina Patel</h3>
-        <p class="bento-role">Finance Director</p>
-      </div>
-    </article>
-  </div>
-</section>
+            <!-- Card 2 - Creative Director -->
+            <article class="exp-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Sarah Chen"
+                        loading="lazy">
+                </div>
+
+                <div class="accent-line"></div>
+                <div class="corner-frame"></div>
+                <span class="card-number">02</span>
+
+                <h3 class="vertical-name">Sarah Chen</h3>
+
+                <div class="content">
+                    <h3 class="member-name">Sarah Chen</h3>
+                    <p class="member-role">Creative Director</p>
+                    <div class="content-divider"></div>
+
+                    <div class="member-quote">
+                        <p>"Every property has a soul. Our job is to reveal it."</p>
+                    </div>
+
+                    <p class="member-bio">Award-winning designer bringing editorial elegance and cinematic vision to
+                        luxury property presentation. Former Art Director at Architectural Digest.</p>
+
+                    <div class="member-stats">
+                        <div class="stat">
+                            <span class="stat-value">15</span>
+                            <span class="stat-label">Years Exp.</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">12</span>
+                            <span class="stat-label">Awards</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">200+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                    </div>
+
+                    <div class="member-tags">
+                        <span class="tag">Visual Identity</span>
+                        <span class="tag">Photography</span>
+                        <span class="tag">Brand Strategy</span>
+                    </div>
+
+                    <div class="member-actions">
+                        <button class="btn-profile">
+                            View Profile
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
 
 
-<div class="section-divider"><div class="line"></div></div>
+            <!-- Card 3 - Head of Sales -->
+            <article class="exp-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80"
+                        alt="Michael Ross" loading="lazy">
+                </div>
+
+                <div class="accent-line"></div>
+                <div class="corner-frame"></div>
+                <span class="card-number">03</span>
+
+                <h3 class="vertical-name">Michael Ross</h3>
+
+                <div class="content">
+                    <h3 class="member-name">Michael Ross</h3>
+                    <p class="member-role">Head of Global Sales</p>
+                    <div class="content-divider"></div>
+
+                    <p class="member-bio">Master negotiator with an unparalleled network of UHNW clients. Closed over
+                        $2B in transactions with a reputation for discretion and results.</p>
+
+                    <div class="member-stats">
+                        <div class="stat">
+                            <span class="stat-value">18</span>
+                            <span class="stat-label">Years Exp.</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">$2.1B</span>
+                            <span class="stat-label">Closed Deals</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">98%</span>
+                            <span class="stat-label">Client Retention</span>
+                        </div>
+                    </div>
+
+                    <div class="member-tags">
+                        <span class="tag">Negotiations</span>
+                        <span class="tag">Private Clients</span>
+                        <span class="tag">Off-Market</span>
+                    </div>
+
+                    <div class="member-actions">
+                        <button class="btn-profile">
+                            View Profile
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                        <a href="mailto:michael@luxestate.com" class="email-link">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Email
+                        </a>
+                    </div>
+                </div>
+            </article>
 
 
-<!-- ═══════════════════════════════════════════════════════════
-     STYLE 3: THE ORBITAL RING
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <span class="section-label">Global Network</span>
-  <h2 class="section-title">Our <span>Circle</span></h2>
-  <p class="section-subtitle">A connected collective spanning continents and cultures.</p>
-  
-  <div class="team-orbital">
-    <div class="orbital-center">
-      <span class="center-number">24</span>
-      <span class="center-label">Team Members</span>
-    </div>
-    
-    <div class="orbital-member">
-      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="">
-      <div class="orb-info">
-        <div class="orb-name">James Morrison</div>
-        <div class="orb-role">CEO</div>
-      </div>
-    </div>
-    
-    <div class="orbital-member">
-      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80" alt="">
-      <div class="orb-info">
-        <div class="orb-name">Sarah Chen</div>
-        <div class="orb-role">Creative</div>
-      </div>
-    </div>
-    
-    <div class="orbital-member">
-      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="">
-      <div class="orb-info">
-        <div class="orb-name">Michael Ross</div>
-        <div class="orb-role">Sales</div>
-      </div>
-    </div>
-    
-    <div class="orbital-member">
-      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="">
-      <div class="orb-info">
-        <div class="orb-name">Emma Williams</div>
-        <div class="orb-role">Architecture</div>
-      </div>
-    </div>
-    
-    <div class="orbital-member">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="">
-      <div class="orb-info">
-        <div class="orb-name">David Park</div>
-        <div class="orb-role">Investment</div>
-      </div>
-    </div>
-    
-    <div class="orbital-member">
-      <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=200&q=80" alt="">
-      <div class="orb-info">
-        <div class="orb-name">Isabella Torres</div>
-        <div class="orb-role">Marketing</div>
-      </div>
-    </div>
-  </div>
-</section>
+            <!-- Card 4 - Architect -->
+            <article class="exp-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80"
+                        alt="Emma Williams" loading="lazy">
+                </div>
+
+                <div class="accent-line"></div>
+                <div class="corner-frame"></div>
+                <span class="card-number">04</span>
+
+                <h3 class="vertical-name">Emma Williams</h3>
+
+                <div class="content">
+                    <h3 class="member-name">Emma Williams</h3>
+                    <p class="member-role">Principal Architect</p>
+                    <div class="content-divider"></div>
+
+                    <p class="member-bio">RIBA-certified architect merging sustainability with timeless design. Leads
+                        our in-house architectural evaluation and renovation advisory team.</p>
+
+                    <div class="member-stats">
+                        <div class="stat">
+                            <span class="stat-value">14</span>
+                            <span class="stat-label">Years Exp.</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">85</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">6</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                    </div>
+
+                    <div class="member-tags">
+                        <span class="tag">Sustainable Design</span>
+                        <span class="tag">Renovations</span>
+                        <span class="tag">Historic Properties</span>
+                    </div>
+
+                    <div class="member-actions">
+                        <button class="btn-profile">
+                            View Profile
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
 
 
-<div class="section-divider"><div class="line"></div></div>
+            <!-- Card 5 - Investment -->
+            <article class="exp-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="David Park"
+                        loading="lazy">
+                </div>
 
+                <div class="accent-line"></div>
+                <div class="corner-frame"></div>
+                <span class="card-number">05</span>
 
-<!-- ═══════════════════════════════════════════════════════════
-     STYLE 4: THE MINIMAL LIST
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <span class="section-label">Directory</span>
-  <h2 class="section-title">The <span>Roster</span></h2>
-  <p class="section-subtitle">Every name, a story. Every role, a purpose.</p>
-  
-  <div class="team-list">
-    <article class="list-member">
-      <span class="list-num">01</span>
-      <div class="list-main">
-        <div class="list-avatar">
-          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="">
-        </div>
-        <div>
-          <h3 class="list-name">James Morrison</h3>
-          <p class="list-role">Founder & Chief Executive Officer</p>
-        </div>
-      </div>
-      <div class="list-social">
-        <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="#"><svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg></a>
-      </div>
-      <div class="list-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </div>
-    </article>
-    
-    <article class="list-member">
-      <span class="list-num">02</span>
-      <div class="list-main">
-        <div class="list-avatar">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80" alt="">
-        </div>
-        <div>
-          <h3 class="list-name">Sarah Chen</h3>
-          <p class="list-role">Creative Director</p>
-        </div>
-      </div>
-      <div class="list-social">
-        <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      </div>
-      <div class="list-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </div>
-    </article>
-    
-    <article class="list-member">
-      <span class="list-num">03</span>
-      <div class="list-main">
-        <div class="list-avatar">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="">
-        </div>
-        <div>
-          <h3 class="list-name">Michael Ross</h3>
-          <p class="list-role">Head of Global Sales</p>
-        </div>
-      </div>
-      <div class="list-social">
-        <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-      </div>
-      <div class="list-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </div>
-    </article>
-    
-    <article class="list-member">
-      <span class="list-num">04</span>
-      <div class="list-main">
-        <div class="list-avatar">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="">
-        </div>
-        <div>
-          <h3 class="list-name">Emma Williams</h3>
-          <p class="list-role">Principal Architect</p>
-        </div>
-      </div>
-      <div class="list-social">
-        <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-      </div>
-      <div class="list-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </div>
-    </article>
-    
-    <article class="list-member">
-      <span class="list-num">05</span>
-      <div class="list-main">
-        <div class="list-avatar">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="">
-        </div>
-        <div>
-          <h3 class="list-name">David Park</h3>
-          <p class="list-role">Investment Director</p>
-        </div>
-      </div>
-      <div class="list-social">
-        <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-      </div>
-      <div class="list-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </div>
-    </article>
-  </div>
-</section>
+                <h3 class="vertical-name">David Park</h3>
 
+                <div class="content">
+                    <h3 class="member-name">David Park</h3>
+                    <p class="member-role">Investment Director</p>
+                    <div class="content-divider"></div>
 
-<div class="section-divider"><div class="line"></div></div>
+                    <div class="member-quote">
+                        <p>"Real estate isn't just property—it's generational wealth."</p>
+                    </div>
 
+                    <p class="member-bio">Former Goldman Sachs VP now directing strategic property investments.
+                        Specializes in portfolio optimization for family offices and institutions.</p>
 
-<!-- ═══════════════════════════════════════════════════════════
-     STYLE 5: THE FLOATING CARDS
-     ═══════════════════════════════════════════════════════════ -->
-<section>
-  <span class="section-label">Creative Studio</span>
-  <h2 class="section-title">Scattered <span>Brilliance</span></h2>
-  <p class="section-subtitle">Organized chaos. Calculated creativity. Beautiful minds.</p>
-  
-  <div class="team-floating">
-    <article class="float-card">
-      <div class="float-img">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="">
-      </div>
-      <div class="float-body">
-        <span class="float-role">Founder</span>
-        <h3>James Morrison</h3>
-        <p class="float-bio">Visionary leader with 20+ years reshaping luxury real estate across three continents.</p>
-      </div>
-      <div class="float-footer">
-        <div class="float-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg></a>
+                    <div class="member-stats">
+                        <div class="stat">
+                            <span class="stat-value">16</span>
+                            <span class="stat-label">Years Exp.</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">$1.8B</span>
+                            <span class="stat-label">AUM</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">32%</span>
+                            <span class="stat-label">Avg. ROI</span>
+                        </div>
+                    </div>
+
+                    <div class="member-tags">
+                        <span class="tag">Portfolio Strategy</span>
+                        <span class="tag">Family Offices</span>
+                        <span class="tag">Market Intelligence</span>
+                    </div>
+
+                    <div class="member-actions">
+                        <button class="btn-profile">
+                            View Profile
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                        </div>
+                        <a href="mailto:david@luxestate.com" class="email-link">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Email
+                        </a>
+                    </div>
+                </div>
+            </article>
+
         </div>
-        <a href="#" class="float-link">
-          Profile
-          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </article>
-    
-    <article class="float-card">
-      <div class="float-img">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="">
-      </div>
-      <div class="float-body">
-        <span class="float-role">Creative</span>
-        <h3>Sarah Chen</h3>
-        <p class="float-bio">Award-winning designer bringing editorial elegance to property presentation.</p>
-      </div>
-      <div class="float-footer">
-        <div class="float-social">
-          <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg></a>
-        </div>
-        <a href="#" class="float-link">
-          Profile
-          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </article>
-    
-    <article class="float-card">
-      <div class="float-img">
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" alt="">
-      </div>
-      <div class="float-body">
-        <span class="float-role">Sales</span>
-        <h3>Michael Ross</h3>
-        <p class="float-bio">Master negotiator with $2B+ in closed transactions worldwide.</p>
-      </div>
-      <div class="float-footer">
-        <div class="float-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
-        <a href="#" class="float-link">
-          Profile
-          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </article>
-    
-    <article class="float-card">
-      <div class="float-img">
-        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="">
-      </div>
-      <div class="float-body">
-        <span class="float-role">Architecture</span>
-        <h3>Emma Williams</h3>
-        <p class="float-bio">RIBA-certified architect merging sustainability with timeless design.</p>
-      </div>
-      <div class="float-footer">
-        <div class="float-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
-        <a href="#" class="float-link">
-          Profile
-          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </article>
-    
-    <article class="float-card">
-      <div class="float-img">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="">
-      </div>
-      <div class="float-body">
-        <span class="float-role">Investment</span>
-        <h3>David Park</h3>
-        <p class="float-bio">Former Goldman Sachs VP now directing strategic property investments.</p>
-      </div>
-      <div class="float-footer">
-        <div class="float-social">
-          <a href="#"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
-        <a href="#" class="float-link">
-          Profile
-          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </article>
-  </div>
-</section>
+
+    </section>
 
 </body>
+
 </html>
