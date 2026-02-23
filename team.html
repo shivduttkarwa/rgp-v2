@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Team</title>
+    <title>Timeline — Real Gold Properties</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
         :root {
             --rg-beige-light: #00032e;
@@ -18,7 +20,6 @@
             --rg-text-medium: rgba(255, 255, 255, 0.72);
             --rg-text-light: rgba(255, 255, 255, 0.45);
             --rg-gold: #f9c307;
-            --rg-amber: #f9c307;
             --rg-navy: #00032e;
             --rg-dark: #000220;
             --rg-radius: 1.125rem;
@@ -40,378 +41,420 @@
             overflow-x: hidden;
         }
 
-        .team-section {
-            position: relative;
-            padding: 7rem 2rem;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        /* ─── Subtle Background ─── */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(249, 195, 7, 0.03) 0%, transparent 65%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ─── Header ─── */
-        .team-header {
+        /* ═══ INTRO ═══ */
+        .intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            margin-bottom: 5rem;
+            padding: 2rem;
             position: relative;
+        }
+
+        .intro-eyebrow {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+            margin-bottom: 1.25rem;
+        }
+
+        .intro-title {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 4.5vw, 3.25rem);
+            font-weight: 700;
+            line-height: 1.2;
+            max-width: 580px;
+            margin-bottom: 1rem;
+        }
+
+        .intro-desc {
+            font-size: 0.92rem;
+            font-weight: 300;
+            color: var(--rg-text-light);
+            max-width: 400px;
+            line-height: 1.75;
+        }
+
+        /* ═══ TIMELINE CONTAINER ═══ */
+        .timeline-container {
+            position: relative;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline-layout {
+            display: flex;
+            gap: 4rem;
+        }
+
+        /* ── LEFT: All 5 content panels stacked ── */
+        .content-rail {
+            flex: 1.3;
+            position: relative;
+        }
+
+        /* Vertical progress line */
+        .progress-track {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(249, 195, 7, 0.06);
             z-index: 1;
         }
 
-        .team-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 600;
+        .progress-fill {
+            width: 100%;
+            height: 0%;
+            background: var(--rg-gold);
+            transition: none;
+        }
+
+        .panel {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 3.5rem;
+            position: relative;
+        }
+
+        /* Dot on line */
+        .panel-dot {
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--rg-dark);
+            border: 2px solid rgba(249, 195, 7, 0.12);
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+
+        .panel.active .panel-dot {
+            background: var(--rg-gold);
+            border-color: var(--rg-gold);
+            box-shadow: 0 0 14px rgba(249, 195, 7, 0.3);
+        }
+
+        .panel-step {
+            font-size: 0.6rem;
+            font-weight: 700;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--rg-gold);
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(12px);
-            animation: softUp 0.8s ease forwards 0.1s;
+            opacity: 0.4;
+            margin-bottom: 0.6rem;
+            transition: opacity 0.5s ease;
         }
 
-        .team-heading {
+        .panel.active .panel-step {
+            opacity: 1;
+        }
+
+        .panel-year {
             font-family: var(--font-title);
-            font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+            font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1.25rem;
-            opacity: 0;
-            transform: translateY(12px);
-            animation: softUp 0.8s ease forwards 0.25s;
+            line-height: 1;
+            color: rgba(255, 255, 255, 0.035);
+            margin-bottom: 0.15rem;
+            transition: color 0.6s ease;
         }
 
-        .team-subheading {
-            font-size: 1rem;
+        .panel.active .panel-year {
+            color: rgba(255, 255, 255, 0.07);
+        }
+
+        .panel-title {
+            font-family: var(--font-title);
+            font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .panel-desc {
+            font-size: 0.88rem;
             font-weight: 300;
             color: var(--rg-text-light);
-            max-width: 480px;
-            margin: 0 auto;
-            line-height: 1.7;
-            opacity: 0;
-            transform: translateY(12px);
-            animation: softUp 0.8s ease forwards 0.4s;
+            line-height: 1.85;
+            max-width: 430px;
+            margin-bottom: 1.75rem;
+            transition: color 0.5s ease;
         }
 
-        .heading-line {
-            width: 48px;
-            height: 2px;
-            background: var(--rg-gold);
-            margin: 1.75rem auto 0;
-            border-radius: 2px;
-            opacity: 0;
-            animation: softUp 0.8s ease forwards 0.55s;
+        .panel.active .panel-desc {
+            color: var(--rg-text-medium);
         }
 
-        @keyframes softUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .panel-metrics {
+            display: flex;
+            gap: 2.5rem;
         }
 
-        /* ─── Grid ─── */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.75rem;
+        .m-val {
+            font-family: var(--font-title);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--rg-gold);
+            line-height: 1;
+        }
+
+        .m-label {
+            font-size: 0.6rem;
+            color: var(--rg-text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+
+        /* ── RIGHT: Sticky image frame ── */
+        .image-rail {
+            flex: 0.7;
             position: relative;
-            z-index: 1;
         }
 
-        /* ─── Card ─── */
-        .member-card {
-            position: relative;
-            background: var(--rg-beige-light);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: var(--rg-radius);
-            overflow: hidden;
-            will-change: transform;
-            transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+        .frame-container {
+            position: sticky;
+            top: 50vh;
+            transform: translateY(-50%);
+            width: 100%;
+            aspect-ratio: 3/4;
+            max-height: 500px;
         }
 
-        .member-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(249, 195, 7, 0.1);
-            box-shadow:
-                0 24px 48px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(249, 195, 7, 0.06);
-        }
-
-        /* Image */
-        .member-img-wrap {
-            position: relative;
-            aspect-ratio: 4 / 5;
-            overflow: hidden;
-            background: var(--rg-beige);
-        }
-
-        .member-img-wrap img {
+        /* The phone/frame border */
+        .device-frame {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: saturate(0.8) brightness(0.88);
-            transition: transform 0.6s ease, filter 0.6s ease;
+            border-radius: 1.5rem;
+            border: 2px solid rgba(249, 195, 7, 0.1);
+            overflow: hidden;
+            position: relative;
+            background: var(--rg-beige);
+            will-change: transform;
         }
 
-        .member-card:hover .member-img-wrap img {
-            transform: scale(1.04);
-            filter: saturate(0.95) brightness(0.92);
+        /* Frame decorative top bar */
+        .frame-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 36px;
+            background: rgba(0, 2, 32, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .member-img-fade {
+        .frame-dot-dec {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .frame-dot-dec.gold {
+            background: var(--rg-gold);
+            opacity: 0.5;
+        }
+
+        /* Frame bottom bar */
+        .frame-bottom-bar {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 40%;
-            background: linear-gradient(to top, var(--rg-beige-light), transparent);
+            height: 48px;
+            background: rgba(0, 2, 32, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .frame-indicator {
+            width: 36px;
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Image stack inside frame */
+        .frame-images {
+            position: absolute;
+            inset: 36px 0 48px 0;
+            overflow: hidden;
+        }
+
+        .frame-img {
+            position: absolute;
+            inset: 0;
+            will-change: transform, opacity;
+        }
+
+        .frame-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .frame-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0, 2, 32, 0.5) 100%);
             pointer-events: none;
         }
 
-        /* Social overlay */
-        .member-socials-overlay {
+        .frame-img-label {
             position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            background: rgba(0, 2, 32, 0.55);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            bottom: 0.85rem;
+            left: 0.85rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+            background: rgba(0, 2, 32, 0.6);
+            backdrop-filter: blur(6px);
+            padding: 0.25rem 0.65rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(249, 195, 7, 0.08);
+            z-index: 2;
         }
 
-        .member-card:hover .member-socials-overlay {
-            opacity: 1;
+        /* Step indicator dots below frame */
+        .frame-step-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
         }
 
-        .social-icon-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .frame-step-dot {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            text-decoration: none;
-            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-            transform: translateY(8px);
+            transition: all 0.5s ease;
         }
 
-        .member-card:hover .social-icon-btn {
-            transform: translateY(0);
-        }
-
-        .member-card:hover .social-icon-btn:nth-child(1) {
-            transition-delay: 0.05s;
-        }
-
-        .member-card:hover .social-icon-btn:nth-child(2) {
-            transition-delay: 0.1s;
-        }
-
-        .member-card:hover .social-icon-btn:nth-child(3) {
-            transition-delay: 0.15s;
-        }
-
-        .social-icon-btn:hover {
+        .frame-step-dot.active {
             background: var(--rg-gold);
-            border-color: var(--rg-gold);
-            color: var(--rg-dark);
+            box-shadow: 0 0 8px rgba(249, 195, 7, 0.25);
+            transform: scale(1.3);
         }
 
-        .social-icon-btn svg {
-            width: 15px;
-            height: 15px;
-            fill: currentColor;
-        }
-
-        /* Info */
-        .member-info {
-            padding: 1.5rem 1.5rem 1.75rem;
-        }
-
-        .member-name {
-            font-family: var(--font-title);
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .member-role {
-            font-size: 0.78rem;
-            font-weight: 500;
-            color: var(--rg-gold);
-            letter-spacing: 0.03em;
-            margin-bottom: 0.85rem;
-        }
-
-        .member-divider {
-            width: 28px;
-            height: 1.5px;
-            background: rgba(249, 195, 7, 0.25);
-            border-radius: 2px;
-            margin-bottom: 0.85rem;
-            transition: width 0.45s ease, background 0.45s ease;
-        }
-
-        .member-card:hover .member-divider {
-            width: 48px;
-            background: rgba(249, 195, 7, 0.5);
-        }
-
-        .member-bio {
-            font-size: 0.82rem;
-            font-weight: 300;
-            color: var(--rg-text-light);
-            line-height: 1.65;
-        }
-
-        /* Card reveal animation */
-        .member-card {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .member-card.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.7s ease, transform 0.7s ease,
-                box-shadow 0.45s ease, border-color 0.45s ease;
-        }
-
-        .member-card.is-visible:hover {
-            transform: translateY(-6px);
-        }
-
-        /* ─── CTA ─── */
-        .team-cta {
-            text-align: center;
-            margin-top: 4.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .team-cta.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .cta-link {
-            display: inline-flex;
+        /* ═══ END ═══ */
+        .end-section {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.65rem;
-            padding: 0.9rem 2.25rem;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            color: var(--rg-dark);
-            background: var(--rg-gold);
-            border: none;
-            border-radius: 3rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
         }
 
-        .cta-link:hover {
-            background: #ffd44a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(249, 195, 7, 0.25);
+        .end-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--rg-gold), transparent);
+            margin-bottom: 1.25rem;
+            opacity: 0.3;
         }
 
-        .cta-link svg {
-            width: 15px;
-            height: 15px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: transform 0.3s ease;
-        }
-
-        .cta-link:hover svg {
-            transform: translateX(3px);
-        }
-
-        .cta-subtext {
-            font-size: 0.75rem;
+        .end-text {
+            font-family: var(--font-title);
+            font-size: 1.05rem;
             color: var(--rg-text-light);
-            margin-top: 0.85rem;
-            font-weight: 300;
         }
 
-        /* ─── Responsive ─── */
-        @media (max-width: 960px) {
-            .team-section {
-                padding: 5rem 1.5rem;
+        .end-text span {
+            color: var(--rg-gold);
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 860px) {
+            .timeline-layout {
+                flex-direction: column;
+                gap: 0;
             }
 
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.25rem;
+            .image-rail {
+                order: -1;
+                padding: 0 1rem;
             }
 
-            .team-header {
-                margin-bottom: 3.5rem;
+            .frame-container {
+                position: sticky;
+                top: 1rem;
+                transform: none;
+                max-height: 280px;
+                aspect-ratio: 16/10;
+                margin: 0 auto;
+                max-width: 360px;
+                z-index: 10;
+            }
+
+            .content-rail {
+                padding-left: 2.5rem;
+            }
+
+            .progress-track {
+                right: auto;
+                left: 0;
+            }
+
+            .panel-dot {
+                right: auto;
+                left: -5px;
+            }
+
+            .panel {
+                padding-right: 0;
+                height: 80vh;
+            }
+
+            .frame-step-dots {
+                display: none;
             }
         }
 
-        @media (max-width: 600px) {
-            .team-section {
-                padding: 3.5rem 1rem;
+        @media (max-width: 520px) {
+            .frame-container {
+                max-height: 220px;
             }
 
-            .team-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
-                gap: 1.25rem;
+            .panel {
+                height: 85vh;
             }
 
-            .member-info {
-                padding: 1.25rem;
+            .panel-year {
+                font-size: 2.5rem;
             }
 
-            .member-img-wrap {
-                aspect-ratio: 5 / 5;
-            }
-
-            .team-header {
-                margin-bottom: 2.5rem;
-            }
-
-            .member-socials-overlay {
-                opacity: 1;
-                background: rgba(0, 2, 32, 0.35);
-                align-items: flex-end;
-                padding-bottom: 1rem;
-                justify-content: flex-start;
-                padding-left: 1.25rem;
-            }
-
-            .social-icon-btn {
-                transform: translateY(0);
-                width: 36px;
-                height: 36px;
+            .content-rail {
+                padding-left: 2rem;
             }
         }
     </style>
@@ -419,275 +462,320 @@
 
 <body>
 
-    <div class="bg-glow"></div>
+    <section class="intro">
+        <p class="intro-eyebrow">Our Journey</p>
+        <h1 class="intro-title">Fifteen Years of Building Trust</h1>
+        <p class="intro-desc">Every milestone shaped who we are. Scroll to walk through our story.</p>
+    </section>
 
-    <section class="team-section">
+    <section class="timeline-container">
+        <div class="timeline-layout">
 
-        <div class="team-header">
-            <p class="team-eyebrow">Our Team</p>
-            <h2 class="team-heading">The People Behind<br>Every Detail</h2>
-            <p class="team-subheading">Passionate minds united by craft, driven by purpose, committed to building what
-                matters.</p>
-            <div class="heading-line"></div>
+            <!-- ── LEFT: CONTENT PANELS ── -->
+            <div class="content-rail">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="panel" data-index="0">
+                    <div class="panel-dot"></div>
+                    <p class="panel-step">Step 01</p>
+                    <p class="panel-year">2009</p>
+                    <h2 class="panel-title">The Foundation</h2>
+                    <p class="panel-desc">Real Gold Properties opened with three people and a conviction: luxury real
+                        estate deserves a personal touch. We chose to grow slowly, earn trust deeply, and never
+                        compromise on quality.</p>
+                    <div class="panel-metrics">
+                        <div>
+                            <div class="m-val">3</div>
+                            <div class="m-label">Team Members</div>
+                        </div>
+                        <div>
+                            <div class="m-val">12</div>
+                            <div class="m-label">Properties</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel" data-index="1">
+                    <div class="panel-dot"></div>
+                    <p class="panel-step">Step 02</p>
+                    <p class="panel-year">2013</p>
+                    <h2 class="panel-title">Breaking Through</h2>
+                    <p class="panel-desc">We crossed $100 million in annual transactions. More importantly, our referral
+                        rate hit 78%. Clients weren't just returning — they were sending everyone they knew.</p>
+                    <div class="panel-metrics">
+                        <div>
+                            <div class="m-val">$100M+</div>
+                            <div class="m-label">Annual Sales</div>
+                        </div>
+                        <div>
+                            <div class="m-val">78%</div>
+                            <div class="m-label">Referrals</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel" data-index="2">
+                    <div class="panel-dot"></div>
+                    <p class="panel-step">Step 03</p>
+                    <p class="panel-year">2017</p>
+                    <h2 class="panel-title">Going Global</h2>
+                    <p class="panel-desc">Our clients invested across borders, so we followed. Offices in Dubai and
+                        London extended our curated approach internationally — same principles, wider canvas.</p>
+                    <div class="panel-metrics">
+                        <div>
+                            <div class="m-val">3</div>
+                            <div class="m-label">Offices</div>
+                        </div>
+                        <div>
+                            <div class="m-val">6</div>
+                            <div class="m-label">Countries</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel" data-index="3">
+                    <div class="panel-dot"></div>
+                    <p class="panel-step">Step 04</p>
+                    <p class="panel-year">2021</p>
+                    <h2 class="panel-title">Redefining Luxury</h2>
+                    <p class="panel-desc">We launched Sustainable Estates — proving luxury and environmental
+                        responsibility aren't opposites. Our first net-zero development sold out in 90 days.</p>
+                    <div class="panel-metrics">
+                        <div>
+                            <div class="m-val">90</div>
+                            <div class="m-label">Days Sold Out</div>
+                        </div>
+                        <div>
+                            <div class="m-val">Net-Zero</div>
+                            <div class="m-label">Certified</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel" data-index="4">
+                    <div class="panel-dot"></div>
+                    <p class="panel-step">Step 05</p>
+                    <p class="panel-year">2024</p>
+                    <h2 class="panel-title">The Next Chapter</h2>
+                    <p class="panel-desc">$2.4 billion in managed assets. 850+ families across three continents. Zero
+                        unresolved disputes. Every promise kept. The next fifteen years start now.</p>
+                    <div class="panel-metrics">
+                        <div>
+                            <div class="m-val">$2.4B</div>
+                            <div class="m-label">Portfolio</div>
+                        </div>
+                        <div>
+                            <div class="m-val">850+</div>
+                            <div class="m-label">Families</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── RIGHT: STICKY FRAME ── -->
+            <div class="image-rail">
+                <div class="frame-container">
+                    <div class="device-frame" id="deviceFrame">
+                        <div class="frame-top-bar">
+                            <div class="frame-dot-dec"></div>
+                            <div class="frame-dot-dec gold"></div>
+                            <div class="frame-dot-dec"></div>
+                        </div>
+                        <div class="frame-images" id="frameImages">
+                            <div class="frame-img" data-img="0">
+                                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=700&fit=crop"
+                                    alt="2009">
+                                <div class="frame-img-overlay"></div>
+                                <span class="frame-img-label">2009</span>
+                            </div>
+                            <div class="frame-img" data-img="1">
+                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=700&fit=crop"
+                                    alt="2013">
+                                <div class="frame-img-overlay"></div>
+                                <span class="frame-img-label">2013</span>
+                            </div>
+                            <div class="frame-img" data-img="2">
+                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&h=700&fit=crop"
+                                    alt="2017">
+                                <div class="frame-img-overlay"></div>
+                                <span class="frame-img-label">2017</span>
+                            </div>
+                            <div class="frame-img" data-img="3">
+                                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&h=700&fit=crop"
+                                    alt="2021">
+                                <div class="frame-img-overlay"></div>
+                                <span class="frame-img-label">2021</span>
+                            </div>
+                            <div class="frame-img" data-img="4">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=700&fit=crop"
+                                    alt="2024">
+                                <div class="frame-img-overlay"></div>
+                                <span class="frame-img-label">2024</span>
+                            </div>
+                        </div>
+                        <div class="frame-bottom-bar">
+                            <div class="frame-indicator"></div>
+                        </div>
+                    </div>
+                    <div class="frame-step-dots">
+                        <div class="frame-step-dot active" data-dot="0"></div>
+                        <div class="frame-step-dot" data-dot="1"></div>
+                        <div class="frame-step-dot" data-dot="2"></div>
+                        <div class="frame-step-dot" data-dot="3"></div>
+                        <div class="frame-step-dot" data-dot="4"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="team-grid">
-
-            <div class="member-card" data-delay="0">
-                <div class="member-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=750&fit=crop&crop=face"
-                        alt="Alexander Reed">
-                    <div class="member-img-fade"></div>
-                    <div class="member-socials-overlay">
-                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Email">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="member-info">
-                    <h3 class="member-name">Alexander Reed</h3>
-                    <p class="member-role">Founder & CEO</p>
-                    <div class="member-divider"></div>
-                    <p class="member-bio">Leads with clarity and conviction, bringing fifteen years of building products
-                        people love.</p>
-                </div>
-            </div>
-
-            <div class="member-card" data-delay="100">
-                <div class="member-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=750&fit=crop&crop=face"
-                        alt="Victoria Chen">
-                    <div class="member-img-fade"></div>
-                    <div class="member-socials-overlay">
-                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Email">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="member-info">
-                    <h3 class="member-name">Victoria Chen</h3>
-                    <p class="member-role">Chief Technology Officer</p>
-                    <div class="member-divider"></div>
-                    <p class="member-bio">Architects elegant systems at scale, turning complex engineering challenges
-                        into simple solutions.</p>
-                </div>
-            </div>
-
-            <div class="member-card" data-delay="200">
-                <div class="member-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=750&fit=crop&crop=face"
-                        alt="Marcus Williams">
-                    <div class="member-img-fade"></div>
-                    <div class="member-socials-overlay">
-                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Dribbble">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308a10.174 10.174 0 004.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4a10.143 10.143 0 006.29 2.166c1.42 0 2.77-.29 4.006-.816z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Email">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="member-info">
-                    <h3 class="member-name">Marcus Williams</h3>
-                    <p class="member-role">Creative Director</p>
-                    <div class="member-divider"></div>
-                    <p class="member-bio">Shapes every visual experience with an obsessive eye for detail and timeless
-                        design sensibility.</p>
-                </div>
-            </div>
-
-            <div class="member-card" data-delay="0">
-                <div class="member-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=750&fit=crop&crop=face"
-                        alt="Sophia Laurent">
-                    <div class="member-img-fade"></div>
-                    <div class="member-socials-overlay">
-                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Email">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="member-info">
-                    <h3 class="member-name">Sophia Laurent</h3>
-                    <p class="member-role">Head of Product</p>
-                    <div class="member-divider"></div>
-                    <p class="member-bio">Translates user needs into thoughtful product decisions that feel intuitive
-                        and right.</p>
-                </div>
-            </div>
-
-            <div class="member-card" data-delay="100">
-                <div class="member-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=750&fit=crop&crop=face"
-                        alt="James Nakamura">
-                    <div class="member-img-fade"></div>
-                    <div class="member-socials-overlay">
-                        <a href="#" class="social-icon-btn" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Email">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="member-info">
-                    <h3 class="member-name">James Nakamura</h3>
-                    <p class="member-role">Lead Engineer</p>
-                    <div class="member-divider"></div>
-                    <p class="member-bio">Writes clean, resilient code and mentors the next generation of builders on
-                        the team.</p>
-                </div>
-            </div>
-
-            <div class="member-card" data-delay="200">
-                <div class="member-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&h=750&fit=crop&crop=face"
-                        alt="Elena Petrova">
-                    <div class="member-img-fade"></div>
-                    <div class="member-socials-overlay">
-                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon-btn" aria-label="Email">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="member-info">
-                    <h3 class="member-name">Elena Petrova</h3>
-                    <p class="member-role">Design Lead</p>
-                    <div class="member-divider"></div>
-                    <p class="member-bio">Brings empathy and precision together, designing interfaces that feel human at
-                        every touchpoint.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="team-cta">
-            <a href="#" class="cta-link">
-                View All Members
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-            </a>
-            <p class="cta-subtext">We're always looking for exceptional people</p>
-        </div>
-
+    <section class="end-section">
+        <div class="end-line"></div>
+        <p class="end-text">The story continues. <span>Write it with us.</span></p>
     </section>
 
     <script>
-        const cards = document.querySelectorAll('.member-card');
-        const cta = document.querySelector('.team-cta');
+        gsap.registerPlugin(ScrollTrigger);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const delay = parseInt(entry.target.dataset.delay) || 0;
-                    setTimeout(() => {
-                        entry.target.classList.add('is-visible');
-                    }, delay);
-                    observer.unobserve(entry.target);
-                }
+        const panels = document.querySelectorAll('.panel');
+        const frameImgs = document.querySelectorAll('.frame-img');
+        const deviceFrame = document.getElementById('deviceFrame');
+        const progressFill = document.getElementById('progressFill');
+        const dots = document.querySelectorAll('.frame-step-dot');
+        const contentRail = document.querySelector('.content-rail');
+
+        let currentActive = 0;
+
+        // ── Set initial image states: first visible, rest hidden below ──
+        frameImgs.forEach((img, i) => {
+            gsap.set(img, {
+                yPercent: i === 0 ? 0 : 100,
+                opacity: i === 0 ? 1 : 1
             });
-        }, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -40px 0px'
         });
 
-        cards.forEach(card => observer.observe(card));
+        // ── Master timeline: frame tilt + image swap per step ──
+        panels.forEach((panel, i) => {
 
-        const ctaObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    ctaObserver.unobserve(entry.target);
+            // When scrolling INTO a panel from top
+            ScrollTrigger.create({
+                trigger: panel,
+                start: 'top center',
+                end: 'bottom center',
+                onEnter: () => activateStep(i),
+                onEnterBack: () => activateStep(i)
+            });
+
+            // Between each panel, create the tilt + image transition
+            if (i < panels.length - 1) {
+
+                // This trigger fires in the gap between two panels
+                ScrollTrigger.create({
+                    trigger: panel,
+                    start: 'bottom 70%',
+                    end: 'bottom 30%',
+                    scrub: 1,
+                    onUpdate: (self) => {
+                        const p = self.progress;
+
+                        // Frame tilts during transition
+                        // First half: tilt right, second half: tilt back to center
+                        let tilt;
+                        if (p < 0.5) {
+                            tilt = p * 2 * 60; // 0 → 12 degrees
+                        } else {
+                            tilt = (1 - p) * 2 * 60; // 12 → 0 degrees
+                        }
+
+                        gsap.set(deviceFrame, {
+                            rotateZ: tilt,
+                            rotateY: tilt * 0.5
+                        });
+
+                        // Image crossfade: current slides up, next slides in from below
+                        const outImg = frameImgs[i];
+                        const inImg = frameImgs[i + 1];
+
+                        gsap.set(outImg, { yPercent: -100 * p });
+                        gsap.set(inImg, { yPercent: 100 * (1 - p) });
+                    }
+                });
+            }
+        });
+
+        function activateStep(index) {
+            if (currentActive === index) return;
+            currentActive = index;
+
+            // Panel active states
+            panels.forEach((p, i) => {
+                p.classList.toggle('active', i === index);
+            });
+
+            // Dots
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+
+            // Make sure correct image is fully visible, others hidden
+            frameImgs.forEach((img, i) => {
+                if (i === index) {
+                    gsap.set(img, { yPercent: 0 });
+                } else if (i < index) {
+                    gsap.set(img, { yPercent: -100 });
+                } else {
+                    gsap.set(img, { yPercent: 100 });
                 }
             });
-        }, { threshold: 0.3 });
 
-        ctaObserver.observe(cta);
+            // Reset frame tilt
+            gsap.to(deviceFrame, {
+                rotateZ: 0,
+                rotateY: 0,
+                duration: 0.4,
+                ease: 'power2.out',
+                overwrite: true
+            });
+        }
+
+        // ── Progress bar fill ──
+        ScrollTrigger.create({
+            trigger: contentRail,
+            start: 'top center',
+            end: 'bottom center',
+            scrub: 0.3,
+            onUpdate: (self) => {
+                progressFill.style.height = (self.progress * 100) + '%';
+            }
+        });
+
+        // ── Content reveal per panel ──
+        panels.forEach((panel) => {
+            const els = panel.querySelectorAll('.panel-step, .panel-year, .panel-title, .panel-desc, .panel-metrics');
+
+            gsap.from(els, {
+                y: 25,
+                opacity: 0,
+                stagger: 0.08,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: panel,
+                    start: 'top 60%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // ── Intro ──
+        gsap.from('.intro-eyebrow', { y: 10, opacity: 0, duration: 0.7, delay: 0.15 });
+        gsap.from('.intro-title', { y: 10, opacity: 0, duration: 0.7, delay: 0.3 });
+        gsap.from('.intro-desc', { y: 10, opacity: 0, duration: 0.7, delay: 0.45 });
+
+        // Activate first step
+        panels[0].classList.add('active');
     </script>
 
 </body>

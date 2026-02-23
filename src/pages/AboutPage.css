@@ -278,20 +278,6 @@
   opacity: 1;
 }
 
-.about-page .slice-wrap {
-  display: grid;
-  grid-template-columns: 4rem 1fr;
-  gap: clamp(0.875rem, 2vw, 1.625rem);
-  align-items: center;
-}
-
-.about-page .slice {
-  width: 3.875rem;
-  height: 21.25rem;
-  background: linear-gradient(180deg, var(--accent), transparent);
-  opacity: 0.8;
-}
-
 .about-page .avail {
   background: var(--rg-gold);
   color: var(--rg-dark);
@@ -429,9 +415,6 @@
     filter: brightness(0.92);
   }
 
-  .about-page .slice {
-    display: none;
-  }
 }
 
 @media (max-width: 35rem) {

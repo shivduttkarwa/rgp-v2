@@ -141,9 +141,12 @@ export default function AboutPage() {
                   exclusive and welcoming — a place to belong.
                 </p>
               </div>
-              <div className="slice-wrap">
-                <div className="slice" aria-hidden="true" />
-                <img className="img" alt="Landscape" src={img("ps1 (7).jpg")} />
+              <div>
+                <img
+                  className="img"
+                  alt="Landscape"
+                  src={img("hero-rpg-brisbane.jpg")}
+                />
               </div>
             </div>
           </div>
