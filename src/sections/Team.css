@@ -254,6 +254,21 @@ body {
   width: 35%;
 }
 
+.exp-card.active .card-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #000220 0%,
+    rgba(0, 2, 32, 0.7) 30%,
+    rgba(0, 2, 32, 0.1) 65%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
 .exp-card.active .content {
   left: 0;
   right: 35%;
@@ -339,6 +354,7 @@ body {
   font-size: 0.72rem;
   color: var(--rg-text-medium);
   font-weight: 500;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .exp-card .tag:hover {
@@ -351,101 +367,78 @@ body {
 .exp-card .member-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
-/* View Profile Button */
-.exp-card .btn-profile {
+/* Unified action button */
+.exp-card .action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  background: var(--rg-gold);
-  border: none;
-  border-radius: 14px;
-  color: var(--rg-dark);
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 12px;
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.exp-card .btn-profile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(249, 195, 7, 0.25);
-}
-
-.exp-card .btn-profile svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--rg-dark);
-  fill: none;
-  stroke-width: 2;
-}
-
-.exp-card .btn-profile:hover svg {
-  transform: translateX(4px);
-}
-
-/* Social Links */
-.exp-card .social-links {
-  display: flex;
-  gap: 8px;
-}
-
-.exp-card .social-link {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-}
-
-.exp-card .social-link:hover {
-  background: rgba(249, 195, 7, 0.15);
-  border-color: rgba(249, 195, 7, 0.4);
-  transform: translateY(-2px);
-}
-
-.exp-card .social-link svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--rg-text-medium);
-}
-
-.exp-card .social-link:hover svg {
-  fill: var(--rg-gold);
-}
-
-/* Email Link */
-.exp-card .email-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  color: var(--rg-text-medium);
   font-size: 0.8rem;
+  font-weight: 500;
   text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.exp-card .email-link:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
-  color: var(--rg-text-dark);
-}
-
-.exp-card .email-link svg {
+.exp-card .action-btn svg {
   width: 16px;
   height: 16px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+/* Phone */
+.exp-card .action-btn--phone {
+  background: var(--rg-gold);
+  color: var(--rg-dark);
+  border-color: var(--rg-gold);
+}
+
+.exp-card .action-btn--phone:hover {
+  background: #ffd33a;
+  border-color: #ffd33a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(249, 195, 7, 0.28);
+}
+
+/* LinkedIn */
+.exp-card .action-btn--linkedin {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--rg-text-medium);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.exp-card .action-btn--linkedin:hover {
+  background: rgba(10, 102, 194, 0.2);
+  border-color: rgba(10, 102, 194, 0.5);
+  color: #6daee8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 102, 194, 0.18);
+}
+
+/* Email */
+.exp-card .action-btn--email {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--rg-text-medium);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.exp-card .action-btn--email:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--rg-text-dark);
+  transform: translateY(-2px);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -643,18 +636,12 @@ body {
     flex-wrap: wrap;
   }
 
-  .exp-card .btn-profile {
-    width: 100%;
-    justify-content: center;
+  .exp-card .member-actions {
+    flex-wrap: wrap;
   }
 
-  .exp-card .social-links {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .exp-card .email-link {
-    width: 100%;
+  .exp-card .action-btn {
+    flex: 1 1 auto;
     justify-content: center;
   }
 }

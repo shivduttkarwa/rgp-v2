@@ -15,10 +15,9 @@ interface TeamMember {
   }[];
   tags: string[];
   email: string;
+  phone: string;
   social: {
     linkedin?: string;
-    twitter?: string;
-    instagram?: string;
   };
 }
 
@@ -30,16 +29,14 @@ const teamMembers: TeamMember[] = [
     bio: "Visionary leader with over two decades of experience reshaping luxury real estate across three continents. Pioneer of the boutique estate concept.",
     image: "/images/rahul-singh.jpg",
     stats: [
-      { value: "22", label: "Years Exp." },
-      { value: "$4.2B", label: "Sales Volume" },
-      { value: "340+", label: "Properties" },
+      { value: "12", label: "Years Exp." },
+      { value: "$850M", label: "Sales Volume" },
+      { value: "120+", label: "Properties" },
     ],
     tags: ["Luxury Estates", "Investment Strategy", "Market Analysis"],
-    email: "james@luxestate.com",
-    social: {
-      linkedin: "#",
-      twitter: "#",
-    },
+    email: "rahul@luxestate.com",
+    phone: "+91 98100 00001",
+    social: { linkedin: "#" },
   },
   {
     id: 2,
@@ -50,16 +47,14 @@ const teamMembers: TeamMember[] = [
     image:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
     stats: [
-      { value: "15", label: "Years Exp." },
-      { value: "12", label: "Awards" },
-      { value: "200+", label: "Projects" },
+      { value: "10", label: "Years Exp." },
+      { value: "6", label: "Awards" },
+      { value: "80+", label: "Projects" },
     ],
     tags: ["Visual Identity", "Photography", "Brand Strategy"],
     email: "sarah@luxestate.com",
-    social: {
-      linkedin: "#",
-      instagram: "#",
-    },
+    phone: "+91 98100 00002",
+    social: { linkedin: "#" },
   },
   {
     id: 3,
@@ -69,15 +64,14 @@ const teamMembers: TeamMember[] = [
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80",
     stats: [
-      { value: "18", label: "Years Exp." },
-      { value: "$2.1B", label: "Closed Deals" },
-      { value: "98%", label: "Client Retention" },
+      { value: "10", label: "Years Exp." },
+      { value: "$620M", label: "Closed Deals" },
+      { value: "94%", label: "Client Retention" },
     ],
     tags: ["Negotiations", "Private Clients", "Off-Market"],
     email: "michael@luxestate.com",
-    social: {
-      linkedin: "#",
-    },
+    phone: "+91 98100 00003",
+    social: { linkedin: "#" },
   },
   {
     id: 4,
@@ -87,16 +81,14 @@ const teamMembers: TeamMember[] = [
     image:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80",
     stats: [
-      { value: "14", label: "Years Exp." },
-      { value: "85", label: "Projects" },
-      { value: "6", label: "Countries" },
+      { value: "9", label: "Years Exp." },
+      { value: "42", label: "Projects" },
+      { value: "3", label: "Countries" },
     ],
     tags: ["Sustainable Design", "Renovations", "Historic Properties"],
     email: "emma@luxestate.com",
-    social: {
-      linkedin: "#",
-      instagram: "#",
-    },
+    phone: "+91 98100 00004",
+    social: { linkedin: "#" },
   },
   {
     id: 5,
@@ -107,15 +99,14 @@ const teamMembers: TeamMember[] = [
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
     stats: [
-      { value: "16", label: "Years Exp." },
-      { value: "$1.8B", label: "AUM" },
-      { value: "32%", label: "Avg. ROI" },
+      { value: "8", label: "Years Exp." },
+      { value: "$320M", label: "AUM" },
+      { value: "22%", label: "Avg. ROI" },
     ],
     tags: ["Portfolio Strategy", "Family Offices", "Market Intelligence"],
     email: "david@luxestate.com",
-    social: {
-      linkedin: "#",
-    },
+    phone: "+91 98100 00005",
+    social: { linkedin: "#" },
   },
 ];
 
@@ -269,66 +260,28 @@ const Team = () => {
               </div>
 
               <div className="member-actions" data-animate="fade-up">
-                <button className="btn-profile">
-                  View Profile
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
+                <a href={`tel:${member.phone}`} className="action-btn action-btn--phone" aria-label="Call">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
-                </button>
-                <div className="social-links">
-                  {member.social.linkedin && (
-                    <a
-                      href={member.social.linkedin}
-                      className="social-link"
-                      aria-label="LinkedIn"
-                    >
-                      <svg viewBox="0 0 24 24">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                        <rect x="2" y="9" width="4" height="12" />
-                        <circle cx="4" cy="4" r="2" />
-                      </svg>
-                    </a>
-                  )}
-                  {member.social.twitter && (
-                    <a
-                      href={member.social.twitter}
-                      className="social-link"
-                      aria-label="X/Twitter"
-                    >
-                      <svg viewBox="0 0 24 24">
-                        <path d="M4 4l11.733 16h4.267l-11.733-16z" />
-                        <path d="M4 20l6.768-6.768m2.46-2.46l6.772-6.772" />
-                      </svg>
-                    </a>
-                  )}
-                  {member.social.instagram && (
-                    <a
-                      href={member.social.instagram}
-                      className="social-link"
-                      aria-label="Instagram"
-                    >
-                      <svg viewBox="0 0 24 24">
-                        <rect
-                          x="2"
-                          y="2"
-                          width="20"
-                          height="20"
-                          rx="5"
-                          ry="5"
-                        />
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
-                <a href={`mailto:${member.email}`} className="email-link">
-                  <svg viewBox="0 0 24 24">
+                  <span>Call</span>
+                </a>
+                {member.social.linkedin && (
+                  <a href={member.social.linkedin} className="action-btn action-btn--linkedin" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <span>LinkedIn</span>
+                  </a>
+                )}
+                <a href={`mailto:${member.email}`} className="action-btn action-btn--email" aria-label="Email">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
-                  Email
+                  <span>Email</span>
                 </a>
               </div>
             </div>
