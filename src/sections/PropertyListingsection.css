@@ -558,6 +558,23 @@
   display: flex;
 }
 
+/* Card enter/exit animation — matches Team swiper */
+.property-section .property-swiper .swiper-slide .property-card {
+  transform: scale(0.9) translateY(14px);
+  opacity: 0.55;
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.5s ease,
+    box-shadow 0.5s ease;
+  will-change: transform, opacity;
+}
+
+.property-section .property-swiper .swiper-slide-active .property-card {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+
 .property-section .property-swiper .property-card {
   width: 100%;
   margin: 0;
@@ -669,6 +686,58 @@
 @media (max-width: 768px) {
   .property-section .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (hover: none) {
+  .property-section .property-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .property-section .property-card:hover .card-image {
+    transform: none;
+  }
+
+  .property-section .property-card:hover .card-title {
+    color: inherit;
+  }
+
+  /* Remove tap highlight */
+  .property-section .property-card {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .property-section .property-card:focus,
+  .property-section .property-card:active {
+    outline: none;
+    border-color: rgba(249, 195, 7, 0.15);
+  }
+
+  /* Gold bottom border on active swiper card */
+  .property-section .property-swiper .swiper-slide-active .property-card-wrap {
+    position: relative;
+  }
+
+  .property-section .property-swiper .swiper-slide-active .property-card-wrap::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(249, 195, 7, 0.35) 15%,
+      rgba(249, 195, 7, 0.95) 50%,
+      rgba(249, 195, 7, 0.35) 85%,
+      transparent 100%
+    );
+    box-shadow: 0 0 12px 2px rgba(249, 195, 7, 0.3);
+    pointer-events: none;
+    border-radius: 0 0 var(--rg-radius) var(--rg-radius);
   }
 }
 
