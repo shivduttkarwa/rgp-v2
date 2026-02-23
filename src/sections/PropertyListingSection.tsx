@@ -417,9 +417,9 @@ const PropertyListingSection = () => {
       gsap.to(pill, {
         left: activeBtn.offsetLeft,
         width: activeBtn.offsetWidth,
-        duration: 0.45,
-        ease: "power3.inOut",
-        overwrite: true,
+        duration: 0.38,
+        ease: "expo.out",
+        overwrite: "auto",
       });
     }
   }, [activeFilter]);
