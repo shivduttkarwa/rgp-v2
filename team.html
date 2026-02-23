@@ -238,6 +238,8 @@
             aspect-ratio: 3/4;
             max-height: 500px;
             perspective: 1500px; /* must be on direct parent of the rotated element */
+            /* natural starting position = sticky position, so no jump on entry */
+            margin-top: calc(50vh - 250px);
         }
 
         /* The phone/frame border */
@@ -471,6 +473,45 @@
                 padding-left: 2rem;
             }
         }
+
+        /* ═══ GOLD THEME ═══ */
+        body {
+            background: #f9c307;
+            color: #00032e;
+        }
+        .intro-eyebrow { color: rgba(0, 2, 32, 0.55); }
+        .intro-title   { color: #00032e; }
+        .intro-desc    { color: rgba(0, 2, 32, 0.62); }
+
+        .progress-track { background: rgba(0, 2, 32, 0.1); }
+        .progress-fill  { background: #00032e; }
+
+        .panel-dot { background: #f9c307; border-color: rgba(0, 2, 32, 0.22); }
+        .panel.active .panel-dot {
+            background: #00032e;
+            border-color: #00032e;
+            box-shadow: 0 0 14px rgba(0, 2, 32, 0.22);
+        }
+        .panel-step { color: rgba(0, 2, 32, 0.4); }
+        .panel.active .panel-step { color: rgba(0, 2, 32, 0.85); opacity: 1; }
+        .panel-year { color: rgba(0, 2, 32, 0.07); }
+        .panel.active .panel-year { color: rgba(0, 2, 32, 0.12); }
+        .panel-title { color: #00032e; }
+        .panel-desc  { color: rgba(0, 2, 32, 0.6); }
+        .panel.active .panel-desc { color: rgba(0, 2, 32, 0.82); }
+
+        .m-val   { color: #00032e; }
+        .m-label { color: rgba(0, 2, 32, 0.5); }
+
+        .device-frame { border-color: rgba(0, 2, 32, 0.25); }
+        .device-frame.flipping { box-shadow: 0 0 40px rgba(0, 2, 32, 0.12); }
+
+        .frame-step-dot        { background: rgba(0, 2, 32, 0.18); }
+        .frame-step-dot.active { background: #00032e; box-shadow: 0 0 8px rgba(0, 2, 32, 0.2); }
+
+        .end-line { background: linear-gradient(to bottom, #00032e, transparent); }
+        .end-text       { color: rgba(0, 2, 32, 0.5); }
+        .end-text span  { color: #00032e; }
     </style>
 </head>
 
@@ -679,55 +720,59 @@
                 onEnterBack: () => activateStep(i)
             });
 
-            // Between each panel, create the 180° flip transition
+            // 180° per step, cumulative — one clean flip per step, no reset jump
             if (i < panels.length - 1) {
 
                 ScrollTrigger.create({
-                    trigger: panel,
-                    start: 'bottom 65%',
-                    end: 'bottom 35%',
-                    scrub: 0.8,
+                    trigger: panels[i + 1],
+                    start: 'top bottom',
+                    end: 'top top',
+                    scrub: 1.5,
                     onUpdate: (self) => {
                         const p = self.progress;
-
-                        // "Door" technique: rotate 0→90° (edge-on), swap image, rotate 90→0°
-                        // This avoids the mirroring problem of a full 180° flip.
-                        const rotateY = p < 0.5
-                            ? p * 2 * 90          // 0 → 90
-                            : (1 - p) * 2 * 90;   // 90 → 0
+                        const rotateY = i * 180 + p * 180; // cumulative, 180° per step
 
                         gsap.set(deviceFrame, {
                             rotateY,
-                            scale: 1 - (Math.sin(p * Math.PI) * 0.05)
+                            scale: 1 - (Math.sin(p * Math.PI) * 0.04)
                         });
 
-                        if (p > 0.1 && p < 0.9) {
-                            deviceFrame.classList.add('flipping');
+                        // Front face: 0–90° and 270–360° (mod 360)
+                        // Back face:  90–270° (mod 360) — needs scaleX(-1) to cancel mirror
+                        const norm = rotateY % 360;
+                        const frontFace = norm < 90 || norm >= 270;
+
+                        // Image swap at the 90° edge-on point of this step
+                        if (p * 180 < 90) {
+                            gsap.set(frameImgs[i],     { opacity: 1, scaleX: frontFace ? 1 : -1 });
+                            gsap.set(frameImgs[i + 1], { opacity: 0, scaleX: 1 });
                         } else {
-                            deviceFrame.classList.remove('flipping');
+                            gsap.set(frameImgs[i],     { opacity: 0 });
+                            gsap.set(frameImgs[i + 1], { opacity: 1, scaleX: frontFace ? 1 : -1 });
                         }
 
-                        // Swap at midpoint (frame is edge-on at 90°, invisible to viewer)
-                        if (p < 0.5) {
-                            gsap.set(frameImgs[i], { opacity: 1 });
-                            gsap.set(frameImgs[i + 1], { opacity: 0 });
-                        } else {
-                            gsap.set(frameImgs[i], { opacity: 0 });
-                            gsap.set(frameImgs[i + 1], { opacity: 1 });
-                        }
+                        deviceFrame.classList.toggle('flipping', p > 0.05 && p < 0.95);
                     },
                     onLeave: () => {
-                        gsap.set(deviceFrame, { rotateY: 0, scale: 1 });
+                        const endAngle = (i + 1) * 180;
+                        const norm = endAngle % 360;
+                        const frontFace = norm < 90 || norm >= 270;
+                        gsap.set(deviceFrame, { rotateY: endAngle, scale: 1 });
                         deviceFrame.classList.remove('flipping');
                         frameImgs.forEach((img, idx) => {
-                            gsap.set(img, { opacity: idx === i + 1 ? 1 : 0 });
+                            const active = idx === i + 1;
+                            gsap.set(img, { opacity: active ? 1 : 0, scaleX: active && !frontFace ? -1 : 1 });
                         });
                     },
                     onLeaveBack: () => {
-                        gsap.set(deviceFrame, { rotateY: 0, scale: 1 });
+                        const startAngle = i * 180;
+                        const norm = startAngle % 360;
+                        const frontFace = norm < 90 || norm >= 270;
+                        gsap.set(deviceFrame, { rotateY: startAngle, scale: 1 });
                         deviceFrame.classList.remove('flipping');
                         frameImgs.forEach((img, idx) => {
-                            gsap.set(img, { opacity: idx === i ? 1 : 0 });
+                            const active = idx === i;
+                            gsap.set(img, { opacity: active ? 1 : 0, scaleX: active && !frontFace ? -1 : 1 });
                         });
                     }
                 });
