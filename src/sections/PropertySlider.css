@@ -542,7 +542,9 @@
   }
 
   .rg-ps__body {
-    display: none; /* hide body on small screens to keep it tight */
+    font-size: clamp(0.78rem, 3.5vw, 0.92rem);
+    max-width: 100%;
+    margin-bottom: 0.75rem;
   }
 
   .rg-ps__cta {
