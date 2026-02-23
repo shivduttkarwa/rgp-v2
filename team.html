@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -24,702 +26,755 @@
             --rg-radius: 1.125rem;
             --font-title: "Bona Nova SC", serif;
             --font-body: "Bricolage Grotesque", sans-serif;
-            --line: rgba(249, 195, 7, 0.22);
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            background: var(--rg-beige-light);
+            background: var(--rg-dark);
             font-family: var(--font-body);
             color: var(--rg-text-dark);
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* ═══════════════════════════════════════════════════════════
-   SECTION HEADER
-   ═══════════════════════════════════════════════════════════ */
-
+        /* ══════════════════════════════════════════════════════
+       SECTION CONTAINER
+    ══════════════════════════════════════════════════════ */
         .team-section {
-            padding: 6rem 2rem;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .section-header-left {
-            max-width: 600px;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--rg-gold);
-            margin-bottom: 1rem;
-        }
-
-        .section-label::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--rg-gold);
-        }
-
-        .section-title {
-            font-family: var(--font-title);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: var(--rg-text-dark);
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .section-title span {
-            color: var(--rg-gold);
-            font-style: italic;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--rg-text-light);
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        .section-header-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .team-count {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .team-count-number {
-            font-family: var(--font-title);
-            font-size: 3rem;
-            color: var(--rg-gold);
-            line-height: 1;
-        }
-
-        .team-count-label {
-            font-size: 0.75rem;
-            color: var(--rg-text-light);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   EXPANDING CARDS CONTAINER
-   ═══════════════════════════════════════════════════════════ */
-
-        .team-expanding {
-            display: flex;
-            gap: 10px;
-            height: 75vh;
-            min-height: 550px;
-            max-height: 750px;
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   INDIVIDUAL CARD
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card {
             position: relative;
-            flex: 1;
-            min-width: 90px;
-            border-radius: 28px;
+            min-height: 100vh;
+            padding: 8rem 2rem;
             overflow: hidden;
-            cursor: pointer;
-
-            /* Smooth flex transition */
-            transition: flex 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .exp-card:hover {
-            flex: 5;
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   CARD IMAGE
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card .card-image {
+        /* Animated mesh gradient background */
+        .team-bg {
             position: absolute;
             inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(15, 24, 112, 0.5) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(249, 195, 7, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 80% at 50% 100%, rgba(10, 18, 96, 0.6) 0%, transparent 40%),
+                var(--rg-dark);
+            z-index: 0;
+        }
+
+        /* Grain texture overlay */
+        .team-grain {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Floating orbs */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(249, 195, 7, 0.12);
+            top: 10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(15, 24, 112, 0.4);
+            bottom: 20%;
+            left: -8%;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: rgba(249, 195, 7, 0.08);
+            top: 50%;
+            left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(30px, -30px) scale(1.05);
+            }
+
+            50% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+
+            75% {
+                transform: translate(20px, 30px) scale(1.02);
+            }
+        }
+
+        .team-inner {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        /* ══════════════════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════════════════ */
+        .team-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .header-content {
+            max-width: 700px;
+        }
+
+        .team-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .label-line {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--rg-gold), transparent);
+        }
+
+        .label-text {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+        }
+
+        .team-title {
+            font-family: var(--font-title);
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.1s forwards;
+        }
+
+        .title-row {
+            display: block;
             overflow: hidden;
         }
 
-        .exp-card .card-image img {
+        .title-row span {
+            display: inline-block;
+        }
+
+        .title-outline {
+            -webkit-text-stroke: 1.5px var(--rg-text-dark);
+            -webkit-text-fill-color: transparent;
+            margin-left: 0.15em;
+        }
+
+        .title-gold {
+            background: linear-gradient(135deg, var(--rg-gold) 0%, #ffe066 50%, var(--rg-amber) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .team-subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            font-weight: 300;
+            color: var(--rg-text-medium);
+            line-height: 1.8;
+            margin-top: 1.5rem;
+            max-width: 480px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        /* Header decoration */
+        .header-deco {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.3s forwards;
+        }
+
+        .deco-number {
+            font-family: var(--font-title);
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .deco-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rg-text-light);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ══════════════════════════════════════════════════════
+       BENTO GRID
+    ══════════════════════════════════════════════════════ */
+        .team-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(180px, auto);
+            gap: 1.25rem;
+        }
+
+        /* ══════════════════════════════════════════════════════
+       TEAM CARD - 3D Tilt Effect
+    ══════════════════════════════════════════════════════ */
+        .team-card {
+            position: relative;
+            border-radius: calc(var(--rg-radius) + 4px);
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            opacity: 0;
+            animation: cardReveal 0.8s ease forwards;
+        }
+
+        .team-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .team-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .team-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .team-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .team-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .team-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes cardReveal {
+            from {
+                opacity: 0;
+                transform: translateY(60px) rotateX(10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .card-tilt {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        .team-card:hover .card-tilt {
+            transform: translateZ(20px);
+        }
+
+        /* Animated gradient border */
+        .card-border {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    rgba(255, 255, 255, 0.03) 50%,
+                    rgba(249, 195, 7, 0.2) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+        }
+
+        .team-card:hover .card-border {
+            opacity: 1;
+            background: linear-gradient(135deg,
+                    rgba(249, 195, 7, 0.5) 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    rgba(249, 195, 7, 0.3) 100%);
+        }
+
+        /* Inner card */
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(165deg,
+                    rgba(10, 18, 96, 0.5) 0%,
+                    rgba(5, 9, 74, 0.3) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: inherit;
+            overflow: hidden;
+        }
+
+        /* Spotlight effect */
+        .card-spotlight {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    rgba(249, 195, 7, 0.06),
+                    transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .team-card:hover .card-spotlight {
+            opacity: 1;
+        }
+
+        /* Card image */
+        .card-image {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1),
-                filter 0.6s ease;
-            filter: saturate(0.8);
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), filter 0.5s ease;
+            filter: grayscale(30%) brightness(0.7);
         }
 
-        .exp-card:hover .card-image img {
-            transform: scale(1.08);
-            filter: saturate(1);
+        .team-card:hover .card-image img {
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(0.85);
         }
 
-
-        /* ═══════════════════════════════════════════════════════════
-   GRADIENT OVERLAYS
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card::before {
-            content: '';
+        /* Image overlay */
+        .card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top,
-                    rgba(0, 2, 32, 0.95) 0%,
-                    rgba(0, 2, 32, 0.6) 35%,
-                    rgba(0, 2, 32, 0.2) 60%,
-                    transparent 100%);
-            z-index: 1;
-            transition: opacity 0.6s ease;
+            background: linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(0, 2, 32, 0.3) 40%,
+                    rgba(0, 2, 32, 0.95) 100%);
+            z-index: 2;
+            transition: background 0.5s ease;
         }
 
-        .exp-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg,
-                    rgba(249, 195, 7, 0.08) 0%,
-                    transparent 50%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.6s ease;
+        .team-card:hover .card-overlay {
+            background: linear-gradient(180deg,
+                    rgba(249, 195, 7, 0.03) 0%,
+                    rgba(0, 2, 32, 0.2) 30%,
+                    rgba(0, 2, 32, 0.9) 100%);
         }
 
-        .exp-card:hover::after {
-            opacity: 1;
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   DECORATIVE ELEMENTS
-   ═══════════════════════════════════════════════════════════ */
-
-        /* Vertical Gold Accent Line */
-        .exp-card .accent-line {
-            position: absolute;
-            top: 2.5rem;
-            left: 2rem;
-            width: 2px;
-            height: 0;
-            background: linear-gradient(to bottom, var(--rg-gold), transparent);
-            z-index: 3;
-            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-        }
-
-        .exp-card:hover .accent-line {
-            height: 80px;
-        }
-
-        /* Corner Frame */
-        .exp-card .corner-frame {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            z-index: 3;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease 0.3s,
-                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-        }
-
-        .exp-card:hover .corner-frame {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .corner-frame::before,
-        .corner-frame::after {
-            content: '';
-            position: absolute;
-            background: var(--rg-gold);
-        }
-
-        .corner-frame::before {
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 1px;
-        }
-
-        .corner-frame::after {
-            top: 0;
-            right: 0;
-            width: 1px;
-            height: 100%;
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   CARD NUMBER (Top Left - Always Visible)
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card .card-number {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            z-index: 4;
-            font-family: var(--font-title);
-            font-size: 0.85rem;
-            color: var(--rg-gold);
-            opacity: 0.5;
-            transition: opacity 0.5s ease,
-                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .exp-card:hover .card-number {
-            opacity: 1;
-            transform: translateY(100px);
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   COLLAPSED STATE - VERTICAL NAME
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card .vertical-name {
-            position: absolute;
-            bottom: 2.5rem;
-            left: 1.8rem;
-            z-index: 4;
-            font-family: var(--font-title);
-            font-size: 1.2rem;
-            color: var(--rg-text-dark);
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transform: rotate(180deg);
-            white-space: nowrap;
-            letter-spacing: 0.05em;
-            transition: opacity 0.4s ease,
-                transform 0.4s ease;
-        }
-
-        .exp-card:hover .vertical-name {
-            opacity: 0;
-            transform: rotate(180deg) translateY(-20px);
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════
-   EXPANDED STATE - MAIN CONTENT
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card .content {
+        /* Card content */
+        .card-content {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 2.5rem;
+            padding: 2rem;
             z-index: 4;
+            transform: translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Name */
-        .exp-card .member-name {
-            font-family: var(--font-title);
-            font-size: 2.2rem;
-            color: var(--rg-text-dark);
-            line-height: 1.1;
-            margin-bottom: 0.3rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.15s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
-        }
-
-        .exp-card:hover .member-name {
-            opacity: 1;
+        .team-card:hover .card-content {
             transform: translateY(0);
         }
 
-        /* Role */
-        .exp-card .member-role {
-            font-size: 0.9rem;
-            color: var(--rg-gold);
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 1.2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.2s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-        }
-
-        .exp-card:hover .member-role {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Divider */
-        .exp-card .content-divider {
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, var(--rg-gold), transparent);
-            margin-bottom: 1.2rem;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
-        }
-
-        .exp-card:hover .content-divider {
-            width: 100%;
-        }
-
-        /* Bio */
-        .exp-card .member-bio {
-            font-size: 0.88rem;
-            color: var(--rg-text-medium);
-            line-height: 1.6;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-            max-width: 400px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.3s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-        }
-
-        .exp-card:hover .member-bio {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Stats Row */
-        .exp-card .member-stats {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.35s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
-        }
-
-        .exp-card:hover .member-stats {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .exp-card .stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .exp-card .stat-value {
-            font-family: var(--font-title);
-            font-size: 1.6rem;
-            color: var(--rg-text-dark);
-            line-height: 1;
-        }
-
-        .exp-card .stat-label {
+        .card-role {
+            display: inline-block;
             font-size: 0.7rem;
-            color: var(--rg-text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 4px;
-        }
-
-        /* Expertise Tags */
-        .exp-card .member-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 1.8rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.4s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
-        }
-
-        .exp-card:hover .member-tags {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .exp-card .tag {
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 100px;
-            font-size: 0.72rem;
-            color: var(--rg-text-medium);
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .exp-card .tag:hover {
-            background: rgba(249, 195, 7, 0.1);
-            border-color: rgba(249, 195, 7, 0.3);
-            color: var(--rg-gold);
-        }
-
-        /* Actions Row */
-        .exp-card .member-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.45s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.45s;
-        }
-
-        .exp-card:hover .member-actions {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* View Profile Button */
-        .exp-card .btn-profile {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: var(--rg-gold);
-            border: none;
-            border-radius: 14px;
-            color: var(--rg-dark);
-            font-family: var(--font-body);
-            font-size: 0.85rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--rg-gold);
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
         }
 
-        .exp-card .btn-profile:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(249, 195, 7, 0.25);
+        .card-name {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rg-text-dark);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
         }
 
-        .exp-card .btn-profile svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--rg-dark);
-            fill: none;
-            stroke-width: 2;
-            transition: transform 0.3s ease;
+        .team-card:hover .card-name {
+            color: #fff;
         }
 
-        .exp-card .btn-profile:hover svg {
-            transform: translateX(4px);
+        .card-bio {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--rg-text-light);
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Social Links */
-        .exp-card .social-links {
+        .team-card:hover .card-bio {
+            max-height: 100px;
+            opacity: 1;
+            margin-bottom: 1rem;
+        }
+
+        /* Social links */
+        .card-socials {
             display: flex;
-            gap: 8px;
+            gap: 0.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
         }
 
-        .exp-card .social-link {
-            width: 44px;
-            height: 44px;
+        .team-card:hover .card-socials {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-btn {
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .exp-card .social-link:hover {
-            background: rgba(249, 195, 7, 0.15);
-            border-color: rgba(249, 195, 7, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .exp-card .social-link svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--rg-text-medium);
-            transition: fill 0.3s ease;
-        }
-
-        .exp-card .social-link:hover svg {
-            fill: var(--rg-gold);
-        }
-
-        /* Email Link */
-        .exp-card .email-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 18px;
-            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
             color: var(--rg-text-medium);
-            font-size: 0.8rem;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(10px);
         }
 
-        .exp-card .email-link:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-            color: var(--rg-text-dark);
-        }
-
-        .exp-card .email-link svg {
+        .social-btn svg {
             width: 16px;
             height: 16px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
+            fill: currentColor;
         }
 
+        .social-btn:hover {
+            background: var(--rg-gold);
+            border-color: var(--rg-gold);
+            color: var(--rg-dark);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(249, 195, 7, 0.25);
+        }
 
-        /* ═══════════════════════════════════════════════════════════
-   QUOTE HIGHLIGHT (Optional - for one card)
-   ═══════════════════════════════════════════════════════════ */
-
-        .exp-card .member-quote {
-            position: relative;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
+        /* Top indicator */
+        .card-indicator {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 100px;
+            background: rgba(0, 2, 32, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease 0.32s,
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.32s;
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
         }
 
-        .exp-card:hover .member-quote {
+        .team-card:hover .card-indicator {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .exp-card .member-quote::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--rg-gold);
-            border-radius: 1px;
+        .indicator-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .exp-card .member-quote p {
-            font-size: 0.9rem;
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .indicator-text {
+            font-size: 0.65rem;
+            font-weight: 500;
             color: var(--rg-text-medium);
-            font-style: italic;
-            line-height: 1.5;
+            letter-spacing: 0.05em;
         }
 
+        /* ══════════════════════════════════════════════════════
+       GRID PLACEMENTS
+    ══════════════════════════════════════════════════════ */
 
-        /* ═══════════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════════ */
+        /* Hero card - large */
+        .team-card.card-hero {
+            grid-column: span 6;
+            grid-row: span 2;
+        }
 
+        .team-card.card-hero .card-content {
+            padding: 2.5rem;
+        }
+
+        .team-card.card-hero .card-name {
+            font-size: 2rem;
+        }
+
+        .team-card.card-hero .card-bio {
+            max-width: 350px;
+        }
+
+        /* Medium cards */
+        .team-card.card-medium {
+            grid-column: span 6;
+            grid-row: span 1;
+        }
+
+        /* Standard cards */
+        .team-card.card-standard {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+
+        /* Wide card */
+        .team-card.card-wide {
+            grid-column: span 8;
+            grid-row: span 1;
+        }
+
+        .team-card.card-wide .card-content {
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .team-card.card-wide .card-info {
+            flex: 1;
+        }
+
+        .team-card.card-wide .card-socials {
+            transform: none;
+            opacity: 0;
+        }
+
+        .team-card.card-wide:hover .card-socials {
+            opacity: 1;
+        }
+
+        /* ══════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════ */
         @media (max-width: 1200px) {
-            .team-expanding {
-                height: auto;
-                max-height: none;
-                flex-direction: column;
-                gap: 12px;
+            .team-bento {
+                grid-template-columns: repeat(8, 1fr);
             }
 
-            .exp-card {
-                min-height: 120px;
-                flex: none !important;
+            .team-card.card-hero {
+                grid-column: span 8;
+                grid-row: span 1;
+                min-height: 400px;
             }
 
-            .exp-card:hover {
-                flex: none !important;
-                min-height: 450px;
+            .team-card.card-medium {
+                grid-column: span 4;
             }
 
-            .exp-card .vertical-name {
-                writing-mode: horizontal-tb;
-                transform: none;
-                bottom: 2rem;
-                left: 2rem;
+            .team-card.card-standard {
+                grid-column: span 4;
             }
 
-            .exp-card:hover .vertical-name {
-                transform: translateY(-20px);
-            }
-
-            .exp-card .member-name {
-                font-size: 1.8rem;
-            }
-
-            .exp-card .member-stats {
-                gap: 1.5rem;
+            .team-card.card-wide {
+                grid-column: span 8;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .team-section {
-                padding: 4rem 1.25rem;
+                padding: 5rem 1.5rem;
             }
 
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .team-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 3.5rem;
             }
 
-            .section-header-right {
-                align-self: flex-start;
+            .header-deco {
+                display: none;
             }
 
-            .exp-card .content {
-                padding: 1.75rem;
-            }
-
-            .exp-card .member-name {
-                font-size: 1.5rem;
-            }
-
-            .exp-card .member-stats {
+            .team-bento {
+                grid-template-columns: repeat(6, 1fr);
                 gap: 1rem;
             }
 
-            .exp-card .stat-value {
-                font-size: 1.3rem;
+            .team-card.card-hero,
+            .team-card.card-medium,
+            .team-card.card-wide {
+                grid-column: span 6;
+                min-height: 350px;
             }
 
-            .exp-card .member-actions {
-                flex-wrap: wrap;
+            .team-card.card-standard {
+                grid-column: span 3;
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .team-section {
+                padding: 4rem 1rem;
             }
 
-            .exp-card .btn-profile {
-                width: 100%;
-                justify-content: center;
+            .team-title {
+                font-size: 2.5rem;
             }
+
+            .title-outline {
+                -webkit-text-stroke-width: 1px;
+            }
+
+            .team-bento {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .team-card.card-hero,
+            .team-card.card-medium,
+            .team-card.card-standard,
+            .team-card.card-wide {
+                grid-column: span 1;
+                min-height: 380px;
+            }
+
+            .card-content {
+                padding: 1.5rem;
+                transform: translateY(0);
+            }
+
+            .card-bio {
+                max-height: none;
+                opacity: 1;
+                margin-bottom: 1rem;
+            }
+
+            .card-socials {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .card-indicator {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .team-card.card-wide .card-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        /* ══════════════════════════════════════════════════════
+       CURSOR FOLLOWER
+    ══════════════════════════════════════════════════════ */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(249, 195, 7, 0.08), transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+
+        .team-section:hover .cursor-glow {
+            opacity: 1;
         }
     </style>
 </head>
@@ -727,403 +782,369 @@
 <body>
 
     <section class="team-section">
+        <!-- Background layers -->
+        <div class="team-bg"></div>
+        <div class="team-grain"></div>
 
-        <!-- Section Header -->
-        <header class="section-header">
-            <div class="section-header-left">
-                <span class="section-label">Our Collective</span>
-                <h2 class="section-title">Meet the <span>Visionaries</span></h2>
-                <p class="section-subtitle">A curated ensemble of creative minds and industry veterans shaping the
-                    future of luxury real estate.</p>
+        <!-- Floating orbs -->
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+
+        <!-- Cursor glow -->
+        <div class="cursor-glow"></div>
+
+        <div class="team-inner">
+
+            <!-- Header -->
+            <header class="team-header">
+                <div class="header-content">
+                    <div class="team-label">
+                        <span class="label-line"></span>
+                        <span class="label-text">The Visionaries</span>
+                    </div>
+                    <h1 class="team-title">
+                        <span class="title-row">
+                            <span>Meet the</span>
+                            <span class="title-outline">minds</span>
+                        </span>
+                        <span class="title-row">
+                            <span class="title-gold">behind the magic</span>
+                        </span>
+                    </h1>
+                    <p class="team-subtitle">
+                        A curated collective of dreamers and doers, united by obsession for craft and relentless pursuit
+                        of excellence.
+                    </p>
+                </div>
+                <div class="header-deco">
+                    <span class="deco-number">06</span>
+                    <span class="deco-label">Team Members</span>
+                </div>
+            </header>
+
+            <!-- Bento Grid -->
+            <div class="team-bento">
+
+                <!-- Card 1: Hero -->
+                <article class="team-card card-hero">
+                    <div class="card-border"></div>
+                    <div class="card-tilt">
+                        <div class="card-inner">
+                            <div class="card-spotlight"></div>
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1000&h=1200&fit=crop&crop=face"
+                                    alt="Alexander Mercer" loading="eager">
+                            </div>
+                            <div class="card-overlay"></div>
+                            <div class="card-indicator">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Founder</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-role">Founder & CEO</span>
+                                <h3 class="card-name">Alexander Mercer</h3>
+                                <p class="card-bio">
+                                    Visionary leader with 15+ years shaping iconic brands at the intersection of luxury,
+                                    technology, and human experience.
+                                </p>
+                                <div class="card-socials">
+                                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Twitter">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Email">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Medium -->
+                <article class="team-card card-medium">
+                    <div class="card-border"></div>
+                    <div class="card-tilt">
+                        <div class="card-inner">
+                            <div class="card-spotlight"></div>
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop&crop=face"
+                                    alt="Sophia Laurent" loading="lazy">
+                            </div>
+                            <div class="card-overlay"></div>
+                            <div class="card-indicator">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Creative</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-role">Creative Director</span>
+                                <h3 class="card-name">Sophia Laurent</h3>
+                                <p class="card-bio">
+                                    Award-winning designer transforming abstract concepts into visual masterpieces.
+                                </p>
+                                <div class="card-socials">
+                                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Dribbble">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308a10.174 10.174 0 004.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4a10.15 10.15 0 006.29 2.166c1.42 0 2.77-.29 4.006-.816z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Standard -->
+                <article class="team-card card-standard">
+                    <div class="card-border"></div>
+                    <div class="card-tilt">
+                        <div class="card-inner">
+                            <div class="card-spotlight"></div>
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face"
+                                    alt="Marcus Chen" loading="lazy">
+                            </div>
+                            <div class="card-overlay"></div>
+                            <div class="card-indicator">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Tech</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-role">CTO</span>
+                                <h3 class="card-name">Marcus Chen</h3>
+                                <p class="card-bio">
+                                    Engineering excellence through elegant, scalable solutions.
+                                </p>
+                                <div class="card-socials">
+                                    <a href="#" class="social-btn" aria-label="GitHub">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4: Standard -->
+                <article class="team-card card-standard">
+                    <div class="card-border"></div>
+                    <div class="card-tilt">
+                        <div class="card-inner">
+                            <div class="card-spotlight"></div>
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=face"
+                                    alt="Elena Vasquez" loading="lazy">
+                            </div>
+                            <div class="card-overlay"></div>
+                            <div class="card-indicator">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Strategy</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-role">Brand Strategist</span>
+                                <h3 class="card-name">Elena Vasquez</h3>
+                                <p class="card-bio">
+                                    Crafting narratives that forge lasting emotional connections.
+                                </p>
+                                <div class="card-socials">
+                                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Twitter">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5: Standard -->
+                <article class="team-card card-standard">
+                    <div class="card-border"></div>
+                    <div class="card-tilt">
+                        <div class="card-inner">
+                            <div class="card-spotlight"></div>
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face"
+                                    alt="James Whitfield" loading="lazy">
+                            </div>
+                            <div class="card-overlay"></div>
+                            <div class="card-indicator">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Product</span>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-role">Head of Product</span>
+                                <h3 class="card-name">James Whitfield</h3>
+                                <p class="card-bio">
+                                    Bridging vision and execution with user-centric design.
+                                </p>
+                                <div class="card-socials">
+                                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Twitter">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 6: Wide -->
+                <article class="team-card card-wide">
+                    <div class="card-border"></div>
+                    <div class="card-tilt">
+                        <div class="card-inner">
+                            <div class="card-spotlight"></div>
+                            <div class="card-image">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=600&fit=crop&crop=face"
+                                    alt="Aria Kim" loading="lazy">
+                            </div>
+                            <div class="card-overlay"></div>
+                            <div class="card-indicator">
+                                <span class="indicator-dot"></span>
+                                <span class="indicator-text">Operations</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-info">
+                                    <span class="card-role">Chief Operating Officer</span>
+                                    <h3 class="card-name">Aria Kim</h3>
+                                    <p class="card-bio">
+                                        Orchestrating seamless operations with precision and a passion for efficiency.
+                                    </p>
+                                </div>
+                                <div class="card-socials">
+                                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Twitter">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-btn" aria-label="Email">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
             </div>
-            <div class="section-header-right">
-                <div class="team-count">
-                    <span class="team-count-number">24</span>
-                    <span class="team-count-label">Team Members</span>
-                </div>
-            </div>
-        </header>
-
-
-        <!-- Expanding Cards -->
-        <div class="team-expanding">
-
-            <!-- Card 1 - Founder -->
-            <article class="exp-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="James Morrison"
-                        loading="lazy">
-                </div>
-
-                <div class="accent-line"></div>
-                <div class="corner-frame"></div>
-                <span class="card-number">01</span>
-
-                <h3 class="vertical-name">James Morrison</h3>
-
-                <div class="content">
-                    <h3 class="member-name">James Morrison</h3>
-                    <p class="member-role">Founder & Chief Executive</p>
-                    <div class="content-divider"></div>
-
-                    <p class="member-bio">Visionary leader with over two decades of experience reshaping luxury real
-                        estate across three continents. Pioneer of the boutique estate concept.</p>
-
-                    <div class="member-stats">
-                        <div class="stat">
-                            <span class="stat-value">22</span>
-                            <span class="stat-label">Years Exp.</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">$4.2B</span>
-                            <span class="stat-label">Sales Volume</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">340+</span>
-                            <span class="stat-label">Properties</span>
-                        </div>
-                    </div>
-
-                    <div class="member-tags">
-                        <span class="tag">Luxury Estates</span>
-                        <span class="tag">Investment Strategy</span>
-                        <span class="tag">Market Analysis</span>
-                    </div>
-
-                    <div class="member-actions">
-                        <button class="btn-profile">
-                            View Profile
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14" />
-                                <path d="M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="LinkedIn">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </a>
-                            <a href="#" class="social-link" aria-label="X/Twitter">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M4 4l11.733 16h4.267l-11.733-16z" />
-                                    <path d="M4 20l6.768-6.768m2.46-2.46l6.772-6.772" />
-                                </svg>
-                            </a>
-                        </div>
-                        <a href="mailto:james@luxestate.com" class="email-link">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                            Email
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-
-            <!-- Card 2 - Creative Director -->
-            <article class="exp-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Sarah Chen"
-                        loading="lazy">
-                </div>
-
-                <div class="accent-line"></div>
-                <div class="corner-frame"></div>
-                <span class="card-number">02</span>
-
-                <h3 class="vertical-name">Sarah Chen</h3>
-
-                <div class="content">
-                    <h3 class="member-name">Sarah Chen</h3>
-                    <p class="member-role">Creative Director</p>
-                    <div class="content-divider"></div>
-
-                    <div class="member-quote">
-                        <p>"Every property has a soul. Our job is to reveal it."</p>
-                    </div>
-
-                    <p class="member-bio">Award-winning designer bringing editorial elegance and cinematic vision to
-                        luxury property presentation. Former Art Director at Architectural Digest.</p>
-
-                    <div class="member-stats">
-                        <div class="stat">
-                            <span class="stat-value">15</span>
-                            <span class="stat-label">Years Exp.</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">12</span>
-                            <span class="stat-label">Awards</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">200+</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                    </div>
-
-                    <div class="member-tags">
-                        <span class="tag">Visual Identity</span>
-                        <span class="tag">Photography</span>
-                        <span class="tag">Brand Strategy</span>
-                    </div>
-
-                    <div class="member-actions">
-                        <button class="btn-profile">
-                            View Profile
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14" />
-                                <path d="M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="LinkedIn">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </a>
-                            <a href="#" class="social-link" aria-label="Instagram">
-                                <svg viewBox="0 0 24 24">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-
-            <!-- Card 3 - Head of Sales -->
-            <article class="exp-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80"
-                        alt="Michael Ross" loading="lazy">
-                </div>
-
-                <div class="accent-line"></div>
-                <div class="corner-frame"></div>
-                <span class="card-number">03</span>
-
-                <h3 class="vertical-name">Michael Ross</h3>
-
-                <div class="content">
-                    <h3 class="member-name">Michael Ross</h3>
-                    <p class="member-role">Head of Global Sales</p>
-                    <div class="content-divider"></div>
-
-                    <p class="member-bio">Master negotiator with an unparalleled network of UHNW clients. Closed over
-                        $2B in transactions with a reputation for discretion and results.</p>
-
-                    <div class="member-stats">
-                        <div class="stat">
-                            <span class="stat-value">18</span>
-                            <span class="stat-label">Years Exp.</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">$2.1B</span>
-                            <span class="stat-label">Closed Deals</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">98%</span>
-                            <span class="stat-label">Client Retention</span>
-                        </div>
-                    </div>
-
-                    <div class="member-tags">
-                        <span class="tag">Negotiations</span>
-                        <span class="tag">Private Clients</span>
-                        <span class="tag">Off-Market</span>
-                    </div>
-
-                    <div class="member-actions">
-                        <button class="btn-profile">
-                            View Profile
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14" />
-                                <path d="M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="LinkedIn">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </a>
-                        </div>
-                        <a href="mailto:michael@luxestate.com" class="email-link">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                            Email
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-
-            <!-- Card 4 - Architect -->
-            <article class="exp-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=80"
-                        alt="Emma Williams" loading="lazy">
-                </div>
-
-                <div class="accent-line"></div>
-                <div class="corner-frame"></div>
-                <span class="card-number">04</span>
-
-                <h3 class="vertical-name">Emma Williams</h3>
-
-                <div class="content">
-                    <h3 class="member-name">Emma Williams</h3>
-                    <p class="member-role">Principal Architect</p>
-                    <div class="content-divider"></div>
-
-                    <p class="member-bio">RIBA-certified architect merging sustainability with timeless design. Leads
-                        our in-house architectural evaluation and renovation advisory team.</p>
-
-                    <div class="member-stats">
-                        <div class="stat">
-                            <span class="stat-value">14</span>
-                            <span class="stat-label">Years Exp.</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">85</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">6</span>
-                            <span class="stat-label">Countries</span>
-                        </div>
-                    </div>
-
-                    <div class="member-tags">
-                        <span class="tag">Sustainable Design</span>
-                        <span class="tag">Renovations</span>
-                        <span class="tag">Historic Properties</span>
-                    </div>
-
-                    <div class="member-actions">
-                        <button class="btn-profile">
-                            View Profile
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14" />
-                                <path d="M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="LinkedIn">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </a>
-                            <a href="#" class="social-link" aria-label="Instagram">
-                                <svg viewBox="0 0 24 24">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-
-            <!-- Card 5 - Investment -->
-            <article class="exp-card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="David Park"
-                        loading="lazy">
-                </div>
-
-                <div class="accent-line"></div>
-                <div class="corner-frame"></div>
-                <span class="card-number">05</span>
-
-                <h3 class="vertical-name">David Park</h3>
-
-                <div class="content">
-                    <h3 class="member-name">David Park</h3>
-                    <p class="member-role">Investment Director</p>
-                    <div class="content-divider"></div>
-
-                    <div class="member-quote">
-                        <p>"Real estate isn't just property—it's generational wealth."</p>
-                    </div>
-
-                    <p class="member-bio">Former Goldman Sachs VP now directing strategic property investments.
-                        Specializes in portfolio optimization for family offices and institutions.</p>
-
-                    <div class="member-stats">
-                        <div class="stat">
-                            <span class="stat-value">16</span>
-                            <span class="stat-label">Years Exp.</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">$1.8B</span>
-                            <span class="stat-label">AUM</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">32%</span>
-                            <span class="stat-label">Avg. ROI</span>
-                        </div>
-                    </div>
-
-                    <div class="member-tags">
-                        <span class="tag">Portfolio Strategy</span>
-                        <span class="tag">Family Offices</span>
-                        <span class="tag">Market Intelligence</span>
-                    </div>
-
-                    <div class="member-actions">
-                        <button class="btn-profile">
-                            View Profile
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14" />
-                                <path d="M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <div class="social-links">
-                            <a href="#" class="social-link" aria-label="LinkedIn">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </a>
-                        </div>
-                        <a href="mailto:david@luxestate.com" class="email-link">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
-                            Email
-                        </a>
-                    </div>
-                </div>
-            </article>
 
         </div>
-
     </section>
+
+    <script>
+        // ═══════════════════════════════════════════════════════
+        // CURSOR GLOW FOLLOWER
+        // ═══════════════════════════════════════════════════════
+        const cursorGlow = document.querySelector('.cursor-glow');
+        let cursorX = 0, cursorY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+        });
+
+        function animateCursor() {
+            glowX += (cursorX - glowX) * 0.08;
+            glowY += (cursorY - glowY) * 0.08;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // ═══════════════════════════════════════════════════════
+        // CARD SPOTLIGHT EFFECT
+        // ═══════════════════════════════════════════════════════
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+
+        // ═══════════════════════════════════════════════════════
+        // 3D TILT EFFECT
+        // ═══════════════════════════════════════════════════════
+        document.querySelectorAll('.team-card').forEach(card => {
+            const tilt = card.querySelector('.card-tilt');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                tilt.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                tilt.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
 
 </body>
 

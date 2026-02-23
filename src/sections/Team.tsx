@@ -125,23 +125,15 @@ const Team = () => {
   return (
     <section className="team-section">
       {/* Section Header */}
-      <header className="section-header">
-        <div className="section-header-left">
-          <span className="section-label">Our Collective</span>
-          <h2 className="section-title">
-            Meet the <span>Visionaries</span>
-          </h2>
-          <p className="section-subtitle">
-            A curated ensemble of creative minds and industry veterans shaping
-            the future of luxury real estate.
-          </p>
-        </div>
-        <div className="section-header-right">
-          <div className="team-count">
-            <span className="team-count-number">24</span>
-            <span className="team-count-label">Team Members</span>
-          </div>
-        </div>
+      <header className="team__header">
+        <span className="team__eyebrow">Our Collective</span>
+        <h2 className="team__title">
+          Meet the <em>Visionaries</em>
+        </h2>
+        <p className="team__subtitle">
+          A curated ensemble of creative minds and industry veterans shaping
+          the future of luxury real estate.
+        </p>
       </header>
 
       {/* Expanding Cards */}

@@ -42,83 +42,46 @@ body {
   margin: 0 auto;
 }
 
-.section-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
-  gap: 2rem;
+.team__header {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto clamp(3rem, 6vw, 4.5rem);
 }
 
-.section-header-left {
-  max-width: 600px;
-}
-
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.72rem;
+.team__eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.25em;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--rg-gold);
   margin-bottom: 1rem;
 }
 
-.section-label::before {
-  content: "";
-  width: 40px;
-  height: 1px;
-  background: var(--rg-gold);
-}
-
-.section-title {
+.team__title {
   font-family: var(--font-title);
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
   color: var(--rg-text-dark);
-  line-height: 1.1;
-  margin-bottom: 1rem;
+  margin: 0 0 1.25rem;
+  line-height: 1.15;
 }
 
-.section-title span {
+.team__title em {
+  font-style: normal;
   color: var(--rg-gold);
-  font-style: italic;
 }
 
-.section-subtitle {
-  font-size: 1.1rem;
+.team__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.125rem);
   color: var(--rg-text-light);
-  line-height: 1.6;
-  font-weight: 300;
+  margin: 0;
+  line-height: 1.7;
 }
 
-.section-header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
 
-.team-count {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.team-count-number {
-  font-family: var(--font-title);
-  font-size: 3rem;
-  color: var(--rg-gold);
-  line-height: 1;
-}
-
-.team-count-label {
-  font-size: 0.75rem;
-  color: var(--rg-text-light);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
 
 /* ═══════════════════════════════════════════════════════════
    EXPANDING CARDS CONTAINER
@@ -629,9 +592,6 @@ body {
     align-items: flex-start;
   }
 
-  .section-header-right {
-    align-self: flex-start;
-  }
 
   .exp-card {
     min-height: 120px;
