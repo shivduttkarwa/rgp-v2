@@ -548,6 +548,7 @@ body {
 @media (max-width: 768px) {
   .team-section {
     padding: 4rem 0 4rem;
+    overflow-x: hidden;
   }
 
   .team__header {

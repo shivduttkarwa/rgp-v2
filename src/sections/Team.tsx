@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./Team.css";
@@ -111,7 +113,60 @@ const Team = () => {
   const [activeCard, setActiveCard] = useState<number | null>(defaultActiveId);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
   const hasAnimated = useRef(false);
+  const expandingRef = useRef<HTMLDivElement>(null);
+  const swiperWrapperRef = useRef<HTMLDivElement>(null);
   const members = useMemo(() => teamMembers, []);
+
+  // Mobile swiper — slide in from right on scroll
+  useEffect(() => {
+    const wrapper = swiperWrapperRef.current;
+    if (!wrapper) return;
+
+    gsap.set(wrapper, { x: 200, autoAlpha: 0 });
+
+    const st = ScrollTrigger.create({
+      trigger: wrapper,
+      start: "top 65%",
+      once: true,
+      onEnter: () => {
+        gsap.to(wrapper, {
+          x: 0,
+          autoAlpha: 1,
+          duration: 1.85,
+          ease: "power3.out",
+        });
+      },
+    });
+
+    return () => st.kill();
+  }, []);
+
+  // Clip reveal on scroll — matches PropertyListingSection
+  useEffect(() => {
+    const container = expandingRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLElement>(".exp-card");
+    if (!cards.length) return;
+
+    gsap.set(cards, { clipPath: "inset(100% 0 0 0)", willChange: "clip-path" });
+
+    ScrollTrigger.create({
+      trigger: container,
+      start: "top 75%",
+      once: true,
+      onEnter: () => {
+        gsap.to(cards, {
+          clipPath: "inset(0% 0 0 0)",
+          duration: 1.2,
+          ease: "power3.inOut",
+          stagger: 0.22,
+          onComplete: () => {
+            gsap.set(cards, { clearProps: "will-change,clip-path" });
+          },
+        });
+      },
+    });
+  }, []);
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
@@ -188,18 +243,28 @@ const Team = () => {
     <section className="team-section">
       {/* Section Header */}
       <header className="team__header">
-        <span className="team__eyebrow">Our Collective</span>
-        <h2 className="team__title">
-          Meet the <em>Visionaries</em>
+        <span className="team__eyebrow" data-gsap="fade-up">
+          Our Team
+        </span>
+        <h2
+          className="team__title"
+          data-gsap="char-reveal"
+          data-gsap-start="top 85%"
+        >
+          Meet Our <em>Team</em>
         </h2>
-        <p className="team__subtitle">
+        <p
+          className="team__subtitle"
+          data-gsap="fade-up"
+          data-gsap-delay="0.15"
+        >
           A curated ensemble of creative minds and industry veterans shaping the
           future of luxury real estate.
         </p>
       </header>
 
       {/* Mobile Swiper */}
-      <div className="team-swiper-wrapper">
+      <div ref={swiperWrapperRef} className="team-swiper-wrapper">
         <Swiper
           slidesPerView={1.18}
           spaceBetween={2}
@@ -293,6 +358,7 @@ const Team = () => {
 
       {/* Expanding Cards — desktop only */}
       <div
+        ref={expandingRef}
         className="team-expanding"
         onMouseLeave={() => setActiveCard(defaultActiveId)}
       >

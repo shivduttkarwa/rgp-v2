@@ -24,6 +24,14 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     onCompleteRef.current = onComplete;
   });
 
+  // Lock scroll while preloader is visible
+  useEffect(() => {
+    document.documentElement.classList.add("scroll-locked");
+    return () => {
+      document.documentElement.classList.remove("scroll-locked");
+    };
+  }, []);
+
   // Progress + curtain — no onComplete in deps, use ref instead
   useEffect(() => {
     let progress = 0;
@@ -49,7 +57,10 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             duration: 0.75,
             ease: "power3.inOut",
             overwrite: true,
-            onComplete: () => setHidden(true),
+            onComplete: () => {
+              document.documentElement.classList.remove("scroll-locked");
+              setHidden(true);
+            },
           });
         }, 120);
         return;
