@@ -11,6 +11,7 @@ type HeroSectionProps = {
   ctaLabel?: string;
   ctaOnClick?: () => void;
   showCta?: boolean;
+  showVideo?: boolean;
   bgImage?: string;
   bgVideo?: string;
   bgPoster?: string;
@@ -36,6 +37,7 @@ export default function HeroSection({
   ctaLabel = "Explore Properties",
   ctaOnClick,
   showCta = true,
+  showVideo = true,
   bgImage = "images/hero-rpg-brisbane.jpg",
   bgVideo = "vids/hero-rgp.mp4",
   bgPoster,
@@ -218,33 +220,35 @@ export default function HeroSection({
         >
           <img
             className="rg-hero__bg-poster"
-            src={`${publicUrl}${bgImage}`}
+            src={`${publicUrl}${bgPoster || bgImage}`}
             alt=""
             loading="eager"
             fetchPriority="high"
           />
-          <video
-            className="rg-hero__bg-video"
-            ref={videoRef}
-            src={`${publicUrl}${bgVideo}`}
-            autoPlay
-            loop
-            muted
-            playsInline
-            controls={false}
-            disablePictureInPicture
-            preload="auto"
-            poster={`${publicUrl}${bgPoster || bgImage}`}
-            onLoadedMetadata={() => {
-              requestAnimationFrame(() => {
-                requestAnimationFrame(() => setVideoReady(true));
-              });
-            }}
-            onCanPlay={() => {
-              setVideoReady(true);
-              void videoRef.current?.play();
-            }}
-          />
+          {showVideo && (
+            <video
+              className="rg-hero__bg-video"
+              ref={videoRef}
+              src={`${publicUrl}${bgVideo}`}
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls={false}
+              disablePictureInPicture
+              preload="auto"
+              poster={`${publicUrl}${bgPoster || bgImage}`}
+              onLoadedMetadata={() => {
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => setVideoReady(true));
+                });
+              }}
+              onCanPlay={() => {
+                setVideoReady(true);
+                void videoRef.current?.play();
+              }}
+            />
+          )}
         </div>
         <div
           className="rg-hero__vignette"

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import HeroSection from "../sections/HeroSection";
 import "./AboutPage.css";
 
@@ -30,38 +30,33 @@ const accordionItems = [
 export default function AboutPage() {
   const [openIndex, setOpenIndex] = useState(0);
 
-  const heroImage = useMemo(() => img("hero_architecture.jpg"), []);
-
   return (
     <>
-      <HeroSection />
+      <HeroSection
+        showVideo={false}
+        showCta={false}
+        bgImage="images/hero_architecture.jpg"
+        titleLine1={
+          <>
+            Crafted For <span className="rg-gold">Life</span>
+          </>
+        }
+        titleLine2={
+          <>
+            Designed To <span className="rg-amber">Endure</span>
+          </>
+        }
+        subtitle="Real Gold Properties curates refined residences across Australia — quiet luxury, timeless materials, and spaces that grow with the people who live in them."
+      />
       <main className="about-page">
-        {/* 1) HERO */}
-        <section className="section">
-          <div className="container center stack">
-            <h1 className="hero-title h-serif">
-              A Portfolio Of Exceptional
-              <br />
-              Residences Across Australia
-            </h1>
-          </div>
-          <div className="hero-media">
-            <img
-              className="hero-img"
-              alt="Real Gold Properties"
-              src={heroImage}
-            />
-          </div>
-        </section>
-
         {/* 2) STATEMENT + MARK */}
         <section className="section section-spacious">
           <div className="container center stack">
             <h2 className="intro-statement lead">
-              Thoughtfully placed in the nation’s most admired enclaves,
+              Set in the nation’s most admired enclaves,
               <br />
-              Real Gold Properties represents a refined collection of bespoke
-              homes and private estates.
+              Real Gold Properties presents a refined collection of bespoke
+              residences and private estates.
             </h2>
 
             <div className="mark" aria-label="Real Gold Properties">

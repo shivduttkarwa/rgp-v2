@@ -1,37 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@400;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap");
-
-:root {
-  --rg-beige-light: #00032e;
-  --rg-beige: #05094a;
-  --rg-beige-dark: #0a1260;
-  --rg-beige-darker: #0f1870;
-  --rg-text-dark: #ffffff;
-  --rg-text-medium: rgba(255, 255, 255, 0.72);
-  --rg-text-light: rgba(255, 255, 255, 0.45);
-  --rg-gold: #f9c307;
-  --rg-amber: #f9c307;
-  --rg-navy: #00032e;
-  --rg-dark: #000220;
-  --rg-radius: 1.125rem;
-  --font-title: "Bona Nova SC", serif;
-  --font-body: "Bricolage Grotesque", sans-serif;
-  --line: rgba(249, 195, 7, 0.22);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--rg-beige-light);
-  font-family: var(--font-body);
-  color: var(--rg-text-dark);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
 /* ═══════════════════════════════════════════════════════════
    SECTION HEADER
    ═══════════════════════════════════════════════════════════ */
