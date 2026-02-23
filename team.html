@@ -90,6 +90,7 @@
         .timeline-layout {
             display: flex;
             gap: 4rem;
+            align-items: stretch;
         }
 
         /* ── LEFT: All 5 content panels stacked ── */
@@ -123,6 +124,11 @@
             justify-content: center;
             padding-right: 3.5rem;
             position: relative;
+        }
+
+        /* First panel aligns with frame */
+        .panel:first-child {
+            padding-top: 0;
         }
 
         /* Dot on line */
@@ -227,11 +233,11 @@
 
         .frame-container {
             position: sticky;
-            top: 50vh;
-            transform: translateY(-50%);
+            top: calc(50vh - 250px);
             width: 100%;
             aspect-ratio: 3/4;
             max-height: 500px;
+            perspective: 1500px; /* must be on direct parent of the rotated element */
         }
 
         /* The phone/frame border */
@@ -244,6 +250,7 @@
             position: relative;
             background: var(--rg-beige);
             will-change: transform;
+            transform-origin: center center;
         }
 
         /* Frame decorative top bar */
@@ -303,12 +310,15 @@
             position: absolute;
             inset: 36px 0 48px 0;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
 
         .frame-img {
             position: absolute;
             inset: 0;
             will-change: transform, opacity;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
         }
 
         .frame-img img {
@@ -364,6 +374,11 @@
             transform: scale(1.3);
         }
 
+        /* Flip animation glow effect */
+        .device-frame.flipping {
+            box-shadow: 0 0 40px rgba(249, 195, 7, 0.15);
+        }
+
         /* ═══ END ═══ */
         .end-section {
             height: 50vh;
@@ -408,7 +423,6 @@
             .frame-container {
                 position: sticky;
                 top: 1rem;
-                transform: none;
                 max-height: 280px;
                 aspect-ratio: 16/10;
                 margin: 0 auto;
@@ -648,18 +662,15 @@
 
         let currentActive = 0;
 
-        // ── Set initial image states: first visible, rest hidden below ──
+        // ── Set initial image states: first visible, rest hidden ──
         frameImgs.forEach((img, i) => {
-            gsap.set(img, {
-                yPercent: i === 0 ? 0 : 100,
-                opacity: i === 0 ? 1 : 1
-            });
+            gsap.set(img, { opacity: i === 0 ? 1 : 0 });
         });
 
-        // ── Master timeline: frame tilt + image swap per step ──
+        // ── Create flip transitions between panels ──
         panels.forEach((panel, i) => {
 
-            // When scrolling INTO a panel from top
+            // When scrolling INTO a panel
             ScrollTrigger.create({
                 trigger: panel,
                 start: 'top center',
@@ -668,38 +679,56 @@
                 onEnterBack: () => activateStep(i)
             });
 
-            // Between each panel, create the tilt + image transition
+            // Between each panel, create the 180° flip transition
             if (i < panels.length - 1) {
 
-                // This trigger fires in the gap between two panels
                 ScrollTrigger.create({
                     trigger: panel,
-                    start: 'bottom 70%',
-                    end: 'bottom 30%',
-                    scrub: 1,
+                    start: 'bottom 65%',
+                    end: 'bottom 35%',
+                    scrub: 0.8,
                     onUpdate: (self) => {
                         const p = self.progress;
 
-                        // Frame tilts during transition
-                        // First half: tilt right, second half: tilt back to center
-                        let tilt;
-                        if (p < 0.5) {
-                            tilt = p * 2 * 60; // 0 → 12 degrees
-                        } else {
-                            tilt = (1 - p) * 2 * 60; // 12 → 0 degrees
-                        }
+                        // "Door" technique: rotate 0→90° (edge-on), swap image, rotate 90→0°
+                        // This avoids the mirroring problem of a full 180° flip.
+                        const rotateY = p < 0.5
+                            ? p * 2 * 90          // 0 → 90
+                            : (1 - p) * 2 * 90;   // 90 → 0
 
                         gsap.set(deviceFrame, {
-                            rotateZ: tilt,
-                            rotateY: tilt * 0.5
+                            rotateY,
+                            scale: 1 - (Math.sin(p * Math.PI) * 0.05)
                         });
 
-                        // Image crossfade: current slides up, next slides in from below
-                        const outImg = frameImgs[i];
-                        const inImg = frameImgs[i + 1];
+                        if (p > 0.1 && p < 0.9) {
+                            deviceFrame.classList.add('flipping');
+                        } else {
+                            deviceFrame.classList.remove('flipping');
+                        }
 
-                        gsap.set(outImg, { yPercent: -100 * p });
-                        gsap.set(inImg, { yPercent: 100 * (1 - p) });
+                        // Swap at midpoint (frame is edge-on at 90°, invisible to viewer)
+                        if (p < 0.5) {
+                            gsap.set(frameImgs[i], { opacity: 1 });
+                            gsap.set(frameImgs[i + 1], { opacity: 0 });
+                        } else {
+                            gsap.set(frameImgs[i], { opacity: 0 });
+                            gsap.set(frameImgs[i + 1], { opacity: 1 });
+                        }
+                    },
+                    onLeave: () => {
+                        gsap.set(deviceFrame, { rotateY: 0, scale: 1 });
+                        deviceFrame.classList.remove('flipping');
+                        frameImgs.forEach((img, idx) => {
+                            gsap.set(img, { opacity: idx === i + 1 ? 1 : 0 });
+                        });
+                    },
+                    onLeaveBack: () => {
+                        gsap.set(deviceFrame, { rotateY: 0, scale: 1 });
+                        deviceFrame.classList.remove('flipping');
+                        frameImgs.forEach((img, idx) => {
+                            gsap.set(img, { opacity: idx === i ? 1 : 0 });
+                        });
                     }
                 });
             }
@@ -717,26 +746,6 @@
             // Dots
             dots.forEach((d, i) => {
                 d.classList.toggle('active', i === index);
-            });
-
-            // Make sure correct image is fully visible, others hidden
-            frameImgs.forEach((img, i) => {
-                if (i === index) {
-                    gsap.set(img, { yPercent: 0 });
-                } else if (i < index) {
-                    gsap.set(img, { yPercent: -100 });
-                } else {
-                    gsap.set(img, { yPercent: 100 });
-                }
-            });
-
-            // Reset frame tilt
-            gsap.to(deviceFrame, {
-                rotateZ: 0,
-                rotateY: 0,
-                duration: 0.4,
-                ease: 'power2.out',
-                overwrite: true
             });
         }
 

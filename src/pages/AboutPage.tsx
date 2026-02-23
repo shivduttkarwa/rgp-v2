@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BtnSecondary from "../components/BtnSecondary";
 import HeroSection from "../sections/HeroSection";
 import PropertyMarqee from "../components/reusable/PropertyMarqee";
 import "./AboutPage.css";
+import { initGsapSwitchAnimations } from "@/lib/gsapSwitchAnimations";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -31,6 +34,73 @@ const accordionItems = [
 
 export default function AboutPage() {
   const [openIndex, setOpenIndex] = useState(0);
+  const pageRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLHeadingElement | null>(null);
+
+  useEffect(() => {
+    const cleanup = initGsapSwitchAnimations(pageRef.current);
+    return () => cleanup?.();
+  }, []);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const el = introRef.current;
+    if (!el || el.dataset.wordsSplit === "true") return;
+    el.dataset.wordsSplit = "true";
+
+    const fragment = document.createDocumentFragment();
+    const nodes = Array.from(el.childNodes);
+
+    nodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent || "";
+        text.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            fragment.appendChild(document.createTextNode(part));
+          } else {
+            const span = document.createElement("span");
+            span.className = "intro-word";
+            span.textContent = part;
+            fragment.appendChild(span);
+          }
+        });
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const element = node as HTMLElement;
+        if (element.tagName.toLowerCase() === "br") {
+          fragment.appendChild(document.createElement("br"));
+          return;
+        }
+        const text = element.textContent || "";
+        const span = document.createElement("span");
+        const isGold = element.classList.contains("gold-word");
+        span.className = isGold ? "intro-word gold-word" : "intro-word";
+        span.textContent = text;
+        fragment.appendChild(span);
+      }
+    });
+
+    el.innerHTML = "";
+    el.appendChild(fragment);
+
+    const words = el.querySelectorAll<HTMLElement>(".intro-word");
+    gsap.set(words, { y: 20, autoAlpha: 0 });
+    gsap.to(words, {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.6,
+      ease: "power3.out",
+      stagger: 0.06,
+      scrollTrigger: {
+        trigger: el,
+        start: "top 78%",
+        end: "top 45%",
+        scrub: true,
+        toggleActions: "play none none none",
+        once: true,
+      },
+    });
+  }, []);
 
   return (
     <>
@@ -50,15 +120,23 @@ export default function AboutPage() {
         }
         subtitle="Real Gold Properties curates refined residences across Australia — quiet luxury, timeless materials, and spaces that grow with the people who live in them."
       />
-      <main className="about-page">
+      <main className="about-page" ref={pageRef}>
         {/* 2) STATEMENT */}
         <section className="section section-spacious">
           <div className="container center stack">
-            <h2 className="intro-statement lead">
-              Set in the nation’s most admired enclaves,
+            <h2
+              className="intro-statement lead"
+              ref={introRef}
+            >
+              Set in the nation’s most{" "}
+              <span className="gold-word">admired</span>{" "}
+              <span className="gold-word">enclaves</span>,
               <br />
-              Real Gold Properties presents a refined collection of bespoke
-              residences and private estates.
+              Real Gold Properties presents a{" "}
+              <span className="gold-word">refined</span>{" "}
+              <span className="gold-word">collection</span> of bespoke
+              residences and{" "}
+              <span className="gold-word">private estates</span>.
             </h2>
           </div>
         </section>
