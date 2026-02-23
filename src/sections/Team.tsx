@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import "./Team.css";
 
 interface TeamMember {
@@ -202,7 +204,76 @@ const Team = () => {
         </p>
       </header>
 
-      {/* Expanding Cards */}
+      {/* Mobile Swiper */}
+      <div className="team-swiper-wrapper">
+        <Swiper
+          slidesPerView={1.18}
+          spaceBetween={14}
+          grabCursor
+          className="team-swiper"
+        >
+          {members.map((member) => (
+            <SwiperSlide key={member.id}>
+              <article className="swiper-card">
+                <div className="swiper-card-image">
+                  <img src={member.image} alt={member.name} loading="lazy" />
+                </div>
+                <div className="swiper-card-body">
+                  <h3 className="member-name">{member.name}</h3>
+                  <p className="member-role">{member.role}</p>
+                  <div className="content-divider"></div>
+                  {member.quote && (
+                    <div className="member-quote">
+                      <p>"{member.quote}"</p>
+                    </div>
+                  )}
+                  <p className="member-bio">{member.bio}</p>
+                  <div className="member-stats">
+                    {member.stats.map((stat, idx) => (
+                      <div key={idx} className="stat">
+                        <span className="stat-value">{stat.value}</span>
+                        <span className="stat-label">{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="member-tags">
+                    {member.tags.map((tag, idx) => (
+                      <span key={idx} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="member-actions">
+                    <a href={`tel:${member.phone}`} className="action-btn action-btn--phone" aria-label="Call">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                      <span>Call</span>
+                    </a>
+                    {member.social.linkedin && (
+                      <a href={member.social.linkedin} className="action-btn action-btn--linkedin" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                          <rect x="2" y="9" width="4" height="12" />
+                          <circle cx="4" cy="4" r="2" />
+                        </svg>
+                        <span>LinkedIn</span>
+                      </a>
+                    )}
+                    <a href={`mailto:${member.email}`} className="action-btn action-btn--email" aria-label="Email">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                      <span>Email</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Expanding Cards — desktop only */}
       <div className="team-expanding">
         {members.map((member) => (
           <article
