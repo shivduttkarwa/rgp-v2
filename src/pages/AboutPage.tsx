@@ -17,6 +17,7 @@ const img = (name: string) => `${base}images/${name}`;
 export default function AboutPage() {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLHeadingElement | null>(null);
+  const introMaxProgressRef = useRef(0);
 
   useEffect(() => {
     const cleanup = initGsapSwitchAnimations(pageRef.current);
@@ -26,8 +27,8 @@ export default function AboutPage() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const el = introRef.current;
-    if (!el || el.dataset.wordsSplit === "true") return;
-    el.dataset.wordsSplit = "true";
+    if (!el || el.dataset.linesSplit === "true") return;
+    el.dataset.linesSplit = "true";
 
     const fragment = document.createDocumentFragment();
     const nodes = Array.from(el.childNodes);
@@ -49,7 +50,7 @@ export default function AboutPage() {
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const element = node as HTMLElement;
         if (element.tagName.toLowerCase() === "br") {
-          fragment.appendChild(document.createElement("br"));
+          fragment.appendChild(document.createTextNode(" "));
           return;
         }
         const text = element.textContent || "";
@@ -64,21 +65,67 @@ export default function AboutPage() {
     el.innerHTML = "";
     el.appendChild(fragment);
 
-    const words = el.querySelectorAll<HTMLElement>(".intro-word");
-    gsap.set(words, { y: 20, autoAlpha: 0 });
-    gsap.to(words, {
-      y: 0,
+    const words = Array.from(el.querySelectorAll<HTMLElement>(".intro-word"));
+    if (!words.length) return;
+
+    // Group words by rendered line (supports responsive line wrapping).
+    const lines: HTMLElement[][] = [];
+    let currentTop: number | null = null;
+    let lineWords: HTMLElement[] = [];
+
+    words.forEach((word) => {
+      const top = word.offsetTop;
+      if (currentTop === null) currentTop = top;
+      if (Math.abs(top - currentTop) > 2) {
+        lines.push(lineWords);
+        lineWords = [];
+        currentTop = top;
+      }
+      lineWords.push(word);
+    });
+    if (lineWords.length) lines.push(lineWords);
+
+    el.innerHTML = "";
+    lines.forEach((line) => {
+      const lineWrap = document.createElement("span");
+      lineWrap.className = "intro-line";
+      const lineText = document.createElement("span");
+      lineText.className = "intro-line-text";
+      lineWrap.appendChild(lineText);
+      line.forEach((word, i) => {
+        lineText.appendChild(word);
+        if (i < line.length - 1) {
+          lineText.appendChild(document.createTextNode(" "));
+        }
+      });
+      el.appendChild(lineWrap);
+    });
+
+    const lineTexts = el.querySelectorAll<HTMLElement>(".intro-line-text");
+    gsap.set(lineTexts, { yPercent: 100, autoAlpha: 0 });
+    const tl = gsap.to(lineTexts, {
+      yPercent: 0,
       autoAlpha: 1,
-      duration: 0.6,
+      duration: 0.7,
       ease: "power3.out",
-      stagger: 0.06,
-      scrollTrigger: {
-        trigger: el,
-        start: "top 78%",
-        end: "top 45%",
-        scrub: true,
-        toggleActions: "play none none none",
-        once: true,
+      stagger: 0.12,
+      paused: true,
+    });
+
+    introMaxProgressRef.current = 0;
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      end: "top 35%",
+      scrub: true,
+      onUpdate: (self) => {
+        const next = Math.max(self.progress, introMaxProgressRef.current);
+        introMaxProgressRef.current = next;
+        tl.progress(next);
+        if (next >= 1) {
+          tl.progress(1);
+          self.kill();
+        }
       },
     });
   }, []);
@@ -106,13 +153,9 @@ export default function AboutPage() {
         <section className="section section-spacious">
           <div className="container center stack">
             <h2 className="intro-statement lead" ref={introRef}>
-              Set in the nation’s most{" "}
-              <span className="gold-word">admired</span>{" "}
-              <span className="gold-word">enclaves</span>,
-              <br />
-              Real Gold Properties presents a{" "}
-              <span className="gold-word">refined</span>{" "}
-              <span className="gold-word">collection</span> of bespoke
+              Within Australia’s most <span className="gold-word">admired</span>{" "}
+              enclaves, Real Gold Properties curates a{" "}
+              <span className="gold-word">refined</span> portfolio of bespoke
               residences and <span className="gold-word">private estates</span>.
             </h2>
           </div>

@@ -82,6 +82,21 @@
   color: var(--rg-gold);
 }
 
+.about-page .intro-statement .intro-line {
+  display: block;
+  overflow: hidden;
+  line-height: 1.15;
+}
+
+.about-page .intro-statement .intro-line-text {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.about-page .intro-statement .intro-line + .intro-line {
+  margin-top: 0.2em;
+}
+
 .about-page .section.section-spacious {
   background: var(--rg-blue-200);
 }
