@@ -103,10 +103,13 @@ export default function Timeline() {
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const frameImgRefs = useRef<(HTMLDivElement | null)[]>([]);
   const deviceFrameRef = useRef<HTMLDivElement>(null);
+  const progressTrackRef = useRef<HTMLDivElement>(null);
   const progressFillRef = useRef<HTMLDivElement>(null);
   const contentRailRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLElement>(null);
   const currentActiveRef = useRef<number>(0);
+  const trackStartRef = useRef<number>(0);
+  const trackEndRef = useRef<number>(0);
   const [steps, setSteps] = useState<Step[]>(ALL_STEPS);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -123,11 +126,28 @@ export default function Timeline() {
     const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
     const frameImgs = frameImgRefs.current.filter(Boolean) as HTMLDivElement[];
     const deviceFrame = deviceFrameRef.current;
+    const progressTrack = progressTrackRef.current;
     const progressFill = progressFillRef.current;
     const contentRail = contentRailRef.current;
 
     const intro = introRef.current;
     if (!deviceFrame || !progressFill || !contentRail || !intro) return;
+
+    const setTrackBounds = () => {
+      if (!progressTrack || panels.length === 0) return;
+      const first = panels[0];
+      const last = panels[panels.length - 1];
+      const firstCenter = first.offsetTop + first.offsetHeight / 2;
+      const lastCenter = last.offsetTop + last.offsetHeight / 2;
+      const total = contentRail.scrollHeight;
+      trackStartRef.current = firstCenter;
+      trackEndRef.current = lastCenter;
+      progressTrack.style.top = `${firstCenter}px`;
+      progressTrack.style.bottom = `${Math.max(total - lastCenter, 0)}px`;
+    };
+
+    setTrackBounds();
+    window.addEventListener("resize", setTrackBounds);
 
     frameImgs.forEach((img, i) => {
       gsap.set(img, { opacity: i === 0 ? 1 : 0 });
@@ -204,6 +224,7 @@ export default function Timeline() {
 
       return () => {
         triggers.forEach((t) => t.kill());
+        window.removeEventListener("resize", setTrackBounds);
         media.removeEventListener("change", applySteps);
       };
     }
@@ -328,11 +349,11 @@ export default function Timeline() {
     triggers.push(
       ScrollTrigger.create({
         trigger: contentRail,
-        start: "top center",
-        end: "bottom center",
+        start: () => `top+=${trackStartRef.current}px center`,
+        end: () => `top+=${trackEndRef.current}px center`,
         scrub: 0.3,
         onUpdate: (self) => {
-          progressFill.style.height = self.progress * 100 + "%";
+          progressFill.style.height = `${Math.min(self.progress, 1) * 100}%`;
         },
       }),
     );
@@ -358,9 +379,11 @@ export default function Timeline() {
 
     // Recalculate all scroll positions after the full page layout settles
     ScrollTrigger.refresh();
+    setTrackBounds();
 
     return () => {
       triggers.forEach((t) => t.kill());
+      window.removeEventListener("resize", setTrackBounds);
       media.removeEventListener("change", applySteps);
     };
   }, [steps]);
@@ -386,7 +409,7 @@ export default function Timeline() {
       <section className="rg-timeline-container">
         <div className="rg-timeline-layout">
           <div className="rg-content-rail" ref={contentRailRef}>
-            <div className="rg-progress-track">
+            <div className="rg-progress-track" ref={progressTrackRef}>
               <div className="rg-progress-fill" ref={progressFillRef} />
             </div>
 
