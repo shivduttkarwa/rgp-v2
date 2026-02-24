@@ -237,7 +237,8 @@
             width: 100%;
             aspect-ratio: 3/4;
             max-height: 500px;
-            perspective: 1500px; /* must be on direct parent of the rotated element */
+            perspective: 1500px;
+            /* must be on direct parent of the rotated element */
             /* natural starting position = sticky position, so no jump on entry */
             margin-top: calc(50vh - 250px);
         }
@@ -453,38 +454,99 @@
             background: #f9c307;
             color: #00032e;
         }
-        .intro-eyebrow { color: rgba(0, 2, 32, 0.55); }
-        .intro-title   { color: #00032e; }
-        .intro-desc    { color: rgba(0, 2, 32, 0.62); }
 
-        .progress-track { background: rgba(0, 2, 32, 0.1); }
-        .progress-fill  { background: #00032e; }
+        .intro-eyebrow {
+            color: rgba(0, 2, 32, 0.55);
+        }
 
-        .panel-dot { background: #f9c307; border-color: rgba(0, 2, 32, 0.22); }
+        .intro-title {
+            color: #00032e;
+        }
+
+        .intro-desc {
+            color: rgba(0, 2, 32, 0.62);
+        }
+
+        .progress-track {
+            background: rgba(0, 2, 32, 0.1);
+        }
+
+        .progress-fill {
+            background: #00032e;
+        }
+
+        .panel-dot {
+            background: #f9c307;
+            border-color: rgba(0, 2, 32, 0.22);
+        }
+
         .panel.active .panel-dot {
             background: #00032e;
             border-color: #00032e;
             box-shadow: 0 0 14px rgba(0, 2, 32, 0.22);
         }
-        .panel-step { color: rgba(0, 2, 32, 0.4); }
-        .panel.active .panel-step { color: rgba(0, 2, 32, 0.85); opacity: 1; }
-        .panel-year { color: rgba(0, 2, 32, 0.07); }
-        .panel.active .panel-year { color: rgba(0, 2, 32, 0.12); }
-        .panel-title { color: #00032e; }
-        .panel-desc  { color: rgba(0, 2, 32, 0.6); }
-        .panel.active .panel-desc { color: rgba(0, 2, 32, 0.82); }
 
-        .m-val   { color: #00032e; }
-        .m-label { color: rgba(0, 2, 32, 0.5); }
+        .panel-step {
+            color: rgba(0, 2, 32, 0.4);
+        }
 
-        .device-frame.flipping { box-shadow: 0 0 40px rgba(0, 2, 32, 0.12); }
+        .panel.active .panel-step {
+            color: rgba(0, 2, 32, 0.85);
+            opacity: 1;
+        }
 
-        .frame-step-dot        { background: rgba(0, 2, 32, 0.18); }
-        .frame-step-dot.active { background: #00032e; box-shadow: 0 0 8px rgba(0, 2, 32, 0.2); }
+        .panel-year {
+            color: rgba(0, 2, 32, 0.07);
+        }
 
-        .end-line { background: linear-gradient(to bottom, #00032e, transparent); }
-        .end-text       { color: rgba(0, 2, 32, 0.5); }
-        .end-text span  { color: #00032e; }
+        .panel.active .panel-year {
+            color: rgba(0, 2, 32, 0.12);
+        }
+
+        .panel-title {
+            color: #00032e;
+        }
+
+        .panel-desc {
+            color: rgba(0, 2, 32, 0.6);
+        }
+
+        .panel.active .panel-desc {
+            color: rgba(0, 2, 32, 0.82);
+        }
+
+        .m-val {
+            color: #00032e;
+        }
+
+        .m-label {
+            color: rgba(0, 2, 32, 0.5);
+        }
+
+        .device-frame.flipping {
+            box-shadow: 0 0 40px rgba(0, 2, 32, 0.12);
+        }
+
+        .frame-step-dot {
+            background: rgba(0, 2, 32, 0.18);
+        }
+
+        .frame-step-dot.active {
+            background: #00032e;
+            box-shadow: 0 0 8px rgba(0, 2, 32, 0.2);
+        }
+
+        .end-line {
+            background: linear-gradient(to bottom, #00032e, transparent);
+        }
+
+        .end-text {
+            color: rgba(0, 2, 32, 0.5);
+        }
+
+        .end-text span {
+            color: #00032e;
+        }
     </style>
 </head>
 
@@ -717,10 +779,10 @@
 
                         // Image swap at the 90° edge-on point of this step
                         if (p * 180 < 90) {
-                            gsap.set(frameImgs[i],     { opacity: 1, scaleX: frontFace ? 1 : -1 });
+                            gsap.set(frameImgs[i], { opacity: 1, scaleX: frontFace ? 1 : -1 });
                             gsap.set(frameImgs[i + 1], { opacity: 0, scaleX: 1 });
                         } else {
-                            gsap.set(frameImgs[i],     { opacity: 0 });
+                            gsap.set(frameImgs[i], { opacity: 0 });
                             gsap.set(frameImgs[i + 1], { opacity: 1, scaleX: frontFace ? 1 : -1 });
                         }
 
@@ -808,3 +870,5 @@
 </body>
 
 </html>
+
+<!-- demonstrates a timeline of a company's journey with interactive scroll-based animations using GSAP. The left side contains content panels for each milestone, while the right side features a sticky image frame that flips to reveal new images as the user scrolls through the panels. A progress bar fills as the user scrolls, and various elements animate into view for an engaging storytelling experience. -->
