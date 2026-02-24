@@ -1321,13 +1321,23 @@
   }
 
   .t-hero__stats {
-    flex-direction: column;
-    gap: 1.25rem;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: nowrap;
   }
 
   .t-hero__stat-divider {
-    width: 60%;
-    height: 1px;
+    width: 1px;
+    height: 2.25rem;
+  }
+
+  .t-hero__stat-value {
+    font-size: 2rem;
+  }
+
+  .t-hero__stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
   }
 }
 
