@@ -116,16 +116,80 @@
   width: 0.6875rem;
   height: 0.6875rem;
   border-radius: 50%;
-  background: rgba(249, 195, 7, 0.2);
-  border: 0.125rem solid rgba(249, 195, 7, 0.18);
+  background: rgba(249, 195, 7, 0.15);
+  border: 0.0625rem solid rgba(249, 195, 7, 0.2);
   z-index: 2;
-  transition: all 0.5s ease;
+  transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Orbit ring — spinning comet arc */
+.rg-panel-dot::before {
+  content: '';
+  position: absolute;
+  width: 1.625rem;
+  height: 1.625rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.8125rem;
+  margin-left: -0.8125rem;
+  border-radius: 50%;
+  border: 0.0625rem solid transparent;
+  border-top-color: rgba(249, 195, 7, 0);
+  border-right-color: rgba(249, 195, 7, 0);
+  pointer-events: none;
+  transition: border-color 0.4s ease;
+}
+
+/* Pulse ring — expands and fades */
+.rg-panel-dot::after {
+  content: '';
+  position: absolute;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.34375rem;
+  margin-left: -0.34375rem;
+  border-radius: 50%;
+  border: 0.0625rem solid rgba(249, 195, 7, 0);
+  pointer-events: none;
 }
 
 .rg-panel.rg-active .rg-panel-dot {
   background: #f9c307;
   border-color: #f9c307;
-  box-shadow: 0 0 1rem rgba(249, 195, 7, 0.4);
+  box-shadow:
+    0 0 0.3rem rgba(249, 195, 7, 1),
+    0 0 1.25rem rgba(249, 195, 7, 0.4),
+    0 0 2.5rem rgba(249, 195, 7, 0.15);
+}
+
+.rg-panel.rg-active .rg-panel-dot::before {
+  border-top-color: rgba(249, 195, 7, 0.95);
+  border-right-color: rgba(249, 195, 7, 0.25);
+  animation: rg-orbit 2.2s linear infinite;
+}
+
+.rg-panel.rg-active .rg-panel-dot::after {
+  animation: rg-pulse 1.8s ease-out infinite;
+}
+
+@keyframes rg-orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes rg-pulse {
+  0%   {
+    border-color: rgba(249, 195, 7, 0.7);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    border-color: rgba(249, 195, 7, 0);
+    transform: scale(5);
+    opacity: 0;
+  }
 }
 
 /* ── Kicker: — 01 / 05 ── */
