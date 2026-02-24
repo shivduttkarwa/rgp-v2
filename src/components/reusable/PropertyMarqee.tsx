@@ -10,7 +10,7 @@ import {
   Square,
   Tag,
 } from "lucide-react";
-import "../../sections/PropertyListingSection.css";
+import "../../sections/PropertyListingsection.css";
 import "./PropertyMarqee.css";
 
 /**
